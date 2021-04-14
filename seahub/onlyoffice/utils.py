@@ -54,11 +54,11 @@ def get_onlyoffice_dict(request, username, repo_id, file_path, file_id='',
 
     filetype, fileext = get_file_type_and_ext(file_path)
     if fileext in ('xls', 'xlsx', 'ods', 'fods', 'csv'):
-        document_type = 'spreadsheet'
+        document_type = 'cell'
     elif fileext in ('pptx', 'ppt', 'odp', 'fodp', 'ppsx', 'pps'):
-        document_type = 'presentation'
+        document_type = 'slide'
     else:
-        document_type = 'text'
+        document_type = 'word'
 
     cache_key = generate_onlyoffice_cache_key(repo_id, file_path)
     doc_key = cache.get(cache_key)
