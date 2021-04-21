@@ -24,28 +24,26 @@ def check_file_lock(repo_id, file_path, username):
     Return (is_locked, locked_by_me)
     """
 
-    if not is_pro_version():
-        return (False, False)
-
     return_value = seafile_api.check_file_lock(repo_id,
             file_path.lstrip('/'), username)
 
     if return_value == 0:
-        return (False, False)
+        return False, False
     elif return_value == 1:
-        return (True, False)
+        return True, False
     elif return_value == 2:
-        return (True, True)
+        return True, True
     else:
         raise SearpcError('check file lock error')
+
 
 def if_locked_by_online_office(repo_id, path):
 
     locked_by_online_office = False
-    if is_pro_version():
-        lock_info = seafile_api.get_lock_info(repo_id, path)
-        if lock_info and lock_info.user == ONLINE_OFFICE_LOCK_OWNER:
-            locked_by_online_office = True
+
+    lock_info = seafile_api.get_lock_info(repo_id, path)
+    if lock_info and lock_info.user == ONLINE_OFFICE_LOCK_OWNER:
+        locked_by_online_office = True
 
     return locked_by_online_office
 

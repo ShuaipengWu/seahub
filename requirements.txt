@@ -18,3 +18,4 @@ pillow
 pyjwt
 pycryptodome
 requests_oauthlib
+django_cas_ng==3.5.10

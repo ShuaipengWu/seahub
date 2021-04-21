@@ -514,14 +514,12 @@ export const Utils = {
       }
       list.push(COPY, TAGS);
 
-      if (isPro) {
-        if (dirent.is_locked) {
-          if (dirent.locked_by_me || dirent.lock_owner == 'OnlineOffice') {
-            list.push(UNLOCK);
-          }
-        } else {
-          list.push(LOCK);
+      if (dirent.is_locked) {
+        if (dirent.locked_by_me || dirent.lock_owner == 'OnlineOffice') {
+          list.push(UNLOCK);
         }
+      } else {
+        list.push(LOCK);
       }
 
       list.push('Divider');

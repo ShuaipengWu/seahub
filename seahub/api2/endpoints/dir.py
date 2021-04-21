@@ -19,7 +19,7 @@ from seahub.api2.views import get_dir_file_recursively
 from seahub.thumbnail.utils import get_thumbnail_src
 from seahub.views import check_folder_permission
 from seahub.utils import check_filename_with_rename, is_valid_dirent_name, \
-        normalize_dir_path, is_pro_version, FILEEXT_TYPE_MAP
+        normalize_dir_path, FILEEXT_TYPE_MAP
 from seahub.utils.timeutils import timestamp_to_isoformat_timestr
 from seahub.utils.file_tags import get_files_tags_in_dir
 from seahub.utils.file_types import IMAGE, VIDEO, XMIND
@@ -118,19 +118,18 @@ def get_dir_file_info_list(username, request_type, repo_obj, parent_dir,
             file_info['modifier_contact_email'] = contact_email_dict.get(modifier_email, '')
 
             # get lock info
-            if is_pro_version():
-                file_info["is_locked"] = dirent.is_locked
-                file_info["lock_time"] = dirent.lock_time
+            file_info["is_locked"] = dirent.is_locked
+            file_info["lock_time"] = dirent.lock_time
 
-                lock_owner_email = dirent.lock_owner or ''
-                file_info["lock_owner"] = lock_owner_email
-                file_info['lock_owner_name'] = nickname_dict.get(lock_owner_email, '')
-                file_info['lock_owner_contact_email'] = contact_email_dict.get(lock_owner_email, '')
+            lock_owner_email = dirent.lock_owner or ''
+            file_info["lock_owner"] = lock_owner_email
+            file_info['lock_owner_name'] = nickname_dict.get(lock_owner_email, '')
+            file_info['lock_owner_contact_email'] = contact_email_dict.get(lock_owner_email, '')
 
-                if username == lock_owner_email:
-                    file_info["locked_by_me"] = True
-                else:
-                    file_info["locked_by_me"] = False
+            if username == lock_owner_email:
+                file_info["locked_by_me"] = True
+            else:
+                file_info["locked_by_me"] = False
 
             # get star info
             file_info['starred'] = False

@@ -516,10 +516,6 @@ class FileView(APIView):
         1. user with 'rw' permission for current file;
         """
 
-        if not is_pro_version():
-            error_msg = 'file lock feature only supported in professional edition.'
-            return api_error(status.HTTP_403_FORBIDDEN, error_msg)
-
         # argument check
         path = request.GET.get('p', None)
         if not path:
@@ -529,7 +525,8 @@ class FileView(APIView):
 
         operation = request.data.get('operation', None)
         if not operation:
-            error_msg = 'operation invalid.'
+            self.invalid_ = 'operation invalid.'
+            error_msg = self.invalid_
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         operation = operation.lower()

@@ -2021,16 +2021,21 @@ def get_dir_file_recursively(username, repo_id, path, all_dirs):
             entry['modifier_email'] = dirent.modifier
             entry["size"] = dirent.size
 
-            if is_pro:
-                entry["is_locked"] = dirent.is_locked
-                entry["lock_owner"] = dirent.lock_owner
-                if dirent.lock_owner:
-                    entry["lock_owner_name"] = email2nickname(dirent.lock_owner)
-                entry["lock_time"] = dirent.lock_time
-                if username == dirent.lock_owner:
-                    entry["locked_by_me"] = True
-                else:
-                    entry["locked_by_me"] = False
+        print("Now appending lock info.") # DEBUG
+        entry["is_locked"] = dirent.is_locked
+        print("is_locked = ", entry["is_locked"]) # DEBUG
+        entry["lock_owner"] = dirent.lock_owner
+        print("lock_owner = ", entry["lock_owner"]) # DEBUG
+        if dirent.lock_owner:
+            entry["lock_owner_name"] = email2nickname(dirent.lock_owner)
+            print("lock_owner_name = ", entry["lock_owner_name"]) # DEBUG
+        entry["lock_time"] = dirent.lock_time
+        print("lock_time = ", entry["lock_time"]) # DEBUG
+        if username == dirent.lock_owner:
+            entry["locked_by_me"] = True
+        else:
+            entry["locked_by_me"] = False
+        print("locked_by_me = ", entry["locked_by_me"]) # DEBUG
 
         entry["parent_dir"] = path
         entry["id"] = dirent.obj_id
@@ -2092,16 +2097,22 @@ def get_dir_entrys_by_id(request, repo, path, dir_id, request_type=None):
                                               dirent.obj_id)
             else:
                 entry["size"] = dirent.size
-            if is_pro_version():
-                entry["is_locked"] = dirent.is_locked
-                entry["lock_owner"] = dirent.lock_owner
-                if dirent.lock_owner:
-                    entry["lock_owner_name"] = email2nickname(dirent.lock_owner)
-                entry["lock_time"] = dirent.lock_time
-                if username == dirent.lock_owner:
-                    entry["locked_by_me"] = True
-                else:
-                    entry["locked_by_me"] = False
+
+            print("Appending lock info... ") # DEBUG
+            entry["is_locked"] = dirent.is_locked
+            print("is_locked = ", entry["is_locked"]) # DEBUG
+            entry["lock_owner"] = dirent.lock_owner
+            print("lock_owner = ", entry["lock_owner"]) # DEBUG
+            if dirent.lock_owner:
+                entry["lock_owner_name"] = email2nickname(dirent.lock_owner)
+                print("lock_owner_name = ", entry["lock_owner_name"]) # DEBUG
+            entry["lock_time"] = dirent.lock_time
+            print("lock_time = ", entry["lock_time"]) # DEBUG
+            if username == dirent.lock_owner:
+                entry["locked_by_me"] = True
+            else:
+                entry["locked_by_me"] = False
+            print("locked_by_me = ", entry["locked_by_me"]) # DEBUG
 
         entry["type"] = dtype
         entry["name"] = dirent.obj_name

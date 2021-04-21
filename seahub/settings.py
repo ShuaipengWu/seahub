@@ -10,7 +10,7 @@ from seaserv import FILE_SERVER_ROOT, FILE_SERVER_PORT, SERVICE_URL
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), os.pardir)
 
-DEBUG = False
+DEBUG = True
 
 CLOUD_MODE = False
 
@@ -124,7 +124,10 @@ MIDDLEWARE = [
     'termsandconditions.middleware.TermsAndConditionsRedirectMiddleware',
     'seahub.two_factor.middleware.OTPMiddleware',
     'seahub.two_factor.middleware.ForceTwoFactorAuthMiddleware',
-    'seahub.trusted_ip.middleware.LimitIpMiddleware'
+    'seahub.trusted_ip.middleware.LimitIpMiddleware',
+
+    # CAS
+    #'django_cas_ng.middleware.CASMiddleware'
 ]
 
 SITE_ROOT_URLCONF = 'seahub.urls'
@@ -221,6 +224,9 @@ INSTALLED_APPS = [
     'post_office',
     'termsandconditions',
     'webpack_loader',
+
+    # CAS
+    'django_cas_ng',
 
     'seahub.api2',
     'seahub.avatar',

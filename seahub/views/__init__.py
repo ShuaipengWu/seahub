@@ -1126,6 +1126,8 @@ def react_fake_view(request, **kwargs):
 
     username = request.user.username
 
+    print(resolve(request.path).url_name)
+
     if resolve(request.path).url_name == 'lib_view':
 
         repo_id = kwargs.get('repo_id', '')
