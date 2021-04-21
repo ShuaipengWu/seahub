@@ -548,7 +548,7 @@ def view_lib_file(request, repo_id, path):
 
     locked_by_online_office = if_locked_by_online_office(repo_id, path)
 
-    if is_pro_version() and permission == 'rw':
+    if permission == 'rw':
         can_lock_unlock_file = True
     else:
         can_lock_unlock_file = False
@@ -762,7 +762,7 @@ def view_lib_file(request, repo_id, path):
                     can_download=parse_repo_perm(permission).can_download)
 
             if wopi_dict:
-                if is_pro_version() and action_name == 'edit':
+                if action_name == 'edit':
                     try:
                         if not is_locked:
                             seafile_api.lock_file(repo_id, path, ONLINE_OFFICE_LOCK_OWNER, 0)
@@ -789,7 +789,7 @@ def view_lib_file(request, repo_id, path):
                     can_edit=can_edit, can_download=parse_repo_perm(permission).can_download)
 
             if onlyoffice_dict:
-                if is_pro_version() and can_edit:
+                if can_edit:
                     try:
                         if not is_locked:
                             seafile_api.lock_file(repo_id, path, ONLINE_OFFICE_LOCK_OWNER, 0)
@@ -1180,7 +1180,7 @@ def view_shared_file(request, fileshare):
                     language_code=request.LANGUAGE_CODE)
 
             if wopi_dict:
-                if is_pro_version() and can_edit:
+                if can_edit:
                     online_office_lock_or_refresh_lock(repo_id, path, username)
 
                 wopi_dict['share_link_token'] = token
@@ -1198,7 +1198,7 @@ def view_shared_file(request, fileshare):
                     can_edit=can_edit, can_download=can_download)
 
             if onlyoffice_dict:
-                if is_pro_version() and can_edit:
+                if can_edit:
                     online_office_lock_or_refresh_lock(repo_id, path, username)
 
                 onlyoffice_dict['share_link_token'] = token

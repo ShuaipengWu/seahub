@@ -199,7 +199,7 @@ class FileUUIDMap(models.Model):
         return hashlib.md5((repo_id + parent_path).encode('utf-8')).hexdigest()
 
     @classmethod
-    def normalize_path(self, path):
+    def normalize_path(cls, path):
         return path.rstrip('/') if path != '/' else '/'
 
     @classmethod
