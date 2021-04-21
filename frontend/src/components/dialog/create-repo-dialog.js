@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { Button, Modal, ModalHeader, Input, ModalBody, ModalFooter, Form, FormGroup, Label, Alert } from 'reactstrap';
@@ -14,11 +15,19 @@ class CreateRepoDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      inputValue: '', // input中的值
+      list: ['lisi', 'xiaohong'],
       repoName: '',
-      disabled: true,
+      disabled1: true,
+      disabled2: true,
+      disabled3: true,
       encrypt: false,
       password1: '',
       password2: '',
+      standardize: false,
+      hint: '',
+      size: 0,
+      unit: 'kb',
       errMessage: '',
       permission: 'rw',
       storage_id: storages.length ? storages[0].id : '',
@@ -44,6 +53,14 @@ class CreateRepoDialog extends React.Component {
 
   handlePassword2Change = (e) => {
     this.setState({password2: e.target.value});
+  }
+
+  handleSizeChange = (e) => {
+    this.setState({size: e.target.value});
+  }
+
+  handleSelectChange = (e) => {
+    this.setState({unit: e.target.value});
   }
 
   handleSubmit = () => {
@@ -130,7 +147,23 @@ class CreateRepoDialog extends React.Component {
     let isChecked = e.target.checked;
     this.setState({
       encrypt: isChecked,
-      disabled: !isChecked
+      disabled1: !isChecked
+    });
+  }
+
+  onStandardized = (e) => {
+    let isChecked = e.target.checked;
+    this.setState({
+      standardize: isChecked,
+      disabled2: !isChecked
+    });
+  }
+
+  onSized = (e) => {
+    let isChecked = e.target.checked;
+    this.setState({
+      standardize: isChecked,
+      disabled3: !isChecked
     });
   }
 
@@ -175,6 +208,27 @@ class CreateRepoDialog extends React.Component {
     return repo;
   }
 
+  hintListChange(e) {
+    this.setState({
+        inputValue: e.target.value
+    })
+  }
+
+  addList = () => {
+    this.setState({
+        inputValue: '',
+        list: [...this.state.list, this.state.inputValue]
+    })
+  }
+
+  deleteItem = (index) => {
+    let list = this.state.list;
+    list.splice(index, 1);
+    this.setState({
+        list: list
+    })
+  }
+
   render() {
     return (
       <Modal isOpen={true} toggle={this.toggle}>
@@ -191,6 +245,19 @@ class CreateRepoDialog extends React.Component {
                 onChange={this.handleRepoNameChange}
               />
             </FormGroup>
+
+            {libraryTemplates.length > 0 && (
+              <FormGroup>
+                <Label for="library-template">{gettext('Template')}</Label>
+                <Select
+                  id="library-template"
+                  defaultValue={{value: libraryTemplates[0], label: libraryTemplates[0]}}
+                  options={libraryTemplates.map((item, index) => { return {value: item, label: item}; })}
+                  onChange={this.handlelibraryTemplatesInputChange}
+                /> 
+              </FormGroup>
+            )}
+
             {storages.length > 0 && (
               <FormGroup>
                 <Label for="storage-backend">{gettext('Storage Backend')}</Label>
@@ -200,18 +267,6 @@ class CreateRepoDialog extends React.Component {
                   options={storages.map((item, index) => { return {value: item.id, label: item.name}; })}
                   onChange={this.handleStorageInputChange}
                 />
-              </FormGroup>
-            )}
-
-            {libraryTemplates.length > 0 && (
-              <FormGroup>
-                <Label for="library-templates">{gettext('Library Templates')}</Label>
-                <Select
-                  id="library-templates"
-                  defaultValue={{value: libraryTemplates[0], label: libraryTemplates[0]}}
-                  options={libraryTemplates.map((item, index) => { return {value: item, label: item}; })}
-                  onChange={this.handlelibraryTemplatesInputChange}
-                /> 
               </FormGroup>
             )}
 
@@ -229,32 +284,82 @@ class CreateRepoDialog extends React.Component {
                 <FormGroup check>
                   <Input type="checkbox" id="encrypt" onChange={this.onEncrypted} />
                   <Label for="encrypt">{gettext('Encrypt')}</Label>
+
+                  <Input type="checkbox" id="standardize" onChange={this.onStandardized} />
+                  <Label for="standardize">{gettext('Standardize')}</Label>
                 </FormGroup>
-                {!this.state.disabled &&
+                {!this.state.disabled1 &&
                   <FormGroup>
                     {/* todo translate */}
                     <Label for="passwd1">{gettext('Password')}</Label><span className="tip">{' '}{gettext('(at least {placeholder} characters)').replace('{placeholder}', repoPasswordMinLength)}</span>
                     <Input
                       id="passwd1"
                       type="password"
-                      disabled={this.state.disabled}
+                      disabled={this.state.disabled1}
                       value={this.state.password1}
                       onChange={this.handlePassword1Change}
                       autoComplete="new-password"
                     />
                   </FormGroup>
                 }
-                {!this.state.disabled &&
+                {!this.state.disabled1 &&
                   <FormGroup>
                     <Label for="passwd2">{gettext('Password again')}</Label>
                     <Input
                       id="passwd2"
                       type="password"
-                      disabled={this.state.disabled}
+                      disabled={this.state.disabled1}
                       value={this.state.password2}
                       onChange={this.handlePassword2Change}
                       autoComplete="new-password"
                     />
+                  </FormGroup>
+                }
+                {!this.state.disabled2 &&
+                  <FormGroup>
+                    <Label for="hint">{gettext('Add named hint')}</Label><span className="tip">{' '}{gettext('The name of this database file will be made up of "-" connection according to the hint')}</span>
+                    <Input
+                      id="hint"
+                      type="text"
+                      disabled={this.state.disabled2}
+                      value={this.state.inputValue}
+                      onChange={this.hintListChange}
+                      autoComplete="off"
+                    />
+                    <button onClick={this.addList.bind(this)}>{gettext('Add the hint')}</button>
+                    <ul>
+                      {
+                          this.state.list.map((item, index) => {
+                              return <li key={index} onClick={this.deleteItem.bind(this, index)}>{item}</li>
+                          })
+                      }
+                    </ul>
+                    <div>
+                      {
+                        this.state.list.join("-")
+                      }
+                    </div>
+                  </FormGroup>
+                }
+                {!this.state.disabled3 &&
+                  <FormGroup>
+                    <Label for="sized">{gettext('Limit upload file size')}</Label>
+                    <Input
+                      id="sized"
+                      type="number"
+                      disabled={this.state.disabled3}
+                      value={this.state.size}
+                      onChange={this.handleSizeChange}
+                      autoComplete="off"
+                    />
+                    <Select
+                      id="unit"
+                      value={age}
+                      onChange={handleSelectChange}
+                    >
+                      <MenuItem value={kb}>KB</MenuItem>
+                      <MenuItem value={mb}>MB</MenuItem>
+                    </Select>
                   </FormGroup>
                 }
               </div>
