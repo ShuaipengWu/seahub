@@ -865,9 +865,9 @@ if getattr(settings, 'ENABLE_BISHENG_OFFICE', False):
     ]
 
 if getattr(settings, 'ENABLE_CAS', False):
-    from django_cas_ng.views import login as cas_login
-    from django_cas_ng.views import logout as cas_logout
-    from django_cas_ng.views import callback as cas_callback
+    from seahub_extra.django_cas_ng.views import login as cas_login
+    from seahub_extra.django_cas_ng.views import logout as cas_logout
+    from seahub_extra.django_cas_ng.views import callback as cas_callback
     urlpatterns += [
         url(r'^accounts/cas-login/$', cas_login, name='cas_ng_login'),
         url(r'^accounts/cas-logout/$', cas_logout, name='cas_ng_logout'),
