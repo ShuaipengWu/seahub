@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 class AdminLogsLoginLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
@@ -87,7 +87,7 @@ class AdminLogsLoginLogs(APIView):
 class AdminLogsFileAccessLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
@@ -179,7 +179,7 @@ class AdminLogsFileAccessLogs(APIView):
 class AdminLogsFileUpdateLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
@@ -266,7 +266,7 @@ class AdminLogsFileUpdateLogs(APIView):
 
 class AdminLogsSharePermissionLogs(APIView):
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):

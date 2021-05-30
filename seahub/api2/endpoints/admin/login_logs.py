@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 class LoginLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
@@ -63,7 +63,7 @@ class LoginLogs(APIView):
 class AdminLoginLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def _get_admin_user_emails(self):

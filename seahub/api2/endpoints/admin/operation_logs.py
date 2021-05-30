@@ -37,7 +37,7 @@ class AdminOperationLogs(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
     throttle_classes = (UserRateThrottle,)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
 
     def get(self, request):
         """ List all logs

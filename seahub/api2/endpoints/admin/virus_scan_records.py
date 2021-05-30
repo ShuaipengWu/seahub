@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class AdminVirusFilesView(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
@@ -91,7 +91,7 @@ class AdminVirusFilesView(APIView):
 class AdminVirusFileView(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def delete(self, request, virus_id):
@@ -162,7 +162,7 @@ class AdminVirusFileView(APIView):
 class AdminVirusFilesBatchView(APIView):
 
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsAdminUser, IsProVersion)
+    permission_classes = (IsAdminUser,)
     throttle_classes = (UserRateThrottle,)
 
     def post(self, request):
