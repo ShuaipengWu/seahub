@@ -44,7 +44,7 @@ class SidePanel extends React.Component {
                   </Link>
                 </li>
                 }
-                {isPro && canViewStatistic &&
+                {canViewStatistic &&
                   <li className="nav-item">
                     <Link className={`nav-link ellipsis ${this.getActiveClass('statistic')}`}
                       to={siteRoot + 'sys/statistics/file/'}
@@ -187,7 +187,7 @@ class SidePanel extends React.Component {
                     </Link>
                   </li>
                 }
-                {isPro && otherPermission && enableFileScan &&
+                {otherPermission && enableFileScan &&
                   <li className="nav-item">
                     <Link
                       className={`nav-link ellipsis ${this.getActiveClass('file-scan-records')}`}
@@ -199,7 +199,7 @@ class SidePanel extends React.Component {
                     </Link>
                   </li>
                 }
-                {isPro && otherPermission &&
+                {otherPermission &&
                   <li className="nav-item">
                     <Link
                       className={`nav-link ellipsis ${this.getActiveClass('virus-files')}`}
@@ -235,7 +235,7 @@ class SidePanel extends React.Component {
                     </Link>
                   </li>
                 }
-                {isPro && canViewAdminLog &&
+                {canViewAdminLog &&
                   <li className="nav-item">
                     <Link
                       className={`nav-link ellipsis ${this.getActiveClass('adminLogs')}`}

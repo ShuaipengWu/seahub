@@ -16,7 +16,6 @@ from seahub.api2.utils import api_error
 
 from seahub.base.templatetags.seahub_tags import email2nickname
 from seahub.utils.timeutils import datetime_to_isoformat_timestr
-from seahub.utils import is_pro_version
 
 class PermAudit(APIView):
 
@@ -25,10 +24,6 @@ class PermAudit(APIView):
     throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
-
-        if not is_pro_version():
-            error_msg = 'Feature disabled.'
-            return api_error(status.HTTP_403_FORBIDDEN, error_msg)
 
         # check the date format, should be like '2015-10-10'
         start = request.GET.get('start', None)

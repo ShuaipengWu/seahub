@@ -78,6 +78,7 @@ else:
     seafevents_api = RPCProxy()
 
 def is_pro_version():
+    return False
     if seahub.settings.DEBUG:
         if hasattr(seahub.settings, 'IS_PRO_VERSION') \
             and seahub.settings.IS_PRO_VERSION:
@@ -87,6 +88,7 @@ def is_pro_version():
         return bool(seafevents_api.is_pro())
     except AttributeError:
         return False
+
 
 def is_cluster_mode():
     cfg = configparser.ConfigParser()

@@ -2811,6 +2811,13 @@ msgstr "拥有的资料库"
 msgid "Shared Libraries"
 msgstr "共享的资料库"
 
+#: frontend/src/pages/sys-admin/virus-scan/nav.js:16
+msgid "Unhandled"
+msgstr "待处理"
+
+msgid "Ignored"
+msgstr "已忽略"
+
 #: frontend/src/components/paginator.js:47
 msgid "{number_placeholder} / Page"
 msgstr "{number_placeholder} / 页"
@@ -4618,7 +4625,7 @@ msgstr "验证码"
 #: frontend/src/pages/sys-admin/logs-page/file-update-logs.js:123
 #: frontend/src/pages/sys-admin/statistic/statistic-file.js:59
 msgid "Deleted"
-msgstr "删除的"
+msgstr "已删除"
 
 #: frontend/src/pages/sys-admin/logs-page/logs-nav.js:15
 msgid "Login"
