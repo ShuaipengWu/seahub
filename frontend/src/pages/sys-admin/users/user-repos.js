@@ -136,7 +136,7 @@ class Item extends Component {
     const { item } = this.props;
     const repo = item;
     if (repo.name) {
-      if (isPro && enableSysAdminViewRepo && !repo.encrypted) {
+      if (enableSysAdminViewRepo && !repo.encrypted) {
         return <Link to={`${siteRoot}sys/libraries/${repo.id}/`}>{repo.name}</Link>;
       } else {
         return repo.name;

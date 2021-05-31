@@ -16,7 +16,7 @@ from seaserv import ccnet_api
 
 from seahub.utils import get_file_ops_stats_by_day, \
         get_total_storage_stats_by_day, get_user_activity_stats_by_day, \
-        is_pro_version, EVENTS_ENABLED, get_system_traffic_by_day, \
+        EVENTS_ENABLED, get_system_traffic_by_day, \
         seafevents_api
 from seahub.utils.timeutils import datetime_to_isoformat_timestr
 from seahub.utils.ms_excel import write_xls
@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 def check_parameter(func):
     def _decorated(view, request, *args, **kwargs):
-        if not is_pro_version() or not EVENTS_ENABLED:
+        if not EVENTS_ENABLED:
             return api_error(status.HTTP_404_NOT_FOUND, 'Events not enabled.')
         start_time = request.GET.get("start", "")
         end_time = request.GET.get("end", "")
@@ -91,6 +91,7 @@ class FileOperationsView(APIView):
         ops_deleted_dict = get_init_data(start_time, end_time)
         ops_modified_dict = get_init_data(start_time, end_time)
 
+        print(data)
         for e in data:
             if e[1] == 'Added':
                 ops_added_dict[e[0]] = e[2]
@@ -196,8 +197,8 @@ def get_init_data(start_time, end_time, init_data=0):
     time_delta = end_time - start_time
     date_length = time_delta.days + 1
     for offset in range(date_length):
-        offset = offset * 24
-        dt = start_time + datetime.timedelta(hours=offset)
+        # offset = offset * 24
+        dt = start_time + datetime.timedelta(hours=offset * 24)
         if isinstance(init_data, dict):
             res[dt] = init_data.copy()
         else:

@@ -527,7 +527,7 @@ export const Utils = {
         list.push(COMMENT);
       }
       list.push(HISTORY);
-      if (isPro && fileAuditEnabled) {
+      if (fileAuditEnabled) {
         list.push(ACCESS_LOG);
       }
       list.push('Divider', OPEN_VIA_CLIENT);
