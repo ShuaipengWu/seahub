@@ -515,6 +515,7 @@
     "Number of days that keep user sign in.": "\u8bb0\u4f4f\u7528\u6237\u5df2\u767b\u5f55\u72b6\u6001\u7684\u5929\u6570\u3002",
     "Number of groups": "\u7fa4\u7ec4\u6570\u91cf",
     "Off": "\u5173\u95ed",
+    "Offline Upload": "\u79bb\u7ebf\u4e0a\u4f20",
     "Old Password": "\u65e7\u5bc6\u7801",
     "On": "\u5f00\u542f",
     "Online Preview": "\u5728\u7ebf\u9884\u89c8",

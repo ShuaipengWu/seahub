@@ -2256,6 +2256,9 @@ msgstr "下载示例文件"
 msgid "Upload file"
 msgstr "上传文件"
 
+msgid "Offline Upload"
+msgstr "离线上传"
+
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58
 msgid "Date Invalid."
 msgstr "日期无效。"

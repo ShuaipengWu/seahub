@@ -1708,6 +1708,11 @@ class LibContentView extends React.Component {
     this.uploader.onFileUpload();
   }
 
+  onOfflineUpload = (e) => {
+    e.nativeEvent.stopImmediatePropagation();
+    // TODO: Open offline download dialog
+  }
+
   onUploadFolder = (e) => {
     e.nativeEvent.stopImmediatePropagation();
     this.uploader.onFolderUpload();
@@ -1828,6 +1833,7 @@ class LibContentView extends React.Component {
               onAddFile={this.onAddFile}
               onAddFolder={this.onAddFolder}
               onUploadFile={this.onUploadFile}
+              onOfflineUpload={this.onOfflineUpload}
               onUploadFolder={this.onUploadFolder}
               currentMode={this.state.currentMode}
               switchViewMode={this.switchViewMode}

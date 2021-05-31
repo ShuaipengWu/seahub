@@ -2242,6 +2242,10 @@ msgstr ""
 msgid "Upload file"
 msgstr ""
 
+#: frontend/src/components/dialog/sysadmin-dialog/sysadmin-import-user-dialog.js:55
+msgid "Offline Upload"
+msgstr ""
+
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58
 msgid "Date Invalid."
 msgstr ""

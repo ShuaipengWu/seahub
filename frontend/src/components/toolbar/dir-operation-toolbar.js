@@ -21,6 +21,7 @@ const propTypes = {
   onAddFile: PropTypes.func.isRequired,
   onAddFolder: PropTypes.func.isRequired,
   onUploadFile: PropTypes.func.isRequired,
+  onOfflineUpload: PropTypes.func.isRequired,
   onUploadFolder: PropTypes.func.isRequired,
   direntList: PropTypes.array.isRequired,
   currentMode: PropTypes.string.isRequired,
@@ -82,6 +83,11 @@ class DirOperationToolbar extends React.Component {
   onUploadFile = (e) => {
     this.setState({isUploadMenuShow: false});
     this.props.onUploadFile(e);
+  }
+
+  onOfflineUpload = (e) => {
+    this.setState({isUploadMenuShow: false});
+    this.props.onOfflineUpload(e);
   }
 
   onUploadFolder = (e) => {
@@ -201,6 +207,7 @@ class DirOperationToolbar extends React.Component {
             {this.state.isUploadMenuShow && (
               <ul className="menu dropdown-menu" style={this.state.operationMenuStyle}>
                 <li className="dropdown-item" onClick={this.onUploadFile}>{gettext('Upload Files')}</li>
+                <li className="dropdown-item" onClick={this.onOfflineUpload}>{gettext('Offline Upload')}</li>
                 <li className="dropdown-item" onClick={this.onUploadFolder}>{gettext('Upload Folder')}</li>
               </ul>
             )}
