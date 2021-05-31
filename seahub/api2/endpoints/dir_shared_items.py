@@ -218,6 +218,7 @@ class DirSharedItemsEndpoint(APIView):
     def post(self, request, repo_id, format=None):
         """Update shared item permission.
         """
+
         username = request.user.username
         repo = seafile_api.get_repo(repo_id)
         if not repo:
@@ -254,6 +255,14 @@ class DirSharedItemsEndpoint(APIView):
                 update_user_dir_permission(repo_id, path, repo_owner, shared_to, permission, org_id)
             else:
                 repo_owner = seafile_api.get_repo_owner(repo_id)
+
+                print(">>>>>>>>>>>>>>>>>>>")
+                print(repo_id)
+                print(path)
+                print(repo_owner)
+                print(shared_to)
+                print(permission)
+                print(">>>>>>>>>>>>>>>>>>>")
 
                 update_user_dir_permission(repo_id, path, repo_owner, shared_to, permission)
 
