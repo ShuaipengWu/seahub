@@ -19,6 +19,7 @@ import LibContentToolbar from './lib-content-toolbar';
 import LibContentContainer from './lib-content-container';
 import FileUploader from '../../components/file-uploader/file-uploader';
 import CopyMoveDirentProgressDialog from '../../components/dialog/copy-move-dirent-progress-dialog';
+import OfflineDownloadDialog from "../../components/dialog/offline-download-dialog";
 
 const propTypes = {
   pathPrefix: PropTypes.array.isRequired,
@@ -65,6 +66,7 @@ class LibContentView extends React.Component {
       isDirentListLoading: true,
       direntList: [],
       isDirentSelected: false,
+      isOfflineDownloadDialogOn: false,
       sortBy: cookie.load('seafile-repo-dir-sort-by') || 'name', // 'name' or 'time' or 'size'
       sortOrder: cookie.load('seafile-repo-dir-sort-order') || 'asc', // 'asc' or 'desc'
       isAllDirentSelected: false,
@@ -513,6 +515,10 @@ class LibContentView extends React.Component {
     });
   }
 
+  refreshDirentList = () => {
+    this.loadDirentList(this.state.path);
+  }
+
   onListContainerScroll = () => {
     let itemsShowLength = this.state.itemsShowLength + 100;
     this.setState({itemsShowLength: itemsShowLength});
@@ -654,6 +660,10 @@ class LibContentView extends React.Component {
       asyncOperationProgress: 0,
       isCopyMoveProgressDialogShow: false,
     });
+  }
+
+  onToggleOfflineDownloadDialog = () => {
+    this.setState({isOfflineDownloadDialogOn: false});
   }
 
   // toolbar operations
@@ -1708,11 +1718,6 @@ class LibContentView extends React.Component {
     this.uploader.onFileUpload();
   }
 
-  onOfflineUpload = (e) => {
-    e.nativeEvent.stopImmediatePropagation();
-    // TODO: Open offline download dialog
-  }
-
   onUploadFolder = (e) => {
     e.nativeEvent.stopImmediatePropagation();
     this.uploader.onFolderUpload();
@@ -1789,7 +1794,7 @@ class LibContentView extends React.Component {
     }
 
     let enableDirPrivateShare = false;
-    let { currentRepoInfo, userPerm, isCopyMoveProgressDialogShow } = this.state;
+    let { currentRepoInfo, userPerm, isCopyMoveProgressDialogShow, isOfflineDownloadDialogOn } = this.state;
     let showShareBtn = Utils.isHasPermissionToShare(currentRepoInfo, userPerm);
     let isRepoOwner = currentRepoInfo.owner_email === username;
     let isVirtual = currentRepoInfo.is_virtual;
@@ -1833,7 +1838,6 @@ class LibContentView extends React.Component {
               onAddFile={this.onAddFile}
               onAddFolder={this.onAddFolder}
               onUploadFile={this.onUploadFile}
-              onOfflineUpload={this.onOfflineUpload}
               onUploadFolder={this.onUploadFolder}
               currentMode={this.state.currentMode}
               switchViewMode={this.switchViewMode}
@@ -1846,6 +1850,7 @@ class LibContentView extends React.Component {
               listRelatedFiles={this.listRelatedFiles}
               unSelectDirent={this.unSelectDirent}
               onFilesTagChanged={this.onFileTagChanged}
+              refreshDirent={this.refreshDirentList.bind(this)}
             />
           </div>
           <div className="main-panel-center flex-row">

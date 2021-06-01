@@ -37,7 +37,6 @@ const propTypes = {
   onAddFile: PropTypes.func.isRequired,
   onAddFolder: PropTypes.func.isRequired,
   onUploadFile: PropTypes.func.isRequired,
-  onOfflineUpload: PropTypes.func.isRequired,
   onUploadFolder: PropTypes.func.isRequired,
   // view-mode
   currentMode: PropTypes.string.isRequired,
@@ -50,6 +49,8 @@ const propTypes = {
   updateDirent: PropTypes.func.isRequired,
   unSelectDirent: PropTypes.func,
   currentRepoInfo: PropTypes.object,
+  // Offline download
+  refreshDirent: PropTypes.func.isRequired
 };
 
 class LibContentToolbar extends React.Component {
@@ -126,8 +127,8 @@ class LibContentToolbar extends React.Component {
               onAddFile={this.props.onAddFile}
               onAddFolder={this.props.onAddFolder}
               onUploadFile={this.props.onUploadFile}
-              onOfflineUpload={this.props.onOfflineUpload}
               onUploadFolder={this.props.onUploadFolder}
+              refreshDirent={this.props.refreshDirent}
               currentMode={this.props.currentMode}
               switchViewMode={this.props.switchViewMode}
             />

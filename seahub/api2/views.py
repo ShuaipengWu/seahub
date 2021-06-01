@@ -424,7 +424,6 @@ class Search(APIView):
     throttle_classes = (UserRateThrottle, )
 
     def get(self, request, format=None):
-        # TODO: Add a Seafile search configuration check.
         if not HAS_FILE_SEARCH:
            error_msg = 'Search not supported.'
            return api_error(status.HTTP_404_NOT_FOUND, error_msg)

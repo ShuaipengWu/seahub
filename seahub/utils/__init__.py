@@ -824,6 +824,16 @@ if EVENTS_CONFIG_FILE:
 
         return events if events else None
 
+    def get_offline_download_tasks(username=None, start=-1, limit=-1):
+        with _get_seafevents_session() as session:
+            r = seafevents.get_offline_download_tasks_by_user(session, username, start, limit)
+        return r if r else []
+
+    def add_offline_download_task(username=None, repo_id=None, path=None, url=None):
+        with _get_seafevents_session() as session:
+            r = seafevents.add_offline_download_record(session, repo_id, path, username, url)
+        return r if r else -1
+
     def get_virus_files(repo_id=None, has_handled=None, start=-1, limit=-1):
         with _get_seafevents_session() as session:
             r = seafevents.get_virus_files(session, repo_id, has_handled, start, limit)
@@ -880,6 +890,10 @@ else:
     def get_file_update_events():
         pass
     def get_perm_audit_events():
+        pass
+    def get_offline_download_tasks():
+        pass
+    def add_offline_download_task():
         pass
     def get_virus_files():
         pass
@@ -1207,6 +1221,22 @@ if EVENTS_CONFIG_FILE:
         return enabled
 
     HAS_FILE_SEARCH = check_search_enabled()
+
+# offline download related
+HAS_OFFLINE_DOWNLOAD = False
+if EVENTS_CONFIG_FILE:
+    def check_offline_download_enabled():
+        enabled = False
+        if hasattr(seafevents, 'is_offline_download_enabled'):
+            enabled = seafevents.is_offline_download_enabled(parsed_events_conf)
+
+            if enabled:
+                logging.debug('offline download: enabled')
+            else:
+                logging.debug('offline download: not enabled')
+        return enabled
+
+    HAS_OFFLINE_DOWNLOAD = check_offline_download_enabled()
 
 
 def user_traffic_over_limit(username):
