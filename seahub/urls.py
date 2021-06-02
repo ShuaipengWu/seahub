@@ -4,6 +4,7 @@ from django.conf.urls import url, include
 # from django.views.generic.simple import direct_to_template
 from django.views.generic import TemplateView
 
+from seahub.api2.endpoints.admin.offline_downloads import AdminOfflineDownloadTasks
 from seahub.api2.endpoints.offline_download import OfflineDownloadTasks
 from seahub.views import *
 from seahub.views.sysadmin import *
@@ -483,8 +484,9 @@ urlpatterns = [
     url(r'api/v2.1/ocm/providers/(?P<provider_id>[-0-9a-f]{36})/repos/(?P<repo_id>[-0-9a-f]{36})/upload-link/$', OCMReposUploadLinkView.as_view(), name='api-v2.1-ocm-repos-dir'),
 
     ## offline download
-    url(r'^api/v2.2/offline-download/tasks$', OfflineDownloadTasks.as_view(), name='api-v2.2-offline-download-tasks'),
-    url(r'^api/v2.2/offline-download/add$', OfflineDownloadTasks.as_view(), name='api-v2.2-offline-download-add'),
+    url(r'^api/v2.2/offline-download/tasks/$', OfflineDownloadTasks.as_view(), name='api-v2.2-offline-download-tasks'),
+    url(r'^api/v2.2/offline-download/add/$', OfflineDownloadTasks.as_view(), name='api-v2.2-offline-download-add'),
+    url(r'^api/v2.2/admin/offline-downloads/$', AdminOfflineDownloadTasks.as_view(), name='api-v2.2-offline-download-admin'),
 
     # admin: activities
     url(r'^api/v2.1/admin/user-activities/$', UserActivitiesView.as_view(), name='api-v2.1-admin-user-activity'),
@@ -776,6 +778,7 @@ if ENABLE_FILE_SCAN:
 from seahub.utils import EVENTS_ENABLED
 if EVENTS_ENABLED:
     urlpatterns += [
+        url(r'^sys/offline-downloads/$', sysadmin_react_fake_view, name='sys_offline_download_records'),
         url(r'^sys/virus-files/all/$', sysadmin_react_fake_view, name='sys_virus_scan_records'),
         url(r'^sys/virus-files/unhandled/$', sysadmin_react_fake_view, name='sys_virus_scan_records'),
     ]

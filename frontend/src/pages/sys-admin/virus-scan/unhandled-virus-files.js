@@ -256,6 +256,7 @@ class UnhandledVirusFiles extends Component {
       this.setState({
         loading: false,
         virusFiles: items,
+        currentPage: page,
         hasNextPage: data.has_next_page
       });
     }).catch((error) => {

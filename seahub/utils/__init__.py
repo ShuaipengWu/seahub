@@ -829,6 +829,11 @@ if EVENTS_CONFIG_FILE:
             r = seafevents.get_offline_download_tasks_by_user(session, username, start, limit)
         return r if r else []
 
+    def get_all_offline_download_tasks(start=-1, limit=-1):
+        with _get_seafevents_session() as session:
+            r = seafevents.get_offline_download_tasks(session, start, limit)
+        return r if r else []
+
     def add_offline_download_task(username=None, repo_id=None, path=None, url=None):
         with _get_seafevents_session() as session:
             r = seafevents.add_offline_download_record(session, repo_id, path, username, url)
@@ -892,6 +897,8 @@ else:
     def get_perm_audit_events():
         pass
     def get_offline_download_tasks():
+        pass
+    def get_all_offline_download_tasks():
         pass
     def add_offline_download_task():
         pass

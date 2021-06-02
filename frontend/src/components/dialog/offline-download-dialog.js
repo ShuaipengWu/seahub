@@ -14,11 +14,11 @@ const propTypes = {
 
 // We cannot modify the seafile-API lib, but we can add a raw method.
 function getOfflineDownloadTask() {
-  let url = seafileAPI.server + '/api/v2.2/offline-download/tasks';
+  let url = seafileAPI.server + '/api/v2.2/offline-download/tasks/';
   return seafileAPI.req.get(url, { });
 }
 function addOfflineDownloadTask(repoId, path, targetUrl) {
-  let url = seafileAPI.server + '/api/v2.2/offline-download/add';
+  let url = seafileAPI.server + '/api/v2.2/offline-download/add/';
   return seafileAPI.req.put(url, { repo_id: repoId, path: path, url: targetUrl });
 }
 
@@ -31,7 +31,7 @@ class OfflineDownloadDialog extends React.Component {
       q: '',
       errMessage: '',
       taskList: [],
-      ent_ok_num: 0,
+      ent_ongoing_num: 0,
       refreshTimer: null
     };
   }
@@ -42,13 +42,15 @@ class OfflineDownloadDialog extends React.Component {
         taskList: res.data.data,
         errMessage: ''
       });
-      let ok_cnt = 0;
+      let ent_ongoing_cnt = 0;
       for (let i = 0; i < this.state.taskList.length; i++) {
-        let is_ok = this.state.taskList[i].status === 3;
-        if (is_ok) ok_cnt++;
+        let is_not_ok = this.state.taskList[i].status === Utils.offlineDownloadStatus.WAITING ||
+            this.state.taskList[i].status === Utils.offlineDownloadStatus.QUEUING ||
+            this.state.taskList[i].status === Utils.offlineDownloadStatus.DOWNLOADING;
+        if (is_not_ok) ent_ongoing_cnt++;
       }
-      if (ok_cnt !== this.state.ent_ok_num) this.props.refreshDirent();
-      this.setState({ ent_ok_num: ok_cnt });
+      if (ent_ongoing_cnt < this.state.ent_ongoing_num) this.props.refreshDirent();
+      this.setState({ ent_ongoing_num: ent_ongoing_cnt });
     }).catch(error => {
       let errMessage = Utils.getErrorMsg(error);
       this.setState({
@@ -57,9 +59,13 @@ class OfflineDownloadDialog extends React.Component {
     });
   }
 
+  intervalRefreshList() {
+    if (this.state.ent_ongoing_num > 0) this.refreshList();
+  }
+
   componentDidMount() {
     this.refreshList();
-    this.setState({ refreshTimer: setInterval(this.refreshList.bind(this), 3000) });
+    this.setState({ refreshTimer: setInterval(this.intervalRefreshList.bind(this), 3000) });
   }
 
   componentWillUnmount() {
@@ -73,6 +79,7 @@ class OfflineDownloadDialog extends React.Component {
       return false;
     }
     addOfflineDownloadTask(this.props.repoID, this.props.path, q).then((res) => {
+      this.setState({ q: '' });
       this.refreshList();
     }).catch(error => {
       let errMessage = Utils.getErrorMsg(error);
@@ -97,12 +104,12 @@ class OfflineDownloadDialog extends React.Component {
   render() {
     const { q, errMessage, taskList, isSubmitDisabled } = this.state;
     return (
-      <Modal isOpen={true} toggle={this.toggle}>
-        <ModalHeader toggle={this.toggle}>Offline Upload</ModalHeader>
+      <Modal isOpen={true} style={{maxWidth: '760px'}} toggle={this.toggle}>
+        <ModalHeader toggle={this.toggle}>{gettext('Offline Upload')}</ModalHeader>
         <ModalBody style={{height: '350px'}} className="o-auto">
           <div className="d-flex">
-            <input className="form-control mr-2" type="text" placeholder="Provide a file url or torrent" value={q} onChange={this.handleInputChange}  />
-            <button type="submit" className="btn btn-primary flex-shrink-0" onClick={this.addTask} disabled={isSubmitDisabled}>Add</button>
+            <input className="form-control mr-2" type="text" placeholder={gettext('Provide a file url or torrent')} value={q} onChange={this.handleInputChange}  />
+            <button type="submit" className="btn btn-primary flex-shrink-0" onClick={this.addTask} disabled={isSubmitDisabled}>{gettext('Add')}</button>
           </div>
           {errMessage && <Alert color="danger" className="mt-2">{errMessage}</Alert>}
           <div className="mt-2">
@@ -110,27 +117,13 @@ class OfflineDownloadDialog extends React.Component {
             <table className="table-hover">
               <thead>
                 <tr>
-                  <th width="75%">Url</th>
-                  <th width="25%">Status</th>
+                  <th>Url</th>
+                  <th width="17%">{gettext('Status')}</th>
                 </tr>
               </thead>
               <tbody>
                 {taskList.map((item, index) => {
-                  var stateStr = 'Unknown';
-                  switch (item.status) {
-                    case 1:
-                      stateStr = 'Waiting';
-                      break;
-                    case 2:
-                      stateStr = 'Downloading';
-                      break;
-                    case 3:
-                      stateStr = 'OK';
-                      break;
-                    case 4:
-                      stateStr = 'Error';
-                      break;
-                  }
+                  let stateStr = Utils.offlineDownloadStatus.toDisplayText(item.status);
                   return (
                     <TaskItem
                       key={index}
@@ -138,8 +131,7 @@ class OfflineDownloadDialog extends React.Component {
                       status={stateStr}
                     />
                   );
-                })
-                }
+                })}
               </tbody>
             </table>}
           </div>

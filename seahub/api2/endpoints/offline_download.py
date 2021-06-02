@@ -7,14 +7,12 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from seahub.utils import HAS_OFFLINE_DOWNLOAD
-from seaserv import seafile_api
 
 from seahub.api2.authentication import TokenAuthentication
 from seahub.api2.throttling import UserRateThrottle
 from seahub.api2.utils import api_error
 
 from seahub.views import check_folder_permission
-from seahub.utils.timeutils import timestamp_to_isoformat_timestr
 
 from seahub.utils import get_offline_download_tasks, add_offline_download_task
 
@@ -100,7 +98,8 @@ class OfflineDownloadTasks(APIView):
             # task_info['path'] = task.path
             task_info['url'] = task.url
             task_info['status'] = task.status
-            task_info['comment'] = task.comment
+            # task_info['comment'] = task.comment
             result.append(task_info)
 
         return Response({'data': result})
+

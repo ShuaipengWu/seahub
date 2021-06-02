@@ -200,6 +200,18 @@ class SidePanel extends React.Component {
                   </li>
                 }
                 {otherPermission &&
+                <li className="nav-item">
+                  <Link
+                      className={`nav-link ellipsis ${this.getActiveClass('offline-downloads')}`}
+                      to={siteRoot + 'sys/offline-downloads'}
+                      onClick={() => this.props.tabItemClick('offline-downloads')}
+                  >
+                    <span className="sf2-icon-link" aria-hidden="true"></span>
+                    <span className="nav-text">{gettext('Offline Upload')}</span>
+                  </Link>
+                </li>
+                }
+                {otherPermission &&
                   <li className="nav-item">
                     <Link
                       className={`nav-link ellipsis ${this.getActiveClass('virus-files')}`}

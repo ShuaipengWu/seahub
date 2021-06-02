@@ -75,6 +75,8 @@ import TermsAndConditions from './terms-and-conditions/terms-and-conditions';
 import AllVirusFiles from './virus-scan/all-virus-files';
 import UnhandledVirusFiles from './virus-scan/unhandled-virus-files';
 
+import DetailedOfflineDownloads from './offline-downloads/offline-downloads';
+
 import AdminOperationLogs from './admin-logs/operation-logs';
 import AdminLoginLogs from './admin-logs/login-logs';
 
@@ -83,6 +85,7 @@ import '../../assets/css/fa-regular.css';
 import '../../assets/css/fontawesome.css';
 import '../../css/layout.css';
 import '../../css/toolbar.css';
+
 
 class SysAdmin extends React.Component {
   constructor(props) {
@@ -145,6 +148,10 @@ class SysAdmin extends React.Component {
       {
         tab: 'virus-files',
         urlPartList: ['virus-files/']
+      },
+      {
+        tab: 'offline-download-tasks',
+        urlPartList: ['offline-downloads/']
       },
       {
         tab: 'adminLogs',
@@ -251,6 +258,8 @@ class SysAdmin extends React.Component {
 
             <AllVirusFiles path={siteRoot + 'sys/virus-files/all'} />
             <UnhandledVirusFiles path={siteRoot + 'sys/virus-files/unhandled'} />
+
+            <DetailedOfflineDownloads path={siteRoot + 'sys/offline-downloads'} />
 
             <FileScanRecords
               path={siteRoot + 'sys/file-scan-records'}

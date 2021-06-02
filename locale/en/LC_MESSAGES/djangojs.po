@@ -2246,6 +2246,30 @@ msgstr ""
 msgid "Offline Upload"
 msgstr ""
 
+msgid "Waiting"
+msgstr ""
+
+msgid "Queuing"
+msgstr ""
+
+msgid "Downloading"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Timeout"
+msgstr ""
+
+msgid "Provide a file url or torrent"
+msgstr ""
+
+msgid "Task Owner"
+msgstr ""
+
+msgid "Repo Owner"
+msgstr ""
+
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58
 msgid "Date Invalid."
 msgstr ""

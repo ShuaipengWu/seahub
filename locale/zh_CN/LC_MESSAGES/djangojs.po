@@ -2259,6 +2259,30 @@ msgstr "上传文件"
 msgid "Offline Upload"
 msgstr "离线上传"
 
+msgid "Waiting"
+msgstr "等待中"
+
+msgid "Queuing"
+msgstr "排队中"
+
+msgid "Downloading"
+msgstr "正在下载"
+
+msgid "OK"
+msgstr "完成"
+
+msgid "Timeout"
+msgstr "下载超时"
+
+msgid "Provide a file url or torrent"
+msgstr "提供文件链接或Torrent"
+
+msgid "Task Owner"
+msgstr "任务创建者"
+
+msgid "Repo Owner"
+msgstr "仓库拥有者"
+
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58
 msgid "Date Invalid."
 msgstr "日期无效。"
