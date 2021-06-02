@@ -78,10 +78,8 @@ else:
     seafevents_api = RPCProxy()
 
 def is_pro_version():
-    return False
     if seahub.settings.DEBUG:
-        if hasattr(seahub.settings, 'IS_PRO_VERSION') \
-            and seahub.settings.IS_PRO_VERSION:
+        if hasattr(seahub.settings, 'IS_PRO_VERSION') and seahub.settings.IS_PRO_VERSION:
             return True
 
     try:

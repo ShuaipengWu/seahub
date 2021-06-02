@@ -16,11 +16,6 @@ from seahub.views import check_folder_permission
 
 from seahub.utils import get_offline_download_tasks, add_offline_download_task
 
-try:
-    from seahub.settings import CLOUD_MODE
-except ImportError:
-    CLOUD_MODE = False
-
 
 class OfflineDownloadTasks(APIView):
 

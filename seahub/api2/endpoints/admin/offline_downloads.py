@@ -16,11 +16,6 @@ from seahub.api2.utils import api_error
 
 logger = logging.getLogger(__name__)
 
-try:
-    from seahub.settings import CLOUD_MODE
-except ImportError:
-    CLOUD_MODE = False
-
 
 class AdminOfflineDownloadTasks(APIView):
 
