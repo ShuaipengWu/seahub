@@ -8,6 +8,7 @@ import CreateFolder from '../../components/dialog/create-folder-dialog';
 import CreateFile from '../../components/dialog/create-file-dialog';
 import ShareDialog from '../../components/dialog/share-dialog';
 import ViewModeToolbar from './view-mode-toolbar';
+import OfflineDownloadDialog from '../dialog/offline-download-dialog';
 
 const propTypes = {
   path: PropTypes.string.isRequired,
@@ -22,6 +23,7 @@ const propTypes = {
   onAddFolder: PropTypes.func.isRequired,
   onUploadFile: PropTypes.func.isRequired,
   onUploadFolder: PropTypes.func.isRequired,
+  refreshDirent: PropTypes.func.isRequired,
   direntList: PropTypes.array.isRequired,
   currentMode: PropTypes.string.isRequired,
   switchViewMode: PropTypes.func.isRequired,
@@ -35,6 +37,7 @@ class DirOperationToolbar extends React.Component {
       fileType: '.md',
       isCreateFileDialogShow: false,
       isCreateFolderDialogShow: false,
+      isOfflineDownloadDialogShow: false,
       isUploadMenuShow: false,
       isCreateMenuShow: false,
       isShareDialogShow: false,
@@ -100,6 +103,12 @@ class DirOperationToolbar extends React.Component {
   onShareClick = () => {
     this.setState({
       isShareDialogShow: !this.state.isShareDialogShow
+    });
+  }
+
+  onOfflineUploadClick = () => {
+    this.setState({
+      isOfflineDownloadDialogShow: !this.state.isOfflineDownloadDialogShow
     });
   }
 
@@ -201,6 +210,7 @@ class DirOperationToolbar extends React.Component {
             {this.state.isUploadMenuShow && (
               <ul className="menu dropdown-menu" style={this.state.operationMenuStyle}>
                 <li className="dropdown-item" onClick={this.onUploadFile}>{gettext('Upload Files')}</li>
+                <li className="dropdown-item" onClick={this.onOfflineUploadClick}>{gettext('Offline Upload')}</li>
                 <li className="dropdown-item" onClick={this.onUploadFolder}>{gettext('Upload Folder')}</li>
               </ul>
             )}
@@ -254,6 +264,16 @@ class DirOperationToolbar extends React.Component {
             />
           </ModalPortal>
         }
+        {this.state.isOfflineDownloadDialogShow && (
+          <ModalPortal>
+            <OfflineDownloadDialog
+              repoID={this.props.repoID}
+              path={this.props.path}
+              toggleDialog={this.onOfflineUploadClick}
+              refreshDirent={this.props.refreshDirent}
+            />
+          </ModalPortal>
+        )}
       </Fragment>
     );
   }

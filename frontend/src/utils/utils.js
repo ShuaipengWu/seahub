@@ -48,6 +48,34 @@ export const Utils = {
     return isEnterpriseWeChat || isWeChat;
   },
 
+  offlineDownloadStatus: {
+    UNKNOWN: 0,
+    WAITING: 1,
+    QUEUING: 2,
+    DOWNLOADING: 3,
+    OK: 4,
+    ERROR: 5,
+    TLE: 6,
+    toDisplayText: function toDisplayText(status) {
+      switch (status) {
+        case Utils.offlineDownloadStatus.WAITING:
+          return <span className="text-purple">{gettext('Waiting')}</span>;
+        case Utils.offlineDownloadStatus.QUEUING:
+          return  <span className="text-purple">{gettext('Queuing')}</span>;
+        case Utils.offlineDownloadStatus.DOWNLOADING:
+          return  <span className="text-azure">{gettext('Downloading')}</span>;
+        case Utils.offlineDownloadStatus.OK:
+          return  <span className="text-green">{gettext('OK')}</span>;
+        case Utils.offlineDownloadStatus.ERROR:
+          return  <span className="text-red">{gettext('Error')}</span>;
+        case Utils.offlineDownloadStatus.TLE:
+          return  <span className="text-orange">{gettext('Timeout')}</span>;
+        default:
+          return  <span className="text-red">{gettext('Unknown')}</span>;
+      }
+    }
+  },
+
   FILEEXT_ICON_MAP: {
 
     // text file

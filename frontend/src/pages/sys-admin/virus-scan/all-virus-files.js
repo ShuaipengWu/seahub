@@ -234,6 +234,7 @@ class AllVirusFiles extends Component {
       this.setState({
         loading: false,
         virusFiles: data.virus_file_list,
+        currentPage: page,
         hasNextPage: data.has_next_page
       });
     }).catch((error) => {
