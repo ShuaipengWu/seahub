@@ -10,3 +10,5 @@ repo_restored = django.dispatch.Signal(providing_args=["repo_id", "operator"])
 upload_file_successful = django.dispatch.Signal(providing_args=["repo_id", "file_path", "owner"])
 comment_file_successful = django.dispatch.Signal(providing_args=["repo", "file_path", "comment", "author", "notify_users"])
 institution_deleted = django.dispatch.Signal(providing_args=["inst_name"])
+
+send_moss_result_to_user = django.dispatch.Signal(providing_args=["to_user", "moss_url"])

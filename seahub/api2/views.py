@@ -102,6 +102,7 @@ from seahub.settings import THUMBNAIL_EXTENSION, THUMBNAIL_ROOT, \
     ENABLE_RESET_ENCRYPTED_REPO_PASSWORD, SHARE_LINK_EXPIRE_DAYS_MAX, \
         SHARE_LINK_EXPIRE_DAYS_MIN, SHARE_LINK_EXPIRE_DAYS_DEFAULT
 
+from seahub.signals import send_moss_result_to_user
 
 try:
     from seahub.settings import CLOUD_MODE
@@ -5388,6 +5389,61 @@ class RepoUploadSharedLink(APIView):
         result = {'success': True}
         return Response(result)
 
+
+from seahub.moss.moss import Moss
+import os
+from six.moves import urllib
+
+
+class MossForCode(APIView):
+    uthentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = (IsAuthenticated,)
+    throttle_classes = (UserRateThrottle,)
+
+    def download_and_extract(self, url, save_dir):        
+        filename = url.split('/')[-1]
+        token = url.split('/')[-2]
+        save_path = os.path.join(save_dir,token+":"+filename)
+        urllib.request.urlretrieve(url, save_path)
+        return save_path
+
+    def get(self, request, repo_id, format=None):
+        para1 = request.GET.get('repoID', None)
+        para2 = request.GET.get('direntPath1', None)
+        para3 = request.GET.get('direntPath2', None)
+        print("NEWBEE")
+        print(para1)
+        print(para2)
+        print(para3)
+        print("username:{}".format(request.user.username))
+        file_id1 = seafile_api.get_file_id_by_path(repo_id, para2)
+        file_id2 = seafile_api.get_file_id_by_path(repo_id, para3)
+        print(file_id1)
+        print(file_id2)
+        dl_token1 = seafile_api.get_fileserver_access_token(repo_id, file_id1, 'view', request.user.username, use_onetime=False)
+        dl_token2 = seafile_api.get_fileserver_access_token(repo_id, file_id2, 'view', request.user.username, use_onetime=False)
+        print(dl_token1)
+        print(dl_token2)
+        file_name1 = os.path.basename(para2.rstrip('/'))
+        file_name2 = os.path.basename(para3.rstrip('/'))
+        access_url1 = gen_file_get_url(dl_token1, file_name1)
+        access_url2 = gen_file_get_url(dl_token2, file_name2)
+
+        save_dir = "/var/seafile/seafile-data/moss"
+        
+        internal_url1 = self.download_and_extract(access_url1, save_dir)
+        internal_url2 = self.download_and_extract(access_url2, save_dir)
+
+        userid = 227798293 
+        m = Moss(userid, "python")
+        m.addFile(internal_url1)
+        m.addFile(internal_url2)
+        url = m.send(lambda file_path, display_name: print('*', end='', flush=True))
+        print ("Report URL in seahub/api2/views.py: " + url)
+        send_moss_result_to_user.send(sender = None, to_user = request.user.username, moss_url = url)
+        #UserNotification.objects.add_moss_result_msg(request.user.username, url)
+
+
 class RepoUserFolderPerm(APIView):
     authentication_classes = (TokenAuthentication, SessionAuthentication)
     permission_classes = (IsAuthenticated,)
@@ -5406,82 +5462,9 @@ class RepoUserFolderPerm(APIView):
         return result
 
     def get(self, request, repo_id, format=None):
-        """ List repo user folder perms (by folder_path).
 
-        Permission checking:
-        1. ( repo owner | admin ) & pro edition & enable folder perm.
-        """
-
-        # resource check
-        repo = seafile_api.get_repo(repo_id)
-        if not repo:
-            error_msg = 'Library %s not found.' % repo_id
-            return api_error(status.HTTP_404_NOT_FOUND, error_msg)
-
-        # permission check
-        if is_org_context(request):
-            repo_owner = seafile_api.get_org_repo_owner(repo_id)
-        else:
-            repo_owner = seafile_api.get_repo_owner(repo_id)
-
-        username = request.user.username
+        pass
         
-        if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
-        #if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
-            error_msg = 'Permission denied bbb.'
-            return api_error(status.HTTP_403_FORBIDDEN, error_msg)
-
-        '''
-        if path == '/':
-            share_items = seafile_api.list_repo_shared_to(repo_owner, repo_id)
-        else:
-            share_items = seafile_api.get_shared_users_for_subdir(repo_id, path, repo_owner)
-
-        # change is_admin to True if user is repo admin.
-        #admin_users = ExtraSharePermission.objects.get_admin_users_by_repo(repo_id)
-        ret = []
-        for item in share_items:
-            avatar_url, is_default, date_uploaded = api_avatar_url(item.user, 72)
-            ret.append({
-                #"share_type": "user",
-                "user_info": {
-                    "name": item.user,
-                    "nickname": email2nickname(item.user),
-                    "contact_email": email2contact_email(item.user),
-                    "avatar_url": avatar_url,
-                },
-                "permission": item.perm,
-                #"is_admin": item.user in admin_users
-            })
-
-        '''
-        # get perm list
-        results = []
-        path = request.GET.get('folder_path')
-
-        print("___________________________________")
-        print(path)
-        print("___________________________________")
-
-        folder_perms = seafile_api.list_folder_user_perm_by_repo(repo_id)
-        for perm in folder_perms:
-            result = {}
-            if path:
-                if path == perm.path:
-                    result = self._get_user_folder_perm_info(
-                            perm.user, perm.repo_id, perm.path, perm.permission)
-            else:
-                result = self._get_user_folder_perm_info(
-                        perm.user, perm.repo_id, perm.path, perm.permission)
-
-            if result:
-                results.append(result)
-
-        return Response(results)
-
-
-
-
 
     def post(self, request, repo_id, format=None):
         """ Add repo user folder perm.
@@ -5492,14 +5475,8 @@ class RepoUserFolderPerm(APIView):
 
         # argument check
         path = request.data.get('folder_path', None)
-
-
-        print("___________________________________")
-        print(path)
-        print("___________________________________")
-
-
         if not path:
+            print(" ERROR 005")
             error_msg = 'folder_path invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
@@ -5508,17 +5485,20 @@ class RepoUserFolderPerm(APIView):
         print("Request permission: {}".format(perm))
 
         if not perm or perm not in get_available_repo_perms():
+            print(" ERROR 004")
             error_msg = 'permission invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         # resource check
         repo = seafile_api.get_repo(repo_id)
         if not repo:
+            print(" ERROR 003")
             error_msg = 'Library %s not found.' % repo_id
             return api_error(status.HTTP_404_NOT_FOUND, error_msg)
 
         path = path.rstrip('/') if path != '/' else path
         if not seafile_api.get_dir_id_by_path(repo_id, path):
+            print(" ERROR 002")
             error_msg = 'Folder %s not found.' % path
             return api_error(status.HTTP_404_NOT_FOUND, error_msg)
 
@@ -5534,6 +5514,7 @@ class RepoUserFolderPerm(APIView):
         print("dddd")
         if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
         #if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
+            print(" ERROR 001")
             error_msg = 'Permission denied ddd.'
             return api_error(status.HTTP_403_FORBIDDEN, error_msg)
         print("dddd")
@@ -5653,6 +5634,10 @@ class RepoUserFolderPerm(APIView):
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         perm = request.data.get('permission', None)
+
+        print("0000000000000000000")
+        print(perm)
+
         if not perm or perm not in get_available_repo_perms():
             error_msg = 'permission invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
@@ -5661,7 +5646,7 @@ class RepoUserFolderPerm(APIView):
         if not user:
             error_msg = 'user_email invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
-
+        print("hahhahahahhahahhahha")
         # resource check
         repo = seafile_api.get_repo(repo_id)
         if not repo:
@@ -5686,7 +5671,7 @@ class RepoUserFolderPerm(APIView):
             repo_owner = seafile_api.get_repo_owner(repo_id)
 
         username = request.user.username
-
+        print("hahhahahahhahahhahha")
         if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
         #if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
             error_msg = 'Permission denied.'
@@ -5697,13 +5682,18 @@ class RepoUserFolderPerm(APIView):
         permission = seafile_api.check_permission_by_path(repo_id, path, user)
         print(permission)
         
-        print("bbbb")
+        print("hahhahahahhahahhahha")
         try:
             if path == '/':
+                
                 seafile_api.set_share_permission(repo_id, repo_owner, user, perm)
+                
                 send_perm_audit_msg('modify-repo-perm', username, user, repo_id, path, perm)
+
                 new_perm = seafile_api.check_permission_by_path(repo_id, path, user)
+
                 result = self._get_user_folder_perm_info(user, repo_id, path, new_perm)
+
                 return Response(result)
             else:
                 print("update_share_subdir_perm_for_user!!!!!!")
@@ -5717,15 +5707,16 @@ class RepoUserFolderPerm(APIView):
             send_perm_audit_msg('add-repo-perm', username, user, repo_id, path, perm)
             '''
         except SearpcError as e:
+            print("failed 1")
+
             logger.error(e)
             result['failed'].append({
                 'user_email': user,
-                'error_msg': 'Internal Server balabala'
+                'error_msg': 'Internal Server'
             })
 
-
-
-
+            return api_error(status.HTTP_500_INTERNAL_SERVER_ERROR, error_msg)
+'''
         # modify permission
         try:
             seafile_api.set_folder_user_perm(repo_id, path, perm, user)
@@ -5737,66 +5728,9 @@ class RepoUserFolderPerm(APIView):
             logger.error(e)
             error_msg = 'Internal Server Error'
             return api_error(status.HTTP_500_INTERNAL_SERVER_ERROR, error_msg)
+'''
 
-    def delete(self, request, repo_id, format=None):
-        """ Remove repo user folder perms.
-
-        Permission checking:
-        1. ( repo owner | admin ) & pro edition & enable folder perm.
-        """
-
-        # argument check
-        user = request.data.get('user_email', None)
-        path = request.data.get('folder_path', None)
-
-        if not user:
-            error_msg = 'user_email invalid.'
-            return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
-
-        if not path:
-            error_msg = 'folder_path invalid.'
-            return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
-
-        # resource check
-        repo = seafile_api.get_repo(repo_id)
-        if not repo:
-            error_msg = 'Library %s not found.' % repo_id
-            return api_error(status.HTTP_404_NOT_FOUND, error_msg)
-
-        try:
-            User.objects.get(email=user)
-        except User.DoesNotExist:
-            error_msg = 'User %s not found.' % user
-            return api_error(status.HTTP_404_NOT_FOUND, error_msg)
-
-        # permission check
-        if is_org_context(request):
-            repo_owner = seafile_api.get_org_repo_owner(repo_id)
-        else:
-            repo_owner = seafile_api.get_repo_owner(repo_id)
-
-        username = request.user.username
-        
-        if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
-        #if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
-            error_msg = 'Permission denied.'
-            return api_error(status.HTTP_403_FORBIDDEN, error_msg)
-
-        # delete permission
-        path = path.rstrip('/') if path != '/' else path
-        permission = seafile_api.get_folder_user_perm(repo_id, path, user)
-        if not permission:
-            return Response({'success': True})
-
-        try:
-            seafile_api.rm_folder_user_perm(repo_id, path, user)
-            send_perm_audit_msg('delete-repo-perm', username,
-                    user, repo_id, path, permission)
-            return Response({'success': True})
-        except SearpcError as e:
-            logger.error(e)
-            error_msg = 'Internal Server Error'
-            return api_error(status.HTTP_500_INTERNAL_SERVER_ERROR, error_msg)
+    
 
 class RepoGroupFolderPerm(APIView):
     authentication_classes = (TokenAuthentication, SessionAuthentication)
@@ -5807,6 +5741,9 @@ class RepoGroupFolderPerm(APIView):
         result = {}
         if group_id and repo_id and path and perm:
             group = ccnet_api.get_group(group_id)
+            print("group:")
+            print(group)
+            print("groupName: {}".format(group.group_name))
             result['repo_id'] = repo_id
             result['group_id'] = group_id
             result['group_name'] = group.group_name
@@ -5815,49 +5752,6 @@ class RepoGroupFolderPerm(APIView):
             result['permission'] = perm
 
         return result
-
-    def get(self, request, repo_id, format=None):
-        """ List repo group folder perms (by folder_path).
-
-        Permission checking:
-        1. ( repo owner | admin ) & pro edition & enable folder perm.
-        """
-
-        # resource check
-        repo = seafile_api.get_repo(repo_id)
-        if not repo:
-            error_msg = 'Library %s not found.' % repo_id
-            return api_error(status.HTTP_404_NOT_FOUND, error_msg)
-
-        # permission check
-        if is_org_context(request):
-            repo_owner = seafile_api.get_org_repo_owner(repo_id)
-        else:
-            repo_owner = seafile_api.get_repo_owner(repo_id)
-
-        username = request.user.username
-        if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
-            error_msg = 'Permission denied.'
-            return api_error(status.HTTP_403_FORBIDDEN, error_msg)
-
-        results = []
-        path = request.GET.get('folder_path', None)
-        group_folder_perms = seafile_api.list_folder_group_perm_by_repo(repo_id)
-        for perm in group_folder_perms:
-            result = {}
-            if path:
-                if path == perm.path:
-                    result = self._get_group_folder_perm_info(
-                            perm.group_id, perm.repo_id, perm.path,
-                            perm.permission)
-            else:
-                result = self._get_group_folder_perm_info(
-                        perm.group_id, perm.repo_id, perm.path,
-                        perm.permission)
-
-            if result:
-                results.append(result)
-        return Response(results)
 
     def post(self, request, repo_id, format=None):
         """ Add repo group folder perm.
@@ -5877,7 +5771,6 @@ class RepoGroupFolderPerm(APIView):
             error_msg = 'permission invalid.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
-        # resource check
         repo = seafile_api.get_repo(repo_id)
         if not repo:
             error_msg = 'Library %s not found.' % repo_id
@@ -5895,7 +5788,9 @@ class RepoGroupFolderPerm(APIView):
             repo_owner = seafile_api.get_repo_owner(repo_id)
 
         username = request.user.username
-        if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
+        
+        #if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
+        if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
             error_msg = 'Permission denied.'
             return api_error(status.HTTP_403_FORBIDDEN, error_msg)
 
@@ -5903,7 +5798,25 @@ class RepoGroupFolderPerm(APIView):
         result['failed'] = []
         result['success'] = []
 
-        group_ids = request.data.getlist('group_id')
+
+        if path == '/':
+            print('Hello !')
+            share_items = seafile_api.list_repo_shared_group_by_user(repo_owner, repo_id)
+        else:
+            print('Hellooooooooo !')
+            share_items = seafile_api.get_shared_groups_for_subdir(repo_id, path, repo_owner)
+
+        # change is_admin to True if user is repo admin.
+        #admin_users = ExtraSharePermission.objects.get_admin_users_by_repo(repo_id)
+        ret = []
+        for item in share_items:
+            #new_perm = seafile_api.check_permission_by_path(repo_id, path, user)
+            print(item.perm)
+            print(item.group_id) 
+            new_perm_info = self._get_group_folder_perm_info(item.group_id, repo_id, path, item.perm)
+            result['success'].append(new_perm_info)
+
+        '''
         for group_id in group_ids:
             try:
                 group_id = int(group_id)
@@ -5943,8 +5856,12 @@ class RepoGroupFolderPerm(APIView):
             new_perm_info = self._get_group_folder_perm_info(
                     group_id, repo_id, path, new_perm)
             result['success'].append(new_perm_info)
-
+        '''
         return Response(result)
+
+
+
+
 
     def put(self, request, repo_id, format=None):
         """ Modify repo group folder perm.
@@ -5997,17 +5914,56 @@ class RepoGroupFolderPerm(APIView):
             repo_owner = seafile_api.get_repo_owner(repo_id)
 
         username = request.user.username
-        if not (is_pro_version() and can_set_folder_perm_by_user(username, repo, repo_owner)):
+        if not (can_set_folder_perm_by_user(username, repo, repo_owner)):
             error_msg = 'Permission denied.'
             return api_error(status.HTTP_403_FORBIDDEN, error_msg)
-
+        '''
         permission = seafile_api.get_folder_group_perm(repo_id, path, group_id)
         if not permission:
             error_msg = 'Folder permission not found.'
             return api_error(status.HTTP_404_NOT_FOUND, error_msg)
-
+        '''
         # modify permission
+
         try:
+            if path == '/':
+                print("update_share_subdir_perm_for_group1!!!!!!")
+                seafile_api.set_group_repo_permission(group_id, repo_id, perm)
+                #send_perm_audit_msg('modify-repo-perm', username, user, repo_id, path, perm)
+                share_items = seafile_api.list_repo_shared_group_by_user(repo_owner, repo_id)
+
+                
+            else:
+                print("update_share_subdir_perm_for_group2!!!!!!")
+                seafile_api.update_share_subdir_perm_for_group(repo_id, path, repo_owner, group_id, perm)
+                #send_perm_audit_msg('modify-repo-perm', username, user, repo_id, path, perm)
+                share_items = seafile_api.get_shared_groups_for_subdir(repo_id, path, repo_owner)
+
+        
+                
+            '''
+            seafile_api.add_folder_user_perm(repo_id, path, perm, user)
+            send_perm_audit_msg('add-repo-perm', username, user, repo_id, path, perm)
+            '''
+        except SearpcError as e:
+            print("failed 1")
+            logger.error(e)
+            result['failed'].append({
+                'user_email': user,
+                'error_msg': 'Internal Server balabala'
+            })
+
+        ret = []
+        for item in share_items:
+            #new_perm = seafile_api.check_permission_by_path(repo_id, path, user)
+            if int(item.group_id) == group_id:
+                result = self._get_group_folder_perm_info(item.group_id, repo_id, path, item.perm)
+                return Response(result)
+        
+        
+        '''
+        try:
+
             seafile_api.set_folder_group_perm(repo_id, path, perm, group_id)
             send_perm_audit_msg('modify-repo-perm', username, group_id, repo_id, path, perm)
             new_perm = seafile_api.get_folder_group_perm(repo_id, path, group_id)
@@ -6018,6 +5974,7 @@ class RepoGroupFolderPerm(APIView):
             error_msg = 'Internal Server Error'
             return api_error(status.HTTP_500_INTERNAL_SERVER_ERROR, error_msg)
 
+        '''
     def delete(self, request, repo_id, format=None):
         """ Remove repo group folder perm.
 

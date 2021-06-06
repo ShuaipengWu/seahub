@@ -1,3 +1,4 @@
+
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { gettext, isPro, siteRoot } from '../../utils/constants';
@@ -57,13 +58,9 @@ class UserItem extends React.Component {
             onPermissionChanged={this.onChangeUserFolderPerm}
           />
         </td>
+
         <td>
-          <span
-            className={`sf2-icon-x3 action-icon ${this.state.isOperationShow ? '' : 'hide'}`}
-            onClick={this.deleteUserFolderPermission}
-            title={gettext('Delete')}
-          >
-          </span>
+
         </td>
       </tr>
     );
@@ -89,11 +86,9 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
       folderPath: '',
       showFileChooser: false
     };
-    if (!isPro) {
-      this.permissions = ['r', 'rw'];
-    } else {
-      this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
-    }
+
+    this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
+    
   }
 
   handleUserSelectChange = (option) => {
@@ -101,6 +96,7 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
   }
 
   componentDidMount() {
+    /*
     const {repoID, folderPath, isDepartmentRepo} = this.props;
     const request = isDepartmentRepo ?
       seafileAPI.listDepartmentRepoUserFolderPerm(repoID, folderPath) :
@@ -110,6 +106,7 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
         this.setState({userFolderPermItems: res.data});
       }
     });
+    */
   }
 
   setPermission = (permission) => {
@@ -117,17 +114,27 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
   }
 
   addUserFolderPerm = () => {
-    const { selectedUsers } = this.state;
+    //const { selectedUsers } = this.state;
     const folderPath = this.props.folderPath || this.state.folderPath;
-    if (!selectedUsers || !selectedUsers.length || !folderPath) { // selectedUsers: null or []
+
+    if (!folderPath) { // selectedUsers: null or []
       return false;
     }
+    
+    /*
+      deleted by YAN:
 
-    const users = selectedUsers.map((item, index) => item.email);
-
-    const request = this.props.isDepartmentRepo ?
+      const users = selectedUsers.map((item, index) => item.email);
+      const request = this.props.isDepartmentRepo ?
       seafileAPI.addDepartmentRepoUserFolderPerm(this.props.repoID, this.state.permission, folderPath, users) :
       seafileAPI.addUserFolderPerm(this.props.repoID, this.state.permission, folderPath, users);
+
+    */
+    
+    const request = this.props.isDepartmentRepo ?
+      seafileAPI.addDepartmentRepoUserFolderPerm(this.props.repoID, this.state.permission, folderPath) :
+      seafileAPI.addUserFolderPerm(this.props.repoID, this.state.permission, folderPath);
+
     request.then(res => {
       let errorMsg = [];
       if (res.data.failed.length > 0) {
@@ -137,12 +144,13 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
       }
       this.setState({
         errorMsg: errorMsg,
-        userFolderPermItems: this.state.userFolderPermItems.concat(res.data.success),
+        //userFolderPermItems: this.state.userFolderPermItems.concat(res.data.success),
+        userFolderPermItems: res.data.success,
         selectedUsers: null,
         permission: 'rw',
         folderPath: '',
       });
-      this.refs.userSelect.clearSelect();
+      //this.refs.userSelect.clearSelect();
     }).catch((error) => {
       let errorMsg = '';
       if (error.response) {
@@ -242,6 +250,17 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
     const thead = (
       <thead>
         <tr>
+          {showPath &&
+          <th width="88%">{gettext('Folder')}</th>
+          }
+          <th width={showPath ? '12%' : '15%'}></th>
+        </tr>
+      </thead>
+    );
+
+    const thead2 = (
+      <thead>
+        <tr>
           <th width={showPath ? '32%': '55%'}>{gettext('User')}</th>
           {showPath &&
           <th width="32%">{gettext('Folder')}</th>
@@ -251,22 +270,13 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
         </tr>
       </thead>
     );
+
     return (
       <Fragment>
         <table className="w-xs-250">
           {thead}
           <tbody>
             <tr>
-              <td>
-                <UserSelect
-                  ref="userSelect"
-                  isMulti={true}
-                  className="reviewer-select"
-                  placeholder={gettext('Search users...')}
-                  onSelectChange={this.handleUserSelectChange}
-                  value={this.state.selectedUsers}
-                />
-              </td>
               {showPath &&
                 <td>
                   <InputGroup>
@@ -275,15 +285,6 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
                   </InputGroup>
                 </td>
               }
-              <td>
-                <SharePermissionEditor
-                  isTextMode={false}
-                  isEditIconShow={false}
-                  currentPermission={this.state.permission}
-                  permissions={this.permissions}
-                  onPermissionChanged={this.setPermission}
-                />
-              </td>
               <td>
                 <Button onClick={this.addUserFolderPerm}>{gettext('Submit')}</Button>
               </td>
@@ -307,7 +308,7 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
         </table>
         <div className="share-list-container">
           <table className="table-thead-hidden w-xs-250">
-            {thead}
+            {thead2}
             <tbody>
               {userFolderPermItems.map((item, index) => {
                 return (

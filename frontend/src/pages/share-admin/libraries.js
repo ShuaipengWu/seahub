@@ -16,6 +16,7 @@ class Content extends Component {
     e.preventDefault();
     const sortBy = 'name';
     const sortOrder = this.props.sortOrder == 'asc' ? 'desc' : 'asc';
+    
     this.props.sortItems(sortBy, sortOrder);
   }
 
@@ -91,13 +92,16 @@ class Item extends Component {
     };
     let permissions = ['rw', 'r'];
     this.permissions = permissions;
-    this.showAdmin = isPro && (item.share_type !== 'public');
+    
+    //this.showAdmin = isPro && (item.share_type !== 'public');
+    this.showAdmin = item.share_type !== 'public';
+
     if (this.showAdmin) {
       permissions.push('admin');
     }
-    if (isPro) {
-      permissions.push('cloud-edit', 'preview');
-    }
+    //if (isPro) {
+    permissions.push('cloud-edit', 'preview');
+    //}
   }
 
   toggleOpMenu = () => {

@@ -85,9 +85,9 @@ class Item extends Component {
     };
 
     this.permissions = ['rw', 'r'];
-    if (isPro) {
-      this.permissions.push('cloud-edit', 'preview');
-    }
+    //if (isPro) {
+    this.permissions.push('cloud-edit', 'preview');
+    //}
   }
 
   toggleOpMenu = () => {
