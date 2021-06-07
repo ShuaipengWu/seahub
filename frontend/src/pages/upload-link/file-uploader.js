@@ -21,6 +21,8 @@ const propTypes = {
 
   filenameOverride: PropTypes.string,   // Only the file name, no format ext.
   // If passed in, all the files will be named [filenameOverride].[format]
+  disableFolderUpload: PropTypes.bool,
+
   filetypes: PropTypes.array,
   chunkSize: PropTypes.number,
   withCredentials: PropTypes.bool,
@@ -31,6 +33,10 @@ const propTypes = {
   minFileSizeErrorCallback: PropTypes.func,
   fileTypeErrorCallback: PropTypes.func,
   onFileUploadSuccess: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  disableFolderUpload: false
 };
 
 class FileUploader extends React.Component {
@@ -642,6 +648,7 @@ class FileUploader extends React.Component {
           onUploadRetry={this.onUploadRetry}
           onFileUpload={this.onFileUpload}
           onFolderUpload={this.onFolderUpload}
+          disableFolderUpload={this.props.disableFolderUpload}
         />
       </Fragment>
     );
@@ -649,5 +656,6 @@ class FileUploader extends React.Component {
 }
 
 FileUploader.propTypes = propTypes;
+FileUploader.defaultProps = defaultProps;
 
 export default FileUploader;

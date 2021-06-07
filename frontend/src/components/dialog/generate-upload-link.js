@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 import moment from 'moment';
 import { Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText, Alert, FormText } from 'reactstrap';
-import { gettext, shareLinkPasswordMinLength, canSendShareLinkEmail, uploadLinkExpireDaysMin, uploadLinkExpireDaysMax, uploadLinkExpireDaysDefault } from '../../utils/constants';
+import {
+  gettext,
+  shareLinkPasswordMinLength,
+  canSendShareLinkEmail,
+  uploadLinkExpireDaysMin,
+  uploadLinkExpireDaysMax,
+  uploadLinkExpireDaysDefault,
+  siteRoot
+} from '../../utils/constants';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
 import UploadLink from '../../models/upload-link';
@@ -339,7 +347,7 @@ class GenerateUploadLink extends React.Component {
             )}
             {sharedUploadInfo.format && (
               <FormGroup className="mb-0">
-                <dt className="text-secondary font-weight-normal">{gettext('Format:')}</dt>
+                <dt className="text-secondary font-weight-normal">{gettext('Filename Format:')}</dt>
                 <dd>{sharedUploadInfo.format}</dd>
               </FormGroup>
             )}
@@ -440,7 +448,7 @@ class GenerateUploadLink extends React.Component {
         <FormGroup check>
           <Label check>
             <Input type="checkbox" onChange={this.addFormat} />
-            <span>{gettext('Add filename format limitation')}</span>
+            <span>{gettext('Filename auto formation')}</span>
           </Label>
           {this.state.showFormatInput &&
           <div className="ml-4">
@@ -448,7 +456,7 @@ class GenerateUploadLink extends React.Component {
               <Label for="filename-format">{gettext('Filename format')}</Label>
               <Input id="filename-format" style={{width: inputWidth}} type='text' onChange={this.inputFormat} />
             </FormGroup>
-            <p className="tip">{gettext('About formatting, you can refer to <a href="#">this manual</a> for more help.')}</p>
+            <p className="tip">{gettext('Filename auto formation system can automatically rename uploaded files to given format.')}<br/>{gettext('To learn basic usages, please refer to ')}<a target={'_blank'} href={`${siteRoot}help/sharing_files_and_folders/`}>{gettext('this manual')}</a></p>
           </div>
           }
         </FormGroup>

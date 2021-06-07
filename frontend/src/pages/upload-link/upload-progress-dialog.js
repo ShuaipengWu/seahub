@@ -13,7 +13,13 @@ const propTypes = {
   onUploadRetry: PropTypes.func.isRequired,
   onFileUpload: PropTypes.func.isRequired,
   onFolderUpload: PropTypes.func.isRequired,
-  allFilesUploaded: PropTypes.bool.isRequired
+  allFilesUploaded: PropTypes.bool.isRequired,
+
+  disableFolderUpload: PropTypes.bool
+};
+
+const defaultProps = {
+  disableFolderUpload: false
 };
 
 class UploadProgressDialog extends React.Component {
@@ -36,13 +42,22 @@ class UploadProgressDialog extends React.Component {
     return (
       <Fragment>
         <div className="text-center">
-          <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-            <DropdownToggle color="primary" caret>{gettext('Upload')}</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.props.onFileUpload}>{gettext('Upload Files')}</DropdownItem>
-              <DropdownItem onClick={this.props.onFolderUpload}>{gettext('Upload Folder')}</DropdownItem>
-            </DropdownMenu>
-          </ButtonDropdown>
+          {
+            this.props.disableFolderUpload ? (
+              <Button color="primary" onClick={this.props.onFileUpload}>
+                {gettext('Upload')}
+              </Button>
+            ) : (
+              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                <DropdownToggle color="primary" caret>{gettext('Upload')}</DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={this.props.onFileUpload}>{gettext('Upload Files')}</DropdownItem>
+                  <DropdownItem onClick={this.props.onFolderUpload}>{gettext('Upload Folder')}</DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+            )
+          }
+
           <Button color="primary" outline={true} className="ml-4"
             onClick={this.props.onCancelAllUploading}
             disabled={allFilesUploaded}>
@@ -83,5 +98,6 @@ class UploadProgressDialog extends React.Component {
 }
 
 UploadProgressDialog.propTypes = propTypes;
+UploadProgressDialog.defaultProps = defaultProps;
 
 export default UploadProgressDialog;

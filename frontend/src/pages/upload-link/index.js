@@ -144,6 +144,7 @@ class SharedUploadLink extends React.Component {
                       path={path}
                       onFileUploadSuccess={() => {}}
                       filenameOverride={this.state.assembledFilename}
+                      disableFolderUpload={this.state.requiredFormatItems > 0}
                     />
                   </Fragment>
                 ) : (
