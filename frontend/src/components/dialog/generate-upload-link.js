@@ -19,6 +19,24 @@ const propTypes = {
 
 const inputWidth = Utils.isDesktop() ? 250 : 210;
 
+// This code is pulled out from SeafileAPI.
+function createUploadLinkModified(repoID, path, password, expirationTime, format) {
+  var url = seafileAPI.server + '/api/v2.1/upload-links/';
+  var form = new FormData();
+  form.append('path', path);
+  form.append('repo_id', repoID);
+  if (password) {
+    form.append('password', password);
+  }
+  if (expirationTime) {
+    form.append('expiration_time', expirationTime);
+  }
+  if (format) {
+    form.append('format', format);
+  }
+  return seafileAPI._sendPostRequest(url, form);
+}
+
 class GenerateUploadLink extends React.Component {
   constructor(props) {
     super(props);
@@ -42,9 +60,11 @@ class GenerateUploadLink extends React.Component {
 
     this.state = {
       showPasswordInput: false,
+      showFormatInput: false,
       passwordVisible: false,
       password: '',
       passwdnew: '',
+      format: '',
       sharedUploadInfo: null,
       isSendLinkShown: false,
       isExpireChecked: !this.isExpireDaysNoLimit,
@@ -84,6 +104,19 @@ class GenerateUploadLink extends React.Component {
     });
   }
 
+  addFormat = () => {
+    this.setState({
+      showFormatInput: !this.state.showFormatInput,
+      errorInfo: ''
+    });
+  }
+
+  inputFormat = (e) => {
+    this.setState({
+      format: e.target.value
+    });
+  }
+
   togglePasswordVisible = () => {
     this.setState({
       passwordVisible: !this.state.passwordVisible
@@ -116,7 +149,7 @@ class GenerateUploadLink extends React.Component {
       this.setState({errorInfo: ''});
 
       let { itemPath, repoID } = this.props;
-      let { password, isExpireChecked, setExp, expireDays, expDate } = this.state;
+      let { password, isExpireChecked, setExp, expireDays, expDate, format } = this.state;
 
       let expirationTime = '';
       if (isExpireChecked) {
@@ -127,7 +160,7 @@ class GenerateUploadLink extends React.Component {
         }
       }
 
-      seafileAPI.createUploadLink(repoID, itemPath, password, expirationTime).then((res) => {
+      createUploadLinkModified(repoID, itemPath, password, expirationTime, format).then((res) => {
         let sharedUploadInfo = new UploadLink(res.data);
         this.setState({sharedUploadInfo: sharedUploadInfo});
       }).catch(error => {
@@ -138,7 +171,7 @@ class GenerateUploadLink extends React.Component {
   }
 
   validateParamsInput = () => {
-    let { showPasswordInput, password, passwordnew, isExpireChecked, setExp, expireDays, expDate } = this.state;
+    let { showPasswordInput, password, passwordnew, isExpireChecked, setExp, expireDays, expDate, format } = this.state;
 
     // check password params
     if (showPasswordInput) {
@@ -174,7 +207,10 @@ class GenerateUploadLink extends React.Component {
         this.setState({errorInfo: gettext('Please enter a non-negative integer')});
         return false;
       }
-      this.setState({expireDays: parseInt(expireDays)});
+
+      // TODO: Add checks for format.
+
+      this.setState({expireDays: parseInt(expireDays), format: format});
     }
     return true;
   }
@@ -275,6 +311,12 @@ class GenerateUploadLink extends React.Component {
                 <dd>{moment(sharedUploadInfo.expire_date).format('YYYY-MM-DD HH:mm:ss')}</dd>
               </FormGroup>
             )}
+            {sharedUploadInfo.format && (
+                <FormGroup className="mb-0">
+                  <dt className="text-secondary font-weight-normal">{gettext('Format:')}</dt>
+                  <dd>{sharedUploadInfo.format}</dd>
+                </FormGroup>
+            )}
           </Form>
           {canSendShareLinkEmail && !isSendLinkShown && <Button onClick={this.toggleSendLink} className="mr-2">{gettext('Send')}</Button>}
           {!isSendLinkShown && <Button onClick={this.deleteUploadLink}>{gettext('Delete')}</Button>}
@@ -360,6 +402,21 @@ class GenerateUploadLink extends React.Component {
                 />
               )}
             </FormGroup>
+          </div>
+          }
+        </FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input type="checkbox" onChange={this.addFormat} />
+            <span>{gettext('Add filename format limitation')}</span>
+          </Label>
+          {this.state.showFormatInput &&
+          <div className="ml-4">
+            <FormGroup>
+              <Label for="filename-format">{gettext('Filename format')}</Label>
+              <Input id="filename-format" style={{width: inputWidth}} type='text' onChange={this.inputFormat} />
+            </FormGroup>
+            <p className="tip">{gettext('About formatting, you can refer to <a href="#">this manual</a> for more help.')}</p>
           </div>
           }
         </FormGroup>

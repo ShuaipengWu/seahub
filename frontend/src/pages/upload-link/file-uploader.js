@@ -1,6 +1,6 @@
 // This file is copied from frontend/src/components/file-uploader/file-uploader.js,
 // and modified according to the requirements of this page.
-import React, { Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import Resumablejs from '@seafile/resumablejs';
 import MD5 from 'MD5';
@@ -19,6 +19,8 @@ const propTypes = {
   repoID: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 
+  filenameOverride: PropTypes.string,   // Only the file name, no format ext.
+  // If passed in, all the files will be named [filenameOverride].[format]
   filetypes: PropTypes.array,
   chunkSize: PropTypes.number,
   withCredentials: PropTypes.bool,
@@ -193,6 +195,14 @@ class FileUploader extends React.Component {
           currentResumableFile: resumableFile,
         });
       } else {
+        // [SDU-NDT] Add for Filename override
+        if (this.props.filenameOverride && this.props.filenameOverride.length > 0) {
+          for (let i = 0; i < this.resumable.files.length; i++) {
+            this.resumable.files[i].fileName =
+                Utils.replaceMainFileName(this.props.filenameOverride, this.resumable.files[i].fileName);
+          }
+        }
+        // [SDU-NDT] Over
         this.setUploadFileList(this.resumable.files);
         seafileAPI.sharedUploadLinkGetFileUploadUrl(this.props.token).then(res => {
           this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
@@ -204,6 +214,14 @@ class FileUploader extends React.Component {
       }
     } else {
       this.setUploadFileList(this.resumable.files);
+      // [SDU-NDT] Add for Filename override
+      if (this.props.filenameOverride && this.props.filenameOverride.length > 0) {
+        for (let i = 0; i < this.resumable.files.length; i++) {
+          this.resumable.files[i].fileName =
+              Utils.replaceMainFileName(this.props.filenameOverride, this.resumable.files[i].fileName);
+        }
+      }
+      // [SDU-NDT] Over
       if (!this.isUploadLinkLoaded) {
         this.isUploadLinkLoaded = true;
         seafileAPI.sharedUploadLinkGetFileUploadUrl(this.props.token).then(res => {

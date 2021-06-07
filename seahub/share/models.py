@@ -419,7 +419,7 @@ class UploadLinkShareManager(models.Manager):
         return self._get_upload_link_by_path(username, repo_id, path)
 
     def create_upload_link_share(self, username, repo_id, path,
-                                 password=None, expire_date=None):
+                                 password=None, expire_date=None, format=None):
         path = normalize_dir_path(path)
         token = gen_token(max_length=config.SHARE_LINK_TOKEN_LENGTH)
         if password is not None:
@@ -428,7 +428,7 @@ class UploadLinkShareManager(models.Manager):
             password_enc = None
         uls = super(UploadLinkShareManager, self).create(
             username=username, repo_id=repo_id, path=path, token=token,
-            password=password_enc, expire_date=expire_date)
+            password=password_enc, expire_date=expire_date, format=format)
         uls.save()
         return uls
 
@@ -460,6 +460,7 @@ class UploadLinkShare(models.Model):
     view_cnt = models.IntegerField(default=0)
     password = models.CharField(max_length=128, null=True)
     expire_date = models.DateTimeField(null=True)
+    format = models.TextField(null=True)
     objects = UploadLinkShareManager()
 
     def is_encrypted(self):

@@ -11,6 +11,7 @@ class UploadLink {
     this.token = object.token;
     this.view_cnt = object.view_cnt;
     this.expire_date = object.expire_date;
+    this.format = object.format;
     this.is_expired = object.is_expired;
   }
 

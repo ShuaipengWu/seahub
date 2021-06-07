@@ -71,6 +71,7 @@ def get_upload_link_info(uls):
     data['token'] = token
     data['username'] = uls.username
     data['expire_date'] = expire_date
+    data['format'] = uls.format
     data['is_expired'] = uls.is_expired()
 
     return data
@@ -164,6 +165,9 @@ class UploadLinks(APIView):
             error_msg = 'Can not pass expire_days and expiration_time at the same time.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
+        format = request.data.get('format', '')
+        # TODO: Add format check.
+
         expire_date = None
         if expire_days:
             try:
@@ -248,7 +252,7 @@ class UploadLinks(APIView):
         uls = UploadLinkShare.objects.get_upload_link_by_path(username, repo_id, path)
         if not uls:
             uls = UploadLinkShare.objects.create_upload_link_share(username,
-                repo_id, path, password, expire_date)
+                repo_id, path, password, expire_date, format)
 
         link_info = get_upload_link_info(uls)
         return Response(link_info)

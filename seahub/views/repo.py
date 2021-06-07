@@ -371,6 +371,7 @@ def view_shared_upload_link(request, uploadlink):
 
     username = uploadlink.username
     repo_id = uploadlink.repo_id
+    filename_format = uploadlink.format
     repo = get_repo(repo_id)
     if not repo:
         raise Http404
@@ -398,6 +399,7 @@ def view_shared_upload_link(request, uploadlink):
     return render(request, 'view_shared_upload_link_react.html', {
     #return render(request, 'view_shared_upload_link.html', {
             'repo': repo,
+            'format': filename_format,
             'path': path,
             'username': username,
             'dir_name': dir_name,
