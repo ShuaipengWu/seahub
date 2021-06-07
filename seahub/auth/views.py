@@ -192,6 +192,8 @@ def login(request, template_name='registration/login.html',
                  getattr(settings, 'ENABLE_REMOTE_USER_AUTHENTICATION', False) or \
                  getattr(settings, 'ENABLE_WORK_WEIXIN', False)
 
+    enlarge_sso = enable_sso and getattr(settings, 'ENLARGE_SSO_BUTTON', False)
+
     login_bg_image_path = get_login_bg_image_path()
 
     return render(request, template_name, {
@@ -202,6 +204,7 @@ def login(request, template_name='registration/login.html',
         'remember_days': config.LOGIN_REMEMBER_DAYS,
         'signup_url': signup_url,
         'enable_sso': enable_sso,
+        'enlarge_sso': enlarge_sso,
         'login_bg_image_path': login_bg_image_path,
     })
 

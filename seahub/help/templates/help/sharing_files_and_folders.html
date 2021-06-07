@@ -47,15 +47,15 @@
 <ul>
   <li>{% trans "Share to user: You can share to one or more users, one by one." %}</li>
   <li>{% trans "Share to group: You can share to a group of users. See how to manage groups in group sharing." %}</li>
-  <li>{% trans "Share to organization: If you're using a private server, sometimes it's useful to share to all members on the server (the entire organization)." %}</li>
+{#  <li>{% trans "Share to organization: If you're using a private server, sometimes it's useful to share to all members on the server (the entire organization)." %}</li>#}
 </ul>
 <p>{% trans "You can also set permission on the share:" %}</p>
 <ul>
   <li>{% trans "Read-Write share: the share members can do any update operations on the folder, including update file, upload file, delete, rename." %}</li>
   <li>{% trans "Read-only share: the share members can only read the folder and files in it. They cannot do any update to the folder and files." %}</li>
   <li>{% trans "Admin: the share members can re-share the library to other users. This permission can only be set when sharing a library, but not a folder." %}</li>
-  <li>{% trans "Online Read-Write: users can view and edit the file online via web browser. File cannot be downloaded. (New in 7.0)" %}</li>
-  <li>{% trans "Online Read-only: users can view the file online via web browser. File cannot be downloaded. (New in 7.0)" %}</li>
+  <li>{% trans "Online Read-Write: users can view and edit the file online via web browser. File cannot be downloaded." %}</li>
+  <li>{% trans "Online Read-only: users can view the file online via web browser. File cannot be downloaded." %}</li>
 </ul>
 <p>{% trans "To share a library or folder to a user or group:" %}</p>
 <ol>
@@ -63,7 +63,7 @@
   <li>{% trans "A pop-up window will appear with all the share options. Click the \"Share to user\" or \"Share to group\" tab on the left panel. Enter the user name or group name to share to. Then click \"Submit\"." %}</li>
 </ol>
 <p>{% trans "After you share a folder or library to a user, the user can see it by clicking the \"Shared\" tab on the left panel in Seafile web app. If you share to a group, the group members can only see the shared folder or library by navigating into the group." %}</p>
-<p>{% trans "To share a library to the entire organization: In Seafile web app, click the \"Organization\" tab on the left panel. Click \"Add Library\" button. In the drop-down menu, you may choose sharing an existing library or creating a new library and share it." %}</p>
+{#<p>{% trans "To share a library to the entire organization: In Seafile web app, click the \"Organization\" tab on the left panel. Click \"Add Library\" button. In the drop-down menu, you may choose sharing an existing library or creating a new library and share it." %}</p>#}
 <h4>{% trans "Internal links" %}</h4>
 <p>{% trans "Only logged in users who have share permissions to file or folder can access this link. It is used for internal file sharing. It's a convenient way for passing files among team members who has asscess to a common library. You may just copy the link and paste it into an email or IM software." %}</p>
 {% endblock %}

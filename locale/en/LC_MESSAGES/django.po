@@ -1502,12 +1502,66 @@ msgstr ""
 msgid "You are invited to join a group on %s"
 msgstr ""
 
+msgid "Introduction"
+msgstr ""
+
+msgid "Managing files and folders"
+msgstr ""
+
+msgid "Managing files with libraries"
+msgstr ""
+
+msgid "Restoring deleted files"
+msgstr ""
+
+msgid "Finding older version of files"
+msgstr ""
+
+msgid "Library history and snapshots"
+msgstr ""
+
+msgid "Setting history retention period"
+msgstr ""
+
+msgid "Deleting a library"
+msgstr ""
+
+msgid "Viewing files within Web App"
+msgstr ""
+
+msgid "Full text file search"
+msgstr ""
+
+msgid "Sharing and collaboration"
+msgstr ""
+
+msgid "Sharing files and folders"
+msgstr ""
+
+msgid "Managing groups"
+msgstr ""
+
+msgid "Locking files"
+msgstr ""
+
+msgid "Folder permission"
+msgstr ""
+
+msgid "Departments sharing"
+msgstr ""
+
+msgid "Wiki and knowledge management"
+msgstr ""
+
+msgid "Manage library as Wiki"
+msgstr ""
+
 #: seahub/help/templates/help/base.html:23
-msgid "Desktop Client and Syncing"
+msgid "Desktop client and syncing"
 msgstr ""
 
 #: seahub/help/templates/help/base.html:25
-msgid "Install and sync Files"
+msgid "Install and sync files"
 msgstr ""
 
 #: seahub/help/templates/help/base.html:26
@@ -1515,7 +1569,11 @@ msgid "Syncing existing folders"
 msgstr ""
 
 #: seahub/help/templates/help/base.html:27
-msgid "Selective sync sub-folders"
+msgid "Selectively sync sub-folders"
+msgstr ""
+
+#: seahub/help/templates/help/base.html:27
+msgid "Read-only syncing"
 msgstr ""
 
 #: seahub/help/templates/help/base.html:28
@@ -1539,12 +1597,37 @@ msgstr ""
 msgid "Excluding files"
 msgstr ""
 
+msgid "Install on Linux"
+msgstr ""
+
+msgid "Seafile client for a CLI server"
+msgstr ""
+
+msgid "Drive client"
+msgstr ""
+
+msgid "Using Seafile drive client"
+msgstr ""
+
+msgid "Using drive client 2.0 on Windows"
+msgstr ""
+
+msgid "Drive client for Linux"
+msgstr ""
+
 #: seahub/help/templates/help/base.html:34
-msgid "Security and Encryption"
+msgid "Security and encryption"
 msgstr ""
 
 #: seahub/help/templates/help/base.html:36
 msgid "How to use encrypted libraries"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+#: seahub/help/templates/help/introduction.html
+msgid "Seafile is an enterprise file hosting platform with high reliability and performance."
 msgstr ""
 
 #: seahub/help/templates/help/conflicts.html:7
@@ -1565,7 +1648,7 @@ msgid ""
 msgstr ""
 
 #: seahub/help/templates/help/desktop_proxy.html:6
-msgid "Using Proxy in Seafile Client"
+msgid "Using proxy in Seafile client"
 msgstr ""
 
 #: seahub/help/templates/help/desktop_proxy.html:8
@@ -1738,7 +1821,7 @@ msgid ""
 msgstr ""
 
 #: seahub/help/templates/help/install.html:6
-msgid "Installing Seafile Client Program"
+msgid "Installing Seafile client program"
 msgstr ""
 
 #: seahub/help/templates/help/install.html:8
@@ -1803,9 +1886,8 @@ msgstr ""
 #: seahub/help/templates/help/selective_sync.html:8
 msgid ""
 "You may have some very large libraries on the Seafile server. And you're "
-"currently only interested in a sub-folder inside one library. If your "
-"Seafile server is Pro edition, you can selectively sync a sub-folder in a "
-"library, instead of syncing the entire library."
+"currently only interested in a sub-folder inside one library. Then you "
+"can selectively sync a sub-folder in a library, instead of syncing the entire library."
 msgstr ""
 
 #: seahub/help/templates/help/selective_sync.html:10
@@ -1823,7 +1905,7 @@ msgid ""
 msgstr ""
 
 #: seahub/help/templates/help/sync_existing.html:6
-msgid "Syncing With an Existing Folder"
+msgid "Syncing with an existing folder"
 msgstr ""
 
 #: seahub/help/templates/help/sync_existing.html:8
@@ -1868,18 +1950,17 @@ msgid ""
 msgstr ""
 
 #: seahub/help/templates/help/unsync_resync.html:6
-msgid "Unsync and Resync Library"
+msgid "Unsync and resync library"
 msgstr ""
 
 #: seahub/help/templates/help/unsync_resync.html:8
 #, python-format
 msgid ""
 "When you no longer want to sync a local folder with a library, you can "
-"unsync it. After you unsync a library, changes to the local folder and files "
-"will not be uploaded, and changes in the library will not be downloaded. If "
-"you want to sync the library with the local folder again, you can use <a "
-"href=\"%(SITE_ROOT)shelp/sync_existing/\">sync with existing folder</a> "
-"feature."
+"unsync it. After you unsync a library, changes to the local folder and files"
+" will not be uploaded, and changes in the library will not be downloaded. If"
+" you want to sync the library with the local folder again, you can use the <a "
+"href=\"%(SITE_ROOT)shelp/syncing_existing_folders/\">sync with existing folder</a> feature."
 msgstr ""
 
 #: seahub/help/templates/help/unsync_resync.html:10
@@ -2843,6 +2924,12 @@ msgstr ""
 #: seahub/templates/registration/logout.html:8
 #: seahub/templates/registration/password_change_done.html:10
 msgid "Log in again"
+msgstr ""
+
+msgid "Log In With Single Sign On"
+msgstr ""
+
+msgid "Login With Username and Password"
 msgstr ""
 
 #: seahub/templates/registration/password_change_done.html:4

@@ -1522,12 +1522,66 @@ msgstr "没有权限"
 msgid "You are invited to join a group on %s"
 msgstr "你被邀请加入 %s 上的一个群组"
 
+msgid "Introduction"
+msgstr "介绍"
+
+msgid "Managing files and folders"
+msgstr "管理文件和目录"
+
+msgid "Managing files with libraries"
+msgstr "使用资料库管理文件"
+
+msgid "Restoring deleted files"
+msgstr "恢复被删除的文件"
+
+msgid "Finding older version of files"
+msgstr "查看旧版本文件"
+
+msgid "Library history and snapshots"
+msgstr "资料库历史和快照"
+
+msgid "Setting history retention period"
+msgstr "设置历史保留时长"
+
+msgid "Deleting a library"
+msgstr "删除资料库"
+
+msgid "Viewing files within Web App"
+msgstr "使用 Web App 浏览文件"
+
+msgid "Full text file search"
+msgstr "全文搜索"
+
+msgid "Sharing and collaboration"
+msgstr "共享与合作"
+
+msgid "Sharing files and folders"
+msgstr "共享文件和目录"
+
+msgid "Managing groups"
+msgstr "管理群组"
+
+msgid "File locking"
+msgstr "文件锁"
+
+msgid "Folder permission"
+msgstr "目录权限"
+
+msgid "Departments sharing"
+msgstr "部门共享"
+
+msgid "Wiki and knowledge management"
+msgstr "维基和知识管理"
+
+msgid "Manage library as Wiki"
+msgstr "设置资料库为维基"
+
 #: seahub/help/templates/help/base.html:23
-msgid "Desktop Client and Syncing"
+msgid "Desktop client and syncing"
 msgstr "桌面客户端与同步"
 
 #: seahub/help/templates/help/base.html:25
-msgid "Install and sync Files"
+msgid "Install and sync files"
 msgstr "安装与同步文件"
 
 #: seahub/help/templates/help/base.html:26
@@ -1535,8 +1589,12 @@ msgid "Syncing existing folders"
 msgstr "同步已存在文件夹"
 
 #: seahub/help/templates/help/base.html:27
-msgid "Selective sync sub-folders"
+msgid "Selectively sync sub-folders"
 msgstr "选择性同步子文件夹"
+
+#: seahub/help/templates/help/base.html:27
+msgid "Read-only syncing"
+msgstr "只读同步"
 
 #: seahub/help/templates/help/base.html:28
 msgid "Unsync and resync libraries"
@@ -1559,13 +1617,595 @@ msgstr "文件冲突"
 msgid "Excluding files"
 msgstr "忽略文件目录"
 
+msgid "Install on Linux"
+msgstr "安装 Linux 客户端"
+
+msgid "Seafile client for a CLI server"
+msgstr "在命令行系统中使用 Seafile 客户端"
+
+msgid "Drive client"
+msgstr "同步盘客户端"
+
+msgid "Using Seafile drive client"
+msgstr "使用 Seafile 同步盘客户端"
+
+msgid "Using drive client 2.0 on Windows"
+msgstr "在 Windows 上使用同步盘客户端 2.0"
+
+msgid "Drive client for Linux"
+msgstr "Linux 版同步盘客户端"
+
 #: seahub/help/templates/help/base.html:34
-msgid "Security and Encryption"
+msgid "Security and encryption"
 msgstr "安全与加密"
 
 #: seahub/help/templates/help/base.html:36
 msgid "How to use encrypted libraries"
 msgstr "怎样使用加密资料库"
+
+msgid "FAQ"
+msgstr "常见问题"
+
+msgid "Seafile is an enterprise file hosting platform with high reliability and performance."
+msgstr "Seafile 是一款企业级文件托管平台，拥有高可靠性和高性能的特点。"
+
+msgid ""
+"Seafile contains a web interface for you to manage and share files. It has two kinds of desktop clients, "
+"<a href=\"%(SITE_ROOT)shelp/install_sync/\">the file syncing client</a> and <a href=\"%(SITE_ROOT)shelp/"
+"using_drive_client\">the drive client</a>. It also has mobile clients for Android and iOS."
+msgstr "Seafile 包含一个 Web 界面，您可以用它来管理和分享您的文件。同时，它还提供了两种客户端，<a href=\"%(SITE_ROOT)shelp/install_sync/\">同步盘客户端</a>和<a href=\"%(SITE_ROOT)shelp/using_drive_client\">挂载盘客户端</a>。另外，它还提供 IOS 和 Android 客户端。"
+
+msgid ""
+"You can download the clients in <a href=\"https://www.seafile.com/en/download/\" "
+"target=\"_blank\">Seafile web site</a>."
+msgstr "您可以在<a href=\"https://www.seafile.com/download/\" target=\"_blank\">Seafile 官方网站</a>下载客户端程序。"
+
+msgid "If this manual does not contain the information you needed, "
+"you can seek help in our forum: <a href=\"https://forum.seafile.com\" target=\"_blank\">https://forum.seafile.com</a>."
+msgstr "如果这份说明书中没有包含您所需要的功能，您可以前往我们的表单页面寻求帮助：<a href=\"https://forum.seafile.com\" target=\"_blank\">https://forum.seafile.com</a>。"
+
+msgid "Seafile uses \"libraries\" to organize your files. A library is a top level container for a set of files and folders. You can create a library for each project you work on, or each document type you want to save in Seafile. A library works mostly like a top level folder. But it also has some special properties:"
+msgstr "Seafile 使用\"资料库\"来管理你的文件。资料库是保存文件和目录的顶层容器，你可以根据自己的工作项目创建资料库，也可以分类将文件存储到不同的资料库中。资料库就像一个根目录文件夹，不过它还附带以下特性："
+
+msgid "Each library keeps its own file modification history. There is no global file modification history across all libraries."
+msgstr "每个资料库都保存了其文件的历史记录，而没有对跨资料库的文件的修改做记录。"
+
+msgid "Each library can be synced to desktop clients separately. You can choose which libraries to be synced."
+msgstr "每个资料库可以被桌面客户端独立地同步，你可以选择同步哪些资料库。"
+
+msgid "When you log into Seafile's web app for the first time, Seafile automatically creates a default library named \"My Library\" for you. You can also create more libraries. Here is what it looks like when you've created a few libraries."
+msgstr "当你第一次登录 Seafile Web 界面时，Seafile 将会自动为你创建一个名为\"我的资料库\"的默认资料库。你还可以自行创建更多资料库。当你创建多个资料库后，你的界面看起来会像这样："
+
+msgid "You can navigate into a library and manage your files and folders. You can upload, download, rename, move, copy and delete files."
+msgstr "你可以浏览资料库，并管理其中的文件和目录。你可以上传、下载、重命名、移动、复制、删除文件。"
+
+msgid "After <a href=\"%(SITE_ROOT)shelp/install_sync/\">syncing a library with desktop client</a>, you can do any file operations inside the local library folder. The operations will be uploaded to the server. "
+msgstr "<a href=\"%(SITE_ROOT)shelp/install_sync/\">使用桌面客户端同步</a>后，你就可以在本地的文件夹中进行任何操作了，这些操作都将被上传到服务器。"
+
+msgid "Restoring deleted files and folders"
+msgstr "恢复被删除的文件和目录"
+
+msgid "Each library in Seafile tracks your file deletion operations automatically. Sometimes you find files are deleted mistakenly. You can find back your delete files in the trash bin of each library."
+msgstr "每个 Seafile 资料库都会自动记录你的文件删除操作。有时你会误删文件，你可以在每个资料库的回收站中找到它们。"
+
+msgid "Here is how to use the trash bin feature:"
+msgstr "下面将介绍如何使用回收站功能："
+
+msgid "In Seafile Web App, navigate into the parent folder containing the deleted file or folder."
+msgstr "在 Seafile Web 客户端，打开被删除文件或目录的上级文件夹。"
+
+msgid "Click the \"trash\" icon in the library operation bar. The deleted files and folders will be listed in deletion time order. In the bottom of the list, you can click the \"more\" button to load more deleted files."
+msgstr "点击菜单栏的\"回收站\"图标，被删除的文件和目录将会按照被删除的时间顺序显示。在列表底部，你可以点击\"更多\"按钮查看更多被删除的文件。"
+
+msgid "In the deleted files list, you can restore file and folders. If a file or folder's parent folder has been deleted, it will be restored to the library's root folder."
+msgstr "在被删除的文件列表中，你可以恢复文件和目录。如果一个文件或目录的上级目录被删除了，那么它将被恢复到资料库的根目录上。"
+
+msgid "Note that the trash bin only contains files and sub-folders deleted under the current folder. Files deleted in the sub-folders of the current folder are also included in the list."
+msgstr "注意，回收站仅包含当前目录和其子目录下被删除的文件，该目录的子目录下被删除的文件也会被包含在内。"
+
+msgid "You can configure the retention period of delete files: <a href=\"%(SITE_ROOT)shelp/setting_library_history/\">setting history retention period</a>."
+msgstr "你可以配置被删除文件的保存时长：<a href=\"%(SITE_ROOT)shelp/setting_library_history/\">设置历史保留时长</a>。"
+
+#: seahub/help/templates/help/finding_older_version_files.html
+
+msgid "Seafile tracks the modification history of all files. Whenever a file is modified, a new version is created, while the old version is still kept for a configurable period. When you want to access an older version of a file, the file history feature becomes very handy."
+msgstr "Seafile 记录所有文件的修改记录。每当一个文件被修改时，一个新的版本号都会被创建，而旧版本文件将会在一段时间内被保留，这个时间可以设置。当你需要某个文件的旧版本时，文件历史功能就很好用了。"
+
+msgid "To list all the versions of a file:"
+msgstr "以下是列出文件所有版本的步骤："
+
+msgid "In Seafile Web App, navigate into the folder containing the file. Move the cursor onto the row of that file. An operation menu will appear. You can click the \"History\" button in that menu."
+msgstr "在 Seafile Web 界面，找到包含目标文件的目录，将鼠标移动到文件对应的行，会出现一个操作菜单，单击\"历史\"按钮进入历史界面。"
+
+msgid "A list of all versions of that file will be displayed in time order, from newer to older. The list also contains the file's rename history."
+msgstr "文件全部版本的列表将会按时间顺序显示，从新到旧排序。这份列表还包含了文件重命名的历史。"
+
+msgid "You can download, restore, view any version of the file. For text files, you can also compare the content of two versions."
+msgstr "你可以下载、恢复、查看文件任意一个版本的原件。而对于文本文件，你还可以比对两个版本之间的差异。"
+
+msgid "You can configure the retention period of file versions: <a href=\"%(SITE_ROOT)shelp/setting_library_history/\">setting history retention period</a>."
+msgstr "你还可以配置文件历史的留存时间：<a href=\"%(SITE_ROOT)shelp/setting_library_history/\">设置历史保留时长</a>。"
+
+#: seahub/help/templates/help/library_history_and_snapshots.html
+
+msgid "Seafile tracks modification history for the entire library. Whenever a file operation applies to a library (file update, file deletion etc.), Seafile creates a \"snapshot\" of the previous state of the library. The snapshot contains the complete file and folder structure of the library."
+msgstr "Seafile 会为整个资料库中的文件修改提供记录。无论何时资料库内的文件被操作时（文件更新、文件删除等），Seafile 将会为旧的资料库创建一个\"镜像\"，快照包含资料库内的全部文件和目录结构。"
+
+msgid "In some cases, you have changed a lot of files in the library, and find that you want to revert all these changes. Restoring many files to their old versions can be tedious. At this time, the snapshot feature becomes very handy. "
+"You can restore the entire library to any point in the past. All the files in the library will be restored to that point of time, all at once. It works like a \"time machine\" for the library."
+msgstr "在某些情况下，你修改了资料库内的很多文件，然后你想回滚这些操作。手动恢复这些文件很费时，这时候资料库镜像功能就很方便了。你可以恢复整个资料库到某个时间点，资料库内的所有文件都会同时被恢复到那个时间点。整个快照系统就像资料库的\"时光机\"一样。"
+
+msgid "To view library history and snapshots:"
+msgstr "以下是浏览资料库历史和镜像的步骤："
+
+msgid "In Seafile Web App, navigate into the root folder of a library. Click the \"History\" icon in the library navigation top bar. All the change record of the library will be displayed in a list."
+msgstr "在 Seafile Web 应用中，找到资料库的根目录，单击顶部导航栏中的\"历史\"图标，打开历史列表。所有文件修改记录都会被放在一个列表中。"
+
+msgid "Click the \"view snapshot\" link on any modification record. You'll see the library state at the point of time."
+msgstr "在任意一个修改的记录上单击\"查看镜像\"链接，你会看到在该时间点上资料库的状态。"
+
+msgid "In the snapshot view, you can download or restore any file or folder. If you're the library's owner, you can restore the enitre library to this point of time."
+msgstr "在镜像视图，你可以下载或恢复任意一个文件或目录。如果你是资料库的拥有者，你可以将整个资料库恢复到某个时间点。"
+
+msgid "You can configure the retention period of library history: <a href=\"%(SITE_ROOT)shelp/setting_library_history/\">setting history retention period</a>."
+msgstr "你可以配置资料库历史的留存时间：<a href=\"%(SITE_ROOT)shelp/setting_library_history/\">设置历史保留时长</a>。"
+
+#: seahub/help/templates/help/setting_library_history.html
+
+msgid "Setting library history retention period"
+msgstr "设置资料库历史保留时长"
+
+msgid "A library's history retention period length controls how long can you access your history data in the following features:"
+msgstr "资料库的历史保留时长影响了以下相关特性："
+
+msgid "Restore deleted files: you cannot restore files and folders deleted before the retention period."
+msgstr "恢复被删除的文件：你无法恢复删除时间超过历史保留时长的文件和目录。"
+
+msgid "File versions: you cannot access file versions older than the retention period."
+msgstr "文件历史版本：你无法访问超过历史保留时长的文件版本。"
+
+msgid "Library history and snapshots: you cannot access library snapshots older than the retention period."
+msgstr "资料库历史和镜像：你无法访问超过历史保留时长时期的内容历史和镜像。"
+
+msgid "The retention period of old files versions can be configured for each library, separately. You must be the library's owner to set the retention period. To set retention period length:"
+msgstr "每个资料库的历史保留时长可以被单独设置，只有资料库的拥有者可以进行这项设置。以下是设置历史保留时长的步骤："
+
+msgid "In Seafile Web App, click the \"Mine\" tab in the navigation panel (as in the below screen shot). All libraries owned by you will be listed."
+msgstr "在 Seafile Web 应用中，单击导航面板中\"我的\"选项卡（如下图所示），你拥有的所有资料库将会被列出。"
+
+msgid "Move the cursor onto the row of the library. An operation menu will appear. Click \"History Setting\" in the drop-down menu."
+msgstr "将光标移动到对应资料库的行上，会出现一个操作菜单。在弹出的菜单中单击\"历史设置\"。"
+
+msgid "In the pop-up dialog, you can set the length of file retention period."
+msgstr "在弹出的对话框中，你可以设置历史保留时长。"
+
+#: seahub/help/templates/help/deleting_a_library.html
+
+msgid "You can delete a library owned by you. Unlike the files and folders in the library, a deleted library currently cannot be restored by the user. But the Seafile server's administrator can restore a deleted library for users. In the future, we may allow the end users to restore a deleted library."
+msgstr "你可以删除一个你拥有的资料库。与资料库中的文件和目录不同，你无法恢复被删除的资料库。不过，系统管理员能够恢复你在 30 天内删除的资料库，未来我们有可能将恢复资料库的功能开放给用户。"
+
+msgid "After a library is deleted, it has following effects:"
+msgstr "当一个资料库被删除后，将会产生如下效果："
+
+msgid "Share of the files and folders within this library are all canceled."
+msgstr "资料库内所有分享的文件和目录都会被删除。"
+
+msgid "Desktop clients synced with this library cannot sync with it any more. But the local files on the client won't be deleted."
+msgstr "与该资料库同步的桌面客户端将无法与之同步，但是保存在本地的文件将不会被删除。"
+
+#: seahub/help/templates/help/viewing_files_within_web_app.html
+
+msgid "Some document types can be directly opened and viewed within the Seafile Web App. When you click on these files in the web app, a new tab will be opened in the web browser to show the contents. The currently supported document types are:"
+msgstr "你可以通过 Seafile Web 应用直接打开并预览部分文件。当你在 Web 界面中单击这些文件时，它将打开一个新的浏览器标签页并显示文件内容。目前支持的文件内容有："
+
+msgid "Microsoft Office Doc: .doc, .docx"
+msgstr "Microsoft Word 文件：.doc, .docx"
+
+msgid "Microsoft Office PowerPoint: .ppt, .pptx"
+msgstr "Microsoft Office PowerPoint 文件：.ppt, .pptx"
+
+msgid "Microsoft Office Excel: .xls, .xlsx"
+msgstr "Microsoft Office Excel 文件：.xls, .xlsx"
+
+msgid "LibreOffice files"
+msgstr "LibreOffice 文件"
+
+msgid "PDF files"
+msgstr "PDF 文件"
+
+msgid "Image files (shown in gallery view): .jpg, .png"
+msgstr "图像文件（将直接在相簿视图显示）：.jpg, .png"
+
+msgid "Markdown files: .md"
+msgstr "Markdown 文件：.md"
+
+msgid "Various source code files"
+msgstr "各种源代码文件"
+
+msgid "Text files: .txt, .log"
+msgstr "文本文件：.txt, .log"
+
+#: seahub/help/templates/help/full_text_file_search.html
+
+msgid "You can search file and folder names, as well as the content of certains files, in the Seafile web app. Currently Seafile can search the contents of the following file types:"
+msgstr "在 Seafile Web 应用中你可以搜索文件和目录名称，以及某些格式的文件。目前 Seafile 可以搜索以下格式的文件内容："
+
+msgid "Note that your Seafile system administrator may not have enabled the full-text search feature. In that case, you can only search file and folder names."
+msgstr "注意，你的 Seafile 管理员可能没有开启全文搜索系统。如果没有开启的话，你将只能搜索文件名和目录名。"
+
+msgid "The full-text search index information updates every 10 minutes (by default, might be changed by your system administrator), you won't be able to see the recently added contents until it has been indexed."
+msgstr "默认情况下，全文搜索系统索引信息每 10 分钟更新一次（可能会被你的 Seafile 管理员修改），在下一次索引完成前，新增的文件内容将无法被查询到。"
+
+#: seahub/help/templates/help/sharing_files_and_folders.html
+
+msgid "In Seafile there are a few ways to share files and folders with others:"
+msgstr "在 Seafile 中，有以下几种方式与其他人分享文件和目录："
+
+msgid "Using links: there are multiple types of links that can be used to share with various scope of collaborators."
+msgstr "使用链接：Seafile 提供以下几种链接，可以用于与不同的合作人员分享文件。"
+
+msgid "Share links: Any user who has access to the links can access the files or folders pointed by the link. No login is required."
+msgstr "共享链接：任何获取到该链接的用户都可以访问到此链接所指向的文件，无需登录。"
+
+msgid "Upload links: Any user who has access to the links can upload files to the folder pointed by the link. No login is required."
+msgstr "上传链接：任何获取到该链接的用户都可以上传文件到指定文件夹，无需登录。"
+
+msgid "Internal links: Only logged in users who have share permissions to file or folder can access this link. Used for internal file sharing."
+msgstr "内部链接：只有拥有对应访问权限的登录用户才能通过此链接看到文件，通常用于内部文件分享。"
+
+msgid "Sharing libraries or folders: used for setting access permissions to a library or folder for specific users or groups. Users have to log in to access the folders."
+msgstr "分享资料库或目录：用于为特定用户或群组设置资料库或文件目录的权限，参与用户必须登录。"
+
+msgid "Creating share links to files or folders"
+msgstr "为文件或目录创建共享链接"
+
+msgid "Share links are public links to files or folders. They can be accessed by anyone, including those who don't have a Seafile account. You can also use password and expiration time to protect your links."
+msgstr "共享链接是文件或目录的公共访问链接，它们能被任何人访问，包括没有 Seafile 账号的人。你还可以为共享链接设置访问密码、设置过期时间。"
+
+msgid "You can also set access permission to share links. There are three types of permissions:"
+msgstr "你还可以为共享链接设置访问权限，以下是可供选择的几种权限："
+
+msgid "Preview and Download: the file or files in the folder can be downloaded. If the type of files can be previewd in web browser, they can also be viewed online (e.g. Office files)."
+msgstr "预览和下载：文件或目录可以被下载。部分格式文件还支持在线浏览（例如 Office 文件）。"
+
+msgid "Preview only: the file or files in the folder can only be viewed in web browser, but cannot be downloaded. This is useful for sharing confidential data. For Office files, water mark can also be added to file preview. The water mark includes the link owner's name."
+msgstr "仅限预览：文件或目录中的文件只能在 Web 浏览器上预览，无法下载。在共享机密文件时，这个特性较为有用。针对 Office 文件，浏览时将会被自动添加水印，水印包含链接拥有者的用户名。"
+
+msgid "Edit on cloud and download: Similar to \"Preview and Download\", but if the file type can be edited in web browser (e.g. Office files), any user who has access to the link is allowed to edit it."
+msgstr "云端编辑和下载：与\"预览和下载\"类似，不同的是如果文件可以被 Web 浏览器编辑（例如 Office 文件），那么任何获取到链接的人都可以编辑它。"
+
+msgid "To create a share link in Seafile web app:"
+msgstr "以下是在 Seafile Web 端创建共享链接的步骤："
+
+msgid "Navigate into the parent folder containing the file or folder. Hover your mouse over the file or folder and click on the \"Share\" icon that appears."
+msgstr "进入要分享文件或目录的上级文件夹，将指针移动到要分享的文件或目录上，单击出现的\"共享\"图标。"
+
+msgid "A pop-up window will appear with all the share options. Click the \"Share Link\" tab on the left panel. Then click \"Generate\" button to create a link. You can use password, expiration time and permission to protect your link."
+msgstr "一个包含所有共享方式的窗口将会弹出。在窗口中，单击左侧\"共享链接\"选项卡，然后单击\"生成链接\"按钮来创建链接。你可以使用密码、过期时间和权限来保护你的链接。"
+
+msgid "Copy the link to email, instant messaging client or any other tool to send it to others."
+msgstr "将链接通过邮件、即时通讯客户端或任何工具分享给其他人。"
+
+msgid "You can also create download links from the desktop clients."
+msgstr "你还可以在桌面客户端创建下载链接。"
+
+msgid "If the library is synced, double click the library in the main Window of Seafile client. The local folder of that library will be opened. Right click on the file or folder that you want to create a link to. In the pop-up menu, choose \"Seafile\" then \"Create share link\"."
+msgstr "如果资料库已被同步，在 Seafile 客户端主窗口双击资料库，资料库保存在本地的文件夹将会被打开。右键单击你要共享的文件或目录，并在弹出的窗口中选择\"Seafile\"，然后单击\"创建共享链接\"。"
+
+msgid "If the library is not synced, double click the library in the main Window of Seafile client. The cloud file browser window will be opened. You can create a link to file or folder in the cloud file browser."
+msgstr "如果资料库没有被同步，在 Seafile 客户端主窗口双击资料库，资料库将会在 Web 浏览器打开。你可以在弹出的 Web 浏览器中创建文件或目录的共享链接。"
+
+msgid "Creating upload links to folders"
+msgstr "为目录创建上传链接"
+
+msgid "You can use upload links to collect files from others. You can only create upload link for a folder. Others cannot see the files in the folder. They can only upload files to the link."
+msgstr "你可以使用上传链接收集其他用户的文件。你可以只对某个目录创建上传链接，其他人无法看到目录内的文件，他们只能通过链接上传文件。"
+
+msgid "To create an upload link in Seafile web app:"
+msgstr "以下是在 Seafile Web 端创建上传链接的步骤："
+
+msgid "Navigate into the parent folder containing the folder. Hover your mouse over the folder and click on the \"Share\" icon that appears."
+msgstr "进入要分享文件或目录的上级文件夹，将指针移动到要分享的文件或目录上，单击出现的\"共享\"图标。"
+
+msgid "A pop-up window will appear with all the share options. Click the \"Upload Link\" tab on the left panel. Then click \"Generate\" button to create a link. You can use password to protect your link."
+msgstr "一个包含所有共享方式的窗口将会弹出。在窗口中，单击左侧\"上传链接\"选项卡，然后单击\"生成链接\"按钮来创建链接。你可以使用密码来保护你的链接。"
+
+msgid "Sharing libraries or folders"
+msgstr "共享资料库或目录"
+
+msgid "You can share a library or folder to other registered Seafile users. The shared library or folder can be accessed by others with the web app and Seafile clients."
+msgstr "你可以向已注册的 Seafile 用户共享资料库或目录。被共享的资料库或目录可以被他人通过 Web 客户端和 Seafile 客户端访问到。"
+
+msgid "You can choose the member range of the share:"
+msgstr "你可以设置共享的人群范围："
+
+msgid "Share to user: You can share to one or more users, one by one."
+msgstr "共享给用户：你可以逐一添加要分享给的用户。"
+
+msgid "Share to group: You can share to a group of users. See how to manage groups in group sharing."
+msgstr "共享给群组：你可以共享给一组用户。在群组共享中查看如何管理群组。"
+
+msgid "Share to organization: If you're using a private server, sometimes it's useful to share to all members on the server (the entire organization)."
+msgstr "共享给组织：如果你在使用一个私有服务器，共享给服务器上的所有用户在某些时候很有用（整个组织）。"
+
+msgid "You can also set permission on the share:"
+msgstr "你还可以在共享时设置权限："
+
+msgid "Read-Write share: the share members can do any update operations on the folder, including update file, upload file, delete, rename."
+msgstr "可读写共享：拥有权限的用户可以对目录做任何更新操作，包括编辑文件、上传文件、删除文件、重命名文件。"
+
+msgid "Read-only share: the share members can only read the folder and files in it. They cannot do any update to the folder and files."
+msgstr "只读共享：拥有权限的用户只能读取目录中的文件内容，他们不能修改目录中的文件或目录。"
+
+msgid "Admin: the share members can re-share the library to other users. This permission can only be set when sharing a library, but not a folder."
+msgstr "管理：拥有权限的用户可以将资料库再次共享给更多人，这个选项只能针对资料库设置，无法对目录设置。"
+
+msgid "Online Read-Write: users can view and edit the file online via web browser. File cannot be downloaded."
+msgstr "在线读写：用户可以在 Web 端浏览和编辑文件，但是无法下载文件。"
+
+msgid "Online Read-only: users can view the file online via web browser. File cannot be downloaded."
+msgstr "在线只读：用户只能通过 Web 端浏览文件，无法下载文件。"
+
+msgid "To share a library or folder to a user or group:"
+msgstr "以下是向用户或群组共享资料库的步骤："
+
+msgid "Hover your mouse over the library or folder and click on the \"Share\" icon that appears."
+msgstr "将指针移动到要分享的文件或目录上，单击出现的\"共享\"图标。"
+
+msgid "A pop-up window will appear with all the share options. Click the \"Share to user\" or \"Share to group\" tab on the left panel. Enter the user name or group name to share to. Then click \"Submit\"."
+msgstr "一个包含所有共享方式的窗口将会弹出。在窗口中，单击左侧\"共享给用户\"或\"共享给群组\"选项卡，输入要共享给的用户或群组名称，然后单击\"提交\"。"
+
+msgid "After you share a folder or library to a user, the user can see it by clicking the \"Shared\" tab on the left panel in Seafile web app. If you share to a group, "
+"the group members can only see the shared folder or library by navigating into the group."
+msgstr "当你向用户共享目录或资料库后，用户可以通过单击 Seafile Web 端左侧\"共享给我的\"选项卡来查看。如果共享给群组，群组成员只能通过进入群组来查看共享的目录或资料库。"
+
+msgid "To share a library to the entire organization: In Seafile web app, click the \"Organization\" tab on the left panel. Click \"Add Library\" button. "
+"In the drop-down menu, you may choose sharing an existing library or creating a new library and share it."
+msgstr "给整个组织共享资料库：在 Seafile Web 端，单击左侧\"组织\"选项卡，单击\"添加资料库\"按钮。在下拉菜单中，你可以选择共享一个已有的资料库，或创建一个新的资料库并共享它。"
+
+msgid "Internal links"
+msgstr "内部链接"
+
+msgid "Only logged in users who have share permissions to file or folder can access this link. It is used for internal file sharing. "
+"It's a convenient way for passing files among team members who has asscess to a common library. You may just copy the link and paste it into an email or IM software."
+msgstr "只有具有访问权限的登录用户才能访问该链接，通常用于内部文件共享。对于一个拥有公共资料库的群组来说，这是一个相互发送文件的方便功能。你可以直接复制链接，并使用邮件或即时通讯系统发送它。"
+
+#: seahub/help/templates/help/groups_managing.html
+
+msgid "Creating a group is a convenient way to share files to many people. In Seafile, you can create and manage a group easily."
+msgstr "要给许多人共享文件，创建群组是个很方便的法子。在 Seafile 中，你可以轻松创建并管理群组。"
+
+msgid "Here is how groups work in Seafile:"
+msgstr "Seafile 群组是这样的："
+
+msgid "Each group has a group admin. The admin is the creator of the group by default. "
+"The group admin can add more group admins. He/she can also transfer the ownership of the group to another member."
+msgstr "每个群组拥有一个管理员。默认情况下，群组的创建者就是管理员。群组管理员可以添加更多管理员，也可以将群组的所有权移交给其他组员。"
+
+msgid "The group admin can add/delete members in the group. And he/she can also unshare a library in the group."
+msgstr "群组管理员可以添加或删除组内的成员，也可以取消组内资料库的共享。"
+
+msgid "To see all the groups you're in, click on the \"Groups\" tab on the left panel. "
+"You'll see all the groups you're in. Clicking into any group, you'll see the libraries shared into this group."
+msgstr "要查看你加入的群组，单击左侧\"群组\"选项卡，你将看到所有你加入的群组。单击进入任何一个群组，你可以看到在该群组内分享的资料库。"
+
+msgid "To create a new group, click on the \"Groups\" tab on the left panel. Then click on \"All Groups\". "
+"In the all group page, you can click \"New Group\" button to create a group."
+msgstr "要创建新的群组，单击左侧\"群组\"选项卡，然后单击\"所有群组\"。在所有群组页面，单击上方\"新建群组\"即可创建新的群组。"
+
+msgid "See <a href=\"%(SITE_ROOT)shelp/sharing_files_and_folders/\">sharing files and folders</a> about "
+"how to share libraries or folders to a group."
+msgstr "前往<a href=\"%(SITE_ROOT)shelp/sharing_files_and_folders/\">共享文件和目录</a>了解如何向群组共享资料库或目录。"
+
+#: seahub/help/templates/help/file_locking.html
+
+msgid "When more than one person collaborate on a file, it's likely that more than one person modify the file at about the same time. "
+"Seafile handles this situation nicely with conflict files. But it's often more convenient to lock the file "
+"when one person wants to exclusively modify the file."
+msgstr "当多于一人协作处理文件时，很有可能出现多人同时修改文件的情况。Seafile 通过文件冲突机制能够轻松化解这些情况，但是利用文件锁，在一个人编辑文件时"
+"将文件锁住更方便。"
+
+msgid "File locking works on both the web app and the desktop syncing client. We'll introduce them one by one."
+msgstr "文件锁在 Web 端和桌面同步客户端都可以使用，我们将逐一讲解。"
+
+msgid "File locking on the Web App"
+msgstr "Web 端文件锁"
+
+msgid "To lock a file, you can navigate into the file's folder on the web app, and click on the \"operations\" drop-down menu."
+msgstr "要锁定一个文件，你可以进入文件所在的目录，然后单击\"操作\"下拉菜单。"
+
+msgid "After the file is locked, you can see a red \"stop sign\" at the corner of the file icon. "
+"Moving the mouse on the stop sign, you can see who locks the file. And you can also unlock a file that's locked by you. "
+"But you cannot unlock files locked by others."
+msgstr "当文件被锁定后，你可以在文件右下角看到一个红色\"停止标志\"。将鼠标移动到停止标志上，你可以看到谁锁定了文件。如果文件是被你锁定的，你还可以解锁它，但你无法解锁由别人锁住的文件。"
+
+msgid "File locking on the desktop client"
+msgstr "同步客户端文件锁"
+
+msgid "After a library is synced to the desktop, you can lock/unlock files in that library inside File Explorer on Windows or Finder on Mac OS."
+msgstr "当资料库被同步到计算机上后，你使用 Windows 文件浏览器或 Mac Finder 在资料库内锁定和解锁文件。"
+
+msgid "To lock a file, just right click on a synced file and choose \"lock this file\" in the \"Seafile\" menu."
+msgstr "要锁定文件，只需要右键单击已同步的文件然后在\"Seafile\"菜单中选择\"锁定此文件\"。"
+
+msgid "If a file is locked by you, you can see an orange \"stop sign\" on the file icon. You can choose to unlock it."
+msgstr "如果文件是被你锁定的，你可以在文件图标上看到一个橘色\"停止标志\"，你可以选择解锁它。"
+
+msgid "If a file is locked by other user, you can see a red \"stop sign\" on the file icon. "
+"The file is automatically set to read-only. You cannot modify it until it's unlocked."
+msgstr "如果文件是被其他用户锁定的，你可以在文件图标上看到一个红色\"停止标志\"，文件将自动被设置为只读，在它被解锁之前你无法修改它。"
+
+msgid "If a library is not synced, you can still use cloud file browser to lock and unlock files in it."
+msgstr "如果资料库没有被同步，你仍然可以使用浏览器来锁定和解锁文件。"
+
+msgid "Auto locking office files"
+msgstr "自动锁定 Office 文件"
+
+msgid "After a library is synced to the desktop, when you open a Microsoft Office file inside the library, "
+"Seafile automatically locks the file. When you close the file, Seafile automatically unlocks the file. "
+"The locking state is propagated to other computers syncing this library. "
+"It prevents concurrent editing the same Office file and is convenient for collaboration."
+msgstr "计算机上的资料库同步完毕后，当你在资料库内打开 Microsoft Office 文件，Seafile 将自动锁定文件。当你关闭文件时，Seafile 将自动解锁文件。"
+"锁定状态也会被同步到其他已同步该资料库的计算机上，它能防止多个人同时编辑 Microsoft Office 文件的情况出现，方便协作。"
+
+msgid "Details about file locking"
+msgstr "文件锁细节"
+
+msgid "There are a few useful tips about how file locking works:"
+msgstr "对于文件锁系统，有几条有用的提示："
+
+msgid "A locked file can only be unlocked by the user who locked it."
+msgstr "锁定的文件只能被锁定它的人解锁。"
+
+msgid "A locked file cannot be modified, moved, renamed or deleted by other users. "
+"But other users can still move, delete or rename the parent folder of a locked file. "
+"The purpose of file locking is mainly to prevent concurrent editing."
+msgstr "被锁定的文件无法被其他用户修改、移动、重命名或删除。但是其他用户依然可以移动、删除或重命名一个锁定文件的上级目录，文件锁主要是为了防止多人同时编辑。"
+
+msgid "When a locked file's parent folder is renamed or moved inside the same library, it remains locked after the operation."
+msgstr "当被锁定文件的上级目录在统一资料库内被重命名或移动了，文件锁将在操作过后继续保持。"
+
+#: seahub/help/templates/help/folder_permission.html
+
+msgid "Use folder permission for fine-grained access control"
+msgstr "使用目录权限进行更详细的权限控制"
+
+msgid "For shared libraries or folders, you can set permission to its sub-folders for a person or a group. "
+"Available permissions are the same as the ones described in <a href=\"%(SITE_ROOT)shelp/sharing_files_and_folders/\">sharing libraries</a>. Here are some use cases:"
+msgstr "对已共享的资料库或者目录，你可以针对用户或者群组设置子目录的权限。可供选择的权限与<a href=\"%(SITE_ROOT)shelp/sharing_files_and_folders/\">共享资料库</a>中一样，以下是几种使用案例："
+
+msgid "You shared a library to a group with \"read only\" permission. You also want to allow a specific "
+"member of the group to modify files in one sub-folder. You can grant write permission of this sub-folder to this person."
+msgstr "你将资料库共享给了群组并设置了\"只读\"权限，然后你还想让某名组员编辑其中的一个子目录，那么你可以为该组员授予该目录的写权限。"
+
+msgid "You shared a library to 3 groups. There are 3 sub-folders under that library, one for each group to upload files. "
+"However you don't want users to change files not belong to his/her group. You can grant write permission of a "
+"sub-folder only to its group."
+msgstr "你给 3 个群组共享了同一个资料库，其中包含 3 个子目录，每个目录用于给不同的群组上传文件，但是你不想让群组成员修改不属于他的文件。此时，你可以使用子目录权限，将分别向不同的群组授予写权限。"
+
+msgid "Folder permissions are only effective for libraries and folders you share to others. "
+"To effectively set folder permissions to its sub-folders, you should first share the parent "
+"library or folder; otherwise the folder permission won't take effect."
+msgstr "子目录权限只对已经共享的资料库和目录有效。要更高效地设置子目录的权限，你应该先共享上级资料库或目录，否则子目录权限不会生效。"
+
+msgid "One important design goal of folder permission is to support hierarchical permissions:"
+msgstr "子目录权限的一大设计目的就是支持按等级划分权限："
+
+msgid "Sub-folders automatically inherit folder permissions from its parent folder."
+msgstr "子目录自动继承其上级目录的权限。"
+
+msgid "Permissions set on sub-folders overwrites permissions set on its parent folder. For example, "
+"you set \"read write\" permission on folder \"meeting files\" for user A, and you set \"read only\" "
+"permission on sub-folder \"meeting files/today\" for user A. Then user A's permission to \"meeting files/today\" is \"read only\"."
+msgstr "子目录的权限设置将会覆盖其上级目录的权限设置。例如，当你为用户 A 授予了目录\"会议文件\"的读写权限，然后又在子目录\"会议文件/今日\"为用户 A 授予只读权限，那么用户 A 对\"会议文件/今日\"的权限就是\"只读\"。"
+
+msgid "Basic usage"
+msgstr "基本用法"
+
+msgid "Only library's owner can set folder permissions for its sub-folders. In the file browsing interface, "
+"click \"more operations\" button, choose \"permission\" in the drop-down menu. In the pop-up window, "
+"you can see and set folder permissions on this folder."
+msgstr "只有资料库的拥有者可以为子目录设置权限。在文件浏览界面，单击\"更多操作\"按钮，在下拉菜单中选择\"权限\"。在弹出的窗口中，你可以浏览并设置子目录的权限。"
+
+msgid "If you want to see all folder permissions set in a library, hover the mouse on the library. "
+"Click \"more operations\" button, choose \"Folder Permission\" in the drop-down menu. In the pop-up window, you can see and set folder permissions in this library."
+msgstr "如果你想查看资料库中所有已设置的权限，将鼠标移动到资料库上，单击\"更多操作\"按钮，在弹出的菜单中选择\"目录权限\"。在弹出的窗口中，你可以查看和设置该资料库中目录的权限。"
+
+msgid "When other users navigate into a folder, there will be a small \"eye\" icon next "
+"to \"read only\" sub-folders. When the user navigate into that sub-folder, he/she won't be able to add/modify/delete files."
+msgstr "当用户浏览一个目录时，会看到只读子目录上有一个小的\"眼\"图标。当用户进入该目录后，他将无法增/删/改文件。"
+
+msgid "If a \"read only\" folder is synced to PC with the Seafile desktop App, changes under "
+"a \"read only\" folder won't be uploaded to the cloud."
+msgstr "如果一个\"只读\"目录被同步到 Seafile 桌面客户端，在\"只读\"目录下所做的一切操作都不会同步到云端。"
+
+msgid "Advanced: priority between different permissions"
+msgstr "高级：不同权限之间的优先级"
+
+msgid "Folder permissions have higher priority than the permission set in share. For example, "
+"if you shared a library to user A with \"read write\" permission, and also set \"read only\" "
+"permission to a sub-folder of that library. Then user A only has \"read only\" access to the "
+"sub-folder, while he/she has \"read write\" access to all other sub-folders and files."
+msgstr "目录权限比共享中设置的权限更高。例如：如果你以\"读写\"权限将资料库分享给 A，并在其中某个子目录下设置权限为\"只读\"，那么 A 只能以\"只读\"权限访问子目录，而可以\"读写\"其他子目录和文件。"
+
+msgid "Folder permissions set to specific user have higher priority than permissions set to a group. "
+"That is, when checking permission for a folder, if the system matches a permission specific to the user, "
+"it'll ignore all permissions set for the groups the user belongs to."
+msgstr "针对某个用户设置的目录权限比针对群组的权限优先级更高。当系统检查目录权限时，如果系统匹配到针对自己的用户权限，那么它将会忽略所有针对群组的设置。"
+
+msgid "Permissions on sub-folders have higher priority than those on parent folders."
+msgstr "子目录权限比上级目录权限优先级高。"
+
+msgid "Here is a more complex example:"
+msgstr "这里有个更复杂的例子："
+
+msgid "Supposed the folder structure looks like \"A/B\", User \"John\" is in group \"Staff\". "
+"If you set \"read only\" permission on folder A for John, and, you also set \"read write\" "
+"permission on folder \"A/B\" for group \"Staff\". Then John's permission to folder \"A/B\" "
+"is still only \"read only\". That's because, according to rule 2, \"read only\" permission "
+"is first matched for folder \"A/B\" and user \"John\", which is inherited from it's parent \"A\"."
+msgstr "假设有个文件目录结构：\"A/B\"，用户\"John\"加入了群组\"Staff\"。如果你为 John 授予 A 目录的\"只读\"权限，并为群组\"Staff\"授予了\"A/B\"目录的"
+"\"读写\"权限，那么 John 对于\"A/B\"子目录的权限将会是\"只读\"。因为根据规则 2，\"只读\"权限优先匹配了目录\"A/B\"和用户\"John\"，它是继承自其上级目录\"A\"的。"
+
+#: seahub/help/templates/help/manage_library_as_wiki.html
+
+msgid "Managing a library as Wiki"
+msgstr "以 Wiki 形式管理资料库"
+
+msgid "Capturing and storing little structured data in an easy-to-use fashion – that is what Seafile’s wikis are for. Wiki pages are written in Markdown (MD), a simple markup language, to ensure cross platform compatibility. "
+"MD files store textual, tabular as well as graphical information; You can also add links to other documents in a Markdown file."
+msgstr "以简单易用的模式，收集并存储小段数据 —— 这就是 Seafile Wiki 功能的作用。Wiki 页面以 Markdown（MD）的格式编写，Markdown 是一种简单的标记语言，可以保证跨平台支持。"
+"Markdown 文件可以存储文字、表格、图像信息，也可以添加链接来指向其他 Markdown 文件。"
+
+msgid "You can manage a standard library in Seafile like a Wiki, with the \"Column View\" introduced in 7.0 version. "
+"Since Seafile implements wikis as standard Seafile libraries, they can be synced and shared with other users just like any ordinary library."
+msgstr "你可以使用分栏视图（7.0 版本引入），像 Wiki 一样管理一个 Seafile 标准资料库。"
+"因为 Seafile 以标准 Seafile 资料库的形式管理 Wiki，它们同样可以被同步和共享给其他用户，这一点与普通的资料库无异。"
+
+msgid "Column view"
+msgstr "分栏视图"
+
+msgid "Wikis usually have a side bar containing a tree-like folder structure, to enable quick-and-easy browsing of Wiki pages. "
+"Seafile's Column View allows you to manage the files in a library in the same way as a Wiki space. Users can browse in it and move files and folders just by dragging and dropping. File actions such as renaming, moving, and opening via client are available in a right-click-accessible context menu."
+msgstr "Wiki 通常有一个树状目录结构，用于简单快速地浏览 Wiki 页面。Seafile 的分栏视图能让你用管理 Wiki 空间的方式来管理资料库内的文件。用户可以浏览文件，并通过拖拽的方式移动文件和资料库。诸如重命名、移动、在客户端打开这样的操作，也可以通过右键菜单实现。"
+
+msgid "WYSIWYG Markdown editor"
+msgstr "WYSIWYG（所见即所得） Markdown 编辑器"
+
+msgid "Wiki pages in Seafile are saved as ordinary documents in Markdown format. To create a new Wiki page in a library, "
+"just create a new Markdown document. MD files can be edited straight from Seafile’s web interface with the online MD editor. "
+"The web-based editor offers a smooth user experience and rich formatting options for text, images, and tables. "
+"Images can be imported into MD files from libraries and local storage as well as by hyperlinks. Basic image editing "
+"functions such as scaling can also be performed in the editor’s what-you-see-is-what-you-get (WYSIWYG) interface. "
+"Tables can be inserted and modified with just a few clicks. The same thing goes for a table’s content: "
+"A table can be copied in its entirety or in part without leaving the WYSIWYG view."
+msgstr "Wiki 页面保存形式与 Seafile 普通文件一样，格式为 Markdown。要在资料库内创建一个 Wiki 页面，只需创建新的 Markdown 文件。 "
+"Markdown 文件可以直接在 Seafile Web 端的在线编辑器进行编辑。"
+"基于 Web 的编辑器提供了丝滑的用户体验，允许用户交互式添加文字、图像和表格。"
+"图像可以从资料库、本地存储和超链接导入到 Markdown 文件中。基本的图像编辑功能（如缩放图片）也能在编辑器的 WYSIWYG（所见即所得）界面直接进行。"
+"插入表格也很简单，只需轻点几下鼠标。表格的内容也是一样，表格可以在不离开 WYSIWYG 界面的情况下，部分复制或全部复制。"
+
+msgid "The change history of a Markdown file can be easily accessed by clicking the \"File History\" "
+"button in the menu on top of the editor interface."
+msgstr "Markdown 文件的修改历史可以被轻松访问，只需单击编辑器顶部的\"文件历史\"按钮即可。"
+
+msgid "You can open a hidden side bar on the right side of the Markdown editor. Table of contents, file information, formatting suggestions, and collaborative commenting are provided in this side bar."
+msgstr "你可以在 Markdown 编辑器右侧打开一个隐藏的菜单。目录、文件信息、格式建议和留言都会显示在其中。"
+
+msgid "File tagging and related documents"
+msgstr "文件标签和相关文档"
+
+msgid "File tagging is an important feature for knowledge management. "
+"Seafile allows users to define tags for each library and apply tags to files. "
+"Tags can be managed from the side bar of the Markdown editor, or from the file browser interface."
+msgstr "文件标签是知识管理的重要功能。Seafile 允许用户为每个资料库定义标签，并为文件应用标签。"
+"标签可以在 Markdown 编辑器的右侧菜单管理，也可以在文件浏览界面管理。"
+
+msgid "The file browser interface provides a summary of all file tags in the current library."
+msgstr "文件浏览界面能够显示当前资料库的全部标签。"
+
+msgid "You can also add related files to a Markdown document from the \"File Information\" tab in the side bar."
+msgstr "你还可以在侧边菜单的\"文件信息\"选项卡中，为 Markdown 文件添加相关文件。"
 
 #: seahub/help/templates/help/conflicts.html:7
 msgid ""
@@ -1584,8 +2224,210 @@ msgid ""
 "name@example.com 2015-03-07-11-30-28)."
 msgstr "有时，你和你的朋友们可能同时编辑了同一个文件。你们的修改可能互相冲突。这种情况下， Seafile 会保留你的版本，并把你朋友们的版本保存为 \"冲突文件\"。一个冲突文件的名字会以该修改的作者的邮箱加上当前时间作为后缀，例如，test.txt (SFConflict name@example.com 2015-03-07-11-30-28)。"
 
+#: seahub/help/templates/help/install_linux_client.html
+
+msgid "Install Seafile client on Linux"
+msgstr "在 Linux 上安装 Seafile 客户端"
+
+msgid "Ubuntu users can install Seafile client from the <a href=\"https://code.launchpad.net/~seafile/+archive/ubuntu/seafile-client\" target=\"_blank\">Official PPA</a>:"
+msgstr "Ubuntu 用户可以在 <a href=\"https://code.launchpad.net/~seafile/+archive/ubuntu/seafile-client\" target=\"_blank\">官方 PPA</a> 安装 Seafile 客户端："
+
+msgid "If you only want to install the command-line client, run <code>sudo apt-get install seafile-cli</code> instead."
+msgstr "如果你想安装命令行客户端，执行 <code>sudo apt-get install seafile-cli</code>。"
+
+msgid "If you want to install the debug symbols (for example, when you want to report a bug), you can install the following packages:"
+msgstr "如果你想安装 debug symbols（比如你想报告 BUG），你可以安装以下包："
+
+msgid "Now you can start seafile client from Unity's dash."
+msgstr "现在，你可以从 Ubuntu Unity dash 启动 Seafile 客户端。"
+
+msgid "Debian users can install Seafile client from our debian repo:"
+msgstr "Debian 用户可以从我们的 Debian 仓库安装 Seafile 客户端："
+
+msgid "To install the client, first add the signing key:"
+msgstr "要安装客户端，首先添加签名键："
+
+msgid "Then add the repo to your apt source list, using the line corresponding to your debian version:"
+msgstr "然后使用与你 Debian 版本符合的指令，将仓库添加到你的 apt 源："
+
+msgid "Update your local apt cache :"
+msgstr "更新本地 apt 缓存："
+
+msgid "Now install the client:"
+msgstr "然后安装客户端："
+
+msgid "Centos/RHEL (community maintained)"
+msgstr "Centos/RHEL (社区维护)"
+
+msgid "Since 7.0.3 version, we provide official repo for CentOS or RHEL. Currently only CentOS/RHEL 7 is supported."
+msgstr "从 7.0.3 版本开始，我们提供 CentOS 和 RHEL 的官方仓库。目前支持 CentOS/RHEL 7。"
+
+msgid "Add the repo (The same repo is used for seadrive.)"
+msgstr "添加仓库（Seadrive 也使用此仓库）"
+
+msgid "Install Seafile Client"
+msgstr "安装 Seafile 客户端："
+
+msgid "Fedora (community maintained)"
+msgstr "Fedora (社区维护)"
+
+msgid "There is a <em>community maintained</em> Seafile Client RPM package in Fedora's <a href=\"https://src.fedoraproject.org/rpms/seafile\" target=\"_blank\">official repository</a>."
+msgstr "Fedora <a href=\"https://src.fedoraproject.org/rpms/seafile\" target=\"_blank\">官方仓库</a> 中有一个<em>社区维护</em>的 Seafile 客户端 RPM 包。"
+
+msgid "Arch Linux (community maintained)"
+msgstr "Arch Linux (社区维护)"
+
+msgid "There is a <em>community maintained</em> Seafile Client package for Arch Linux: <a href=\"https://aur.archlinux.org/packages/seafile-client/\" target=\"_blank\">https://aur.archlinux.org/packages/seafile-client/</a>."
+msgstr "<a href=\"https://aur.archlinux.org/packages/seafile-client/\" target=\"_blank\">https://aur.archlinux.org/packages/seafile-client/</a> 中有一个 Arch Linux <em>社区版</em> Seafile 客户端程序包。"
+
+msgid "Linux CLI usage"
+msgstr "Linux CLI 使用方法"
+
+msgid "Please refer to <a href=\"%(SITE_ROOT)shelp/linux_cli\">this documentation</a> for how to use Linux client on a command line server."
+msgstr "请查看<a href=\"%(SITE_ROOT)shelp/linux_cli\">这份文档</a>，了解如何在命令行系统中使用 Seafile 客户端。"
+
+#: seahub/help/templates/help/linux_cli.html
+
+msgid "Installation"
+msgstr "安装"
+
+msgid "You can follow <a href=\"%(SITE_ROOT)shelp/install_linux_client/\">this documentaion</a> to install Seafile CLI client on various Linux distributions."
+msgstr "你可以跟随<a href=\"%(SITE_ROOT)shelp/install_linux_client/\">这份文档</a>在不同 Linux 发行版上安装 Seafile CLI 客户端。"
+
+msgid "Initialize & start the client"
+msgstr "初始化 & 启动客户端"
+
+msgid "Download and sync a library from a server"
+msgstr "从下载并同步资料库"
+
+msgid "retrieve the library id by browsing into a library on the server. The ID is part of the URL. The format looks like <code>f4962ce9-ba07-47b8-a83a-73dd96c2ebfd</code>."
+msgstr "从 Seafile Web 端进入资料库来获取资料库 ID，它是 URL 的一部分，格式看起来像 <code>f4962ce9-ba07-47b8-a83a-73dd96c2ebfd</code>。"
+
+msgid "then"
+msgstr "然后"
+
+msgid "Note: if you don't supply the password parameter in the command, it will be asked later, which is more secure."
+msgstr "注意：如果你不在命令中提供密码，你将会在之后被要求输入密码，那样更安全。"
+
+msgid "Example: <code>seaf-cli download -l 0536c006-8a43-449e-8718-39f12111620d -s http://cloud.seafile.com -d /tmp -u freeplant@test.com</code>"
+msgstr "例如：<code>seaf-cli download -l 0536c006-8a43-449e-8718-39f12111620d -s http://cloud.seafile.com -d /tmp -u freeplant@test.com</code>"
+
+msgid "The above command will create a <strong>new folder</strong> with the same name as the library under the specified folder."
+msgstr "上述命令将会在指定文件夹下创建一个与资料库名称相同的<strong>新文件夹</strong>。"
+
+msgid "You can also sync a library with an <strong>existing folder</strong> on the local computer. The existing files in the local folder will be merged with the files in the library."
+msgstr "你还可以让资料库与计算机上<strong>已有文件夹</strong>同步，本地已有的文件将会与资料库中的文件合并。"
+
+msgid "After running the <code>download</code> or <code>sync</code> command, the local folder will be automatically synced with the library."
+msgstr "运行完 <code>download</code> 或者 <code>sync</code> 命令后，本地文件夹将会自动与资料库同步。"
+
+msgid "Detailed documentation"
+msgstr "详细文档"
+
+msgid "seaf-cli is the command line interface for seafile client."
+msgstr "seaf-cli 是 Seafile 客户端的命令行界面。"
+
+msgid "Subcommands:"
+msgstr "子命令："
+
+msgid "Running <code>seaf-cli -h</code> will show the above help. For each subcommand, you can also use <code>-h</code> option to get help, e.g. <code>seaf-cli download -h</code>."
+msgstr "运行 <code>seaf-cli -h</code> 命令将会显示上述帮助信息。对每条子命令，你都可以使用 <code>-h</code> 参数来获得更详细的帮助，例如：<code>seaf-cli download -h</code>。"
+
+msgid "Detail"
+msgstr "详情"
+
+msgid "Seafile client stores all its configure information in a config dir. The default location is <code>~/.ccnet</code>. All the commands below accept an option <code>-c &lt;config-dir&gt;</code>."
+msgstr "Seafile 客户端将所有配置信息保存到一个配置文件中，它的默认路径是 <code>~/.ccnet</code>。下面所有命令都接受参数 <code>-c &lt;config-dir&gt;</code>。"
+
+msgid "Initialize seafile client. This command initializes the config dir. It also creates sub-directories <code>seafile-data</code> and <code>seafile</code> under <code>parent-dir</code>. <code>seafile-data</code> is used to store internal data, while <code>seafile</code> is used as the default location put downloaded libraries."
+msgstr "初始化 Seafile 客户端。这个命令将会初始化配置文件夹，并在 <code>parent-dir</code> 下创建 <code>seafile-data</code> 和 <code>seafile</code> 子文件夹。<code>seafile-data</code> 用于存储内部数据，<code>seafile</code> 是下载资料库的默认位置。"
+
+msgid "A file named <code>seafile.ini</code> will be created under <code>~/.ccnet</code> to record the location of <code>seafile-data</code> directory."
+msgstr "<code>seafile.ini</code> 将会在 <code>~/.ccnet</code> 被创建，它将记录 <code>seafile-data</code> 的位置信息。"
+
+msgid "If you want to run multiple instances of Seafile cli client in the same machine, you can specify different <code>config-dir</code> and <code>parent-dir</code> when initializing different client instances. Then the instances can run without interfering each others. When starting the instances, just specify ccnet config directories with the <code>-c</code> option."
+msgstr "如果你想在同一台计算机上同时运行多个 Seafile 命令行客户端，你可以在初始化不同客户端时指定不同的 <code>seafile-data</code> 和 <code>parent-dir</code>。"
+
+msgid "Start seafile client. This command starts <code>seaf-daemon</code>, which is the file syncing engine for Seafile client."
+msgstr "启动 Seafile 客户端。这个命令将会启动 <code>seaf-daemon</code>，它是 Seafile 客户端的文件同步引擎。"
+
+msgid "Stop seafile client."
+msgstr "关闭 Seafile 客户端。"
+
+msgid "Download and sync a library from seafile server. It will create a <b>new folder</b> with the same name as the library under the parent folder. "
+"The local folder will be automatically synced with the library. The download-by-name command works similarly, "
+"but can save you from finding the library ID. It only works when the library name is unique on the server."
+msgstr "从服务端下载并同步资料库。它将在 <code>parent-directory</code> 下创建一个与资料库名称相同的<strong>新文件夹</strong>。"
+"本地文件夹将会自动与资料库同步，download-by-name 命令工作方式相似，但是可以免去你寻找资料库 ID 的麻烦。不过只有在服务器上资料库名字唯一的时候才有效。"
+
+msgid "Synchronize a library with an existing folder. The existing files in the local folder will be merged with the files in the library."
+msgstr "将本地已有文件夹与资料库同步，本地已有的文件将会与资料库中的文件合并。"
+
+msgid "Desynchronize a library from seafile server. After running this command, the local folder will no longer be synced with the server."
+msgstr "取消与服务器上资料库的同步。运行此命令以后，本地文件夹将不会继续与服务端同步。"
+
+msgid "Create a new library on server."
+msgstr "在服务器上创建新资料库。"
+
+msgid "List information about synced libraries. The information includes library name, library ID and local folder path for the library."
+msgstr "列出已同步资料库的信息。信息包含资料库名称、资料库 ID 和本地存储路径。"
+
+msgid "The returned status and their meaning:"
+msgstr "返回值及其含义："
+
+msgid "meaning"
+msgstr "含义"
+
+msgid "Local folder is consistent with the remote library"
+msgstr "本地文件夹与远程资料库是一致的"
+
+msgid "Files in local folder are being indexed"
+msgstr "本地文件夹中的文件正在被索引"
+
+msgid "Getting sync information from server"
+msgstr "正在从服务器获取同步信息"
+
+msgid "Downloading file list from server. Progress will be displayed."
+msgstr "正在从服务端下载文件列表，进度将会被显示。"
+
+msgid "Downloading files from server. Progress will be displayed."
+msgstr "正在从服务端下载文件，进度将会被显示。"
+
+msgid "Uploading files to server. Progress will be displayed."
+msgstr "正在向服务端上传文件，进度将会被显示。"
+
+msgid "Error message will be displayed in the progress column."
+msgstr "错误信息将会显示在进度列。"
+
+msgid "Skip SSL certificate verification"
+msgstr "跳过 SSL 证书认证"
+
+msgid "If you're using self-signed certificate on the server, you should ask the client to skip verifying certificate."
+msgstr "如果你在服务器上使用了自签名证书，那么你应该要求客户端跳过 SSL 证书认证。"
+
+msgid "Set transfer speed limit"
+msgstr "设置传输速度"
+
+msgid "Set upload speed limit to 1MB/s :"
+msgstr "将上传速度限制在 1MB/s 以内："
+
+msgid "Set download speed limit to 1MB/s :"
+msgstr "将下载速度限制在 1MB/s 以内："
+
+msgid "Two factor authentication"
+msgstr "两步认证（2FA）"
+
+msgid "seaf-cli supports 'Two Factor Authentication'."
+msgstr "seaf-cli 支持\"两步认证\"。"
+
+msgid "If you want to use the feature, you should add the argument <code>--tfa <token></code> to any <code>seaf-cli</code> commands. <code>&lt;token&lt;</code> is Google Authenticator's verification code."
+msgstr "如果你想使用该特性，你需要在使用所有 <code>seaf-cli</code> 命令时都添加 <code>--tfa <token></code> 参数。<code>&lt;token&lt;</code> 是谷歌认证程序的验证码。"
+
+msgid "For example:"
+msgstr "例如："
+
 #: seahub/help/templates/help/desktop_proxy.html:6
-msgid "Using Proxy in Seafile Client"
+msgid "Using proxy in Seafile client"
 msgstr "在 Seafile 客户端使用代理"
 
 #: seahub/help/templates/help/desktop_proxy.html:8
@@ -1638,9 +2480,9 @@ msgstr "如果你是通过 web 来创建加密资料库，密码会被发送到�
 #, python-format
 msgid ""
 "If you create an encrypted library from a local folder with the desktop "
-"client (see <a href=\"%(SITE_ROOT)shelp/install/\">file syncing</a>), the "
+"client (see <a href=\"%(SITE_ROOT)shelp/install_sync/\">file syncing</a>), the "
 "password is not sent to the server."
-msgstr "如果你在桌面客户端上通过一个本地文件夹来创建加密资料库，(参考 <a href=\"%(SITE_ROOT)shelp/install/\">文件同步</a>)，密码不会被发送到服务器。"
+msgstr "如果你在桌面客户端上通过一个本地文件夹来创建加密资料库，(参考 <a href=\"%(SITE_ROOT)shelp/install_sync/\">文件同步</a>)，密码不会被发送到服务器。"
 
 #: seahub/help/templates/help/encrypted_libraries.html:17
 msgid "When you access the encrypted library:"
@@ -1675,9 +2517,9 @@ msgstr "注意加密资料库只加密文件内容，并不会加密目录名和
 #: seahub/help/templates/help/encrypted_libraries.html:27
 msgid ""
 "More technical details of encrypted library can be found at <a "
-"href=\"http://manual.seafile.com/security/security_features.html\">Seafile "
+"href=\"https://manual.seafile.com/security/security_features\">Seafile "
 "Manual</a>."
-msgstr "加密资料库更过技术细节请参看 <a href=\"http://manual.seafile.com/security/security_features.html\">Seafile Manual</a>."
+msgstr "加密资料库更过技术细节请参看 <a href=\"https://manual.seafile.com/security/security_features\">Seafile Manual</a>."
 
 #: seahub/help/templates/help/ignore.html:6
 msgid "Excluding files/folders from syncing"
@@ -1760,8 +2602,11 @@ msgid ""
 msgstr "seafile-ignore.txt 只能忽略还没有被同步的文件。对于已经被同步的文件，如果后来把它添加到 seafile-ignore.txt 中，系统只会忽略后续更改，已经上传的版本不会受影响。"
 
 #: seahub/help/templates/help/install.html:6
-msgid "Installing Seafile Client Program"
+msgid "Installing Seafile client program"
 msgstr "安装 Seafile 客户端"
+
+msgid "You can download the sync client from <a href=\"https://www.seafile.com/en/download/\">Seafile official download page</a>."
+msgstr "你可以在 <a href=\"https://www.seafile.com/download/\">Seafile 官方下载页面</a> 下载同步客户端。"
 
 #: seahub/help/templates/help/install.html:8
 msgid ""
@@ -1825,10 +2670,9 @@ msgstr "选择性同步子目录"
 #: seahub/help/templates/help/selective_sync.html:8
 msgid ""
 "You may have some very large libraries on the Seafile server. And you're "
-"currently only interested in a sub-folder inside one library. If your "
-"Seafile server is Pro edition, you can selectively sync a sub-folder in a "
-"library, instead of syncing the entire library."
-msgstr "你可能在 Seafile 服务器上有一个很大的资料库，但是只对其中某一个子目录感兴趣。如果你使用 Seafile 专业版，可以选择性同步子目录，而不必同步整个资料库。"
+"currently only interested in a sub-folder inside one library. Then you "
+"can selectively sync a sub-folder in a library, instead of syncing the entire library."
+msgstr "你可能在 Seafile 服务器上有一个很大的资料库，但是只对其中某一个子目录感兴趣。你可以选择性同步子目录，而不必同步整个资料库。"
 
 #: seahub/help/templates/help/selective_sync.html:10
 msgid ""
@@ -1845,7 +2689,7 @@ msgid ""
 msgstr "同步子目录后，你可以在客户端主界面中的 “已同步资料库” 中看到同步状态。"
 
 #: seahub/help/templates/help/sync_existing.html:6
-msgid "Syncing With an Existing Folder"
+msgid "Syncing with an existing folder"
 msgstr "同步已存在文件夹"
 
 #: seahub/help/templates/help/sync_existing.html:8
@@ -1875,6 +2719,17 @@ msgstr "在弹框中，点击“同步已有文件夹”链接。"
 msgid "Then choose an existing folder to sync with this library."
 msgstr "然后选择一个已有文件夹来同步到这个资料库。"
 
+#: seahub/help/templates/help/read-only_syncing.html
+
+msgid "For ready-only libraries or folders, Seafile will show a forbidden icon (<img src=\"%(MEDIA_URL)simg/help/read_only.png\" alt=\"\" width=\"24\" />) to indicate they are read-only. "
+"However, users can still modify the synced local copies. When a local copy is modified, Seafile will ignore the modified one. "
+"When the copy at the server is also modified, the client will popup a notification, saying that the local modified copy conflict with the copy at the server side. To prevent data loss, the local copy is renamed to a conflict file."
+msgstr "对于只读资料库和目录，Seafile 会显示一个禁止标记（<img src=\"%(MEDIA_URL)simg/help/read_only.png\" alt=\"\" width=\"24\" />），来表明它是只读的。"
+"不过，用户仍然可以修改本地已经同步的副本。当本地副本被修改后，Seafile 会忽略修改后的内容。如果在服务器上的副本也被修改了，客户端将会弹出提示，说明本地副本和服务端副本有冲突，本地文件被重命名为冲突文件。"
+
+msgid "If you want the be-shared users not be able to modify local copies, you can consider using the Seafile Drive client."
+msgstr "如果你想让被共享的用户无法编辑本地副本，你可以考虑使用 Seafile 同步盘客户端。"
+
 #: seahub/help/templates/help/sync_interval.html:6
 msgid "Setting Sync Interval"
 msgstr "设置同步间隔"
@@ -1890,7 +2745,7 @@ msgid ""
 msgstr "通常 Seafile 客户端会自动检测本地文件夹更改并上传服务器。但是，如果本地文件夹是一个 Windows 网络共享驱动器，Seafile 客户端就无法可靠地检测到更改。在这种情况下，你可以以妙为单位设置 Seafile 客户端定期检查更改并同步。"
 
 #: seahub/help/templates/help/unsync_resync.html:6
-msgid "Unsync and Resync Library"
+msgid "Unsync and resync library"
 msgstr "解除同步与重新同步资料库"
 
 #: seahub/help/templates/help/unsync_resync.html:8
@@ -1899,10 +2754,10 @@ msgid ""
 "When you no longer want to sync a local folder with a library, you can "
 "unsync it. After you unsync a library, changes to the local folder and files"
 " will not be uploaded, and changes in the library will not be downloaded. If"
-" you want to sync the library with the local folder again, you can use <a "
-"href=\"%(SITE_ROOT)shelp/sync_existing/\">sync with existing folder</a> "
-"feature."
-msgstr "如果你不想再同步本地文件夹到资料库，你可以解除同步。解除同步后，本地文件夹的更改将不被上传，资料库的更改也不会被下载。如果你想再次同步，可以使用 <a href=\"%(SITE_ROOT)shelp/sync_existing/\">同步已有文件夹</a> 功能。"
+" you want to sync the library with the local folder again, you can use the <a "
+"href=\"%(SITE_ROOT)shelp/syncing_existing_folders/\">sync with existing folder</a> feature."
+msgstr "如果你不想再同步本地文件夹到资料库，你可以解除同步。解除同步后，本地文件夹的更改将不被上传，资料库的更改也不会被下载。"
+"如果你想再次同步，可以使用 <a href=\"%(SITE_ROOT)shelp/syncing_existing_folders/\">同步已有文件夹</a> 功能。"
 
 #: seahub/help/templates/help/unsync_resync.html:10
 msgid ""
@@ -1911,6 +2766,416 @@ msgid ""
 "unsync and then immediately sync the library with the same folder. You can "
 "find this action in the pop-up menu of the client's main window."
 msgstr "有时因为客户端内部错误会阻塞同步，此时你可以在客户端主窗口，右击此资料库，在弹框中点击 “重新同步”。重新同步是指先解除同步，然后立刻再同步此资料库到同一文件夹。"
+
+#: seahub/help/templates/help/using_drive_client.html
+
+msgid "After installing Drive client with the instructions on the <a href=\"https://www.seafile.com/en/download/\">download page</a>, "
+"you can double click the \"SeaDrive\" app icon on your desktop to start the Drive client."
+msgstr "当你在<a href=\"https://www.seafile.com/download/\">下载页面</a>下载并完成同步盘客户端安装后，你可以双击桌面上的\"SeaDrive\"图标启动同步盘客户端。"
+
+msgid "You'll be asked to choose a drive letter for the virtual drive. By default, \"S:\" will be used."
+msgstr "你将会被要求选择一个盘符创建虚拟硬盘。默认情况下会使用\"S:\"。"
+
+msgid "Then you'll be asked to log into your Seafile server."
+msgstr "然后你将会被要求登录到 Seafile 服务器。"
+
+msgid "After successfully log into the server, the Drive client starts to fetch library and file list from the server. "
+"The file contents are not downloaded at this moment. So it'll not take very long. You can let it run in the background. "
+"You'll be noticed when the fetch is done."
+msgstr "成功登录到服务器后，同步盘客户端开始从服务器获取资料库和文件列表，此时文件内容不会被下载，所以这个过程不会持续太长时间，你可以让它在后台运行。当下载完成后，你将会收到通知。"
+
+msgid "The virtual drive folder will be opened. You'll find it works just like an ordinary hard drive on your computer. "
+"The top level folders in the virtual drive are libraries on the Seafile server. "
+"File contents will be downloaded when you open a file. Recently opened file will be cached in your local disk. "
+"All cached files will be marked with a green tick."
+msgstr "虚拟硬盘文件夹将会被打开，你可以看到，它和你计算机上的普通硬盘看起来没什么区别。虚拟硬盘的顶层目录就是 Seafile 服务器中的资料库。"
+"当你打开文件的时候，文件将会被下载。近期使用过的文件将会被缓存到你的本地磁盘上。"
+
+msgid "Synced State"
+msgstr "同步状态"
+
+msgid "Files and folders in the virtual drive are in either cloud-only, synced, or in partially synced state."
+msgstr "虚拟磁盘中文件和目录的状态可以是仅云端、已同步、部分同步状态。"
+
+msgid "States"
+msgstr "状态"
+
+msgid "Icon"
+msgstr "图标"
+
+msgid "Details"
+msgstr "细节"
+
+msgid "Cloud-only content"
+msgstr "仅云端内容"
+
+msgid "Cloud-only content shows in the virtual drive, but doesn’t use the full amount of space that the file would. "
+"In your file explorer, you can see the file, but the content isn’t fully downloaded until you need it. "
+"Only information about the file, such as the file name, size and date the file was updated, is downloaded."
+msgstr "仅云端内容能在虚拟磁盘上显示，但是并不会在你的计算机上占用它原本所需的空间。在你的文件浏览器中，你能看到文件，但是在你需要它之前，其内容并不会完全下载到你的电脑上。"
+"只有文件的信息，例如文件名、文件大小和修改日期被下载了。"
+
+msgid "Synced content"
+msgstr "已同步内容"
+
+msgid "Synced content is downloaded and saved on the hard drive of your computer. "
+"You can directly edit these files from applications on your computer."
+msgstr "已同步内容已经被下载并保存到你的本地磁盘上。你可以直接使用计算机上的应用来编辑它们。"
+
+msgid "Partially synced content"
+msgstr "部分同步内容"
+
+msgid "Partially synced folders contain both synced and cloud-only files or folders."
+msgstr "部分同步的文件夹同时包含仅云端和部分同步文件或文件夹。"
+
+msgid "Special States"
+msgstr "特殊状态"
+
+msgid "For files that are already synced to local computer, they may be in 3 other special states, besides the normal \"synced\" state."
+msgstr "对于已经被同步到本地计算机的文件，除了普通的\"已同步\"状态外，可能会有另外 3 种特殊状态。"
+
+msgid "Locked by other user"
+msgstr "被其他用户锁定"
+
+msgid "The file is locked by other user on the server. You can only open the file in read-only mode. You cannot modify, delete or rename the file."
+msgstr "文件被服务器上的其他用户锁定了。你只能以只读的形式打开文件，无法修改、删除或重命名文件。"
+
+msgid "Locked by me"
+msgstr "被我锁定"
+
+msgid "The file is locked by you. This prevents others from modifying the file."
+msgstr "文件被你锁定了，这样能防止其他人修改次文件。"
+
+msgid "Read-only"
+msgstr "只读"
+
+msgid "The folder or library of this file is shared with read-only permission to you. You cannot modify, delete or rename the file."
+msgstr "这个文件的目录或资料库是以只读的权限共享给你的，你无法修改、删除或重命名文件"
+
+msgid "The Drive client regularly cleans up unused cached files in the background. You can also limit the local cache space."
+msgstr "同步盘客户端每过一段时间在后台清除不用的缓存文件，你还可以设置本地缓存空间。"
+
+msgid "You can log into multiple accounts in the Drive client. However, only files on the current selected server "
+"will be shown in the virtual drive. You can switch among accounts."
+msgstr "你可以在同步盘中登录多个账号，但是只有当前选择服务器中的文件才会被显示在虚拟磁盘中，你可以在多个账户之间切换。"
+
+msgid "1. Why can't I create new files or delete folders in root folder?"
+msgstr "1. 为什么我不能在根目录创建新文件或删除文件夹？"
+
+msgid "The root folder of the virtual drive contains only library folders. Seafile can only sync files inside libraries. "
+"Files in the root folder cannot be uploaded to Seafile server. So it doesn't make sense to support creating files in root folder. "
+"Since the top level folders in the virtual drive represents libraries, we don't want users to delete their libraries by mistake. "
+"So the Drive client doesn't support deleting top level folders."
+msgstr "虚拟磁盘的根目录只包含资料库文件夹。Seafile 只能同步资料库内的文件。根目录下的文件无法被上传到 Seafile 服务器，所以我们没道理支持根目录上的文件上传。"
+"因为根目录中的文件夹代表了资料库，我们不希望用户不小心删除他们的资料库，所以同步盘客户端不支持删除根目录文件夹。"
+
+#: seahub/help/templates/help/drive_client_2.0_for_windows_10.html
+
+msgid "SeaDrive 2.0 for Windows 10"
+msgstr "Windows 10 版 SeaDrive 2.0"
+
+msgid "SeaDrive 2.0 (and future versions) is redesigned with deeper integration to Windows 10 operating system. It supports Windows 10 1709 version (2017 Fall Update for Windows 10) and later versions. "
+"We recommend Windows 10 users to upgrade to SeaDrive 2.0 for more native virtual drive experience."
+msgstr "SeaDrive 2.0（以及后续版本）都在设计上与 Windows 10 操作系统结合更深，它支持 Windows 10 1709（Windows 10 2017 秋季更新）及更新的版本。"
+"我们推荐 Windows 10 用户升级到 SeaDrive 2.0，以享受更好的本地虚拟盘体验。"
+
+msgid "SeaDrive 2.0 is currently in Beta status. We'll mark it stable after we have more user feedbacks."
+msgstr "SeaDrive 2.0 目前正处在 Beta 测试阶段，我们将会在收到更多用户反馈后将其标记为稳定版。"
+
+msgid "Install and Access the Virtual Drive"
+msgstr "安装并访问虚拟磁盘"
+
+msgid "You can download SeaDrive 2.0 from official Seafile website. After installation and logging into your Seafile account, SeaDrive will start downloading library and file lists from the server (just as in SeaDrive 1.0.x). "
+"It may take some time, depending on the number of files available in your seafile account. The download is progressive, so in the mean time you can already access some files in the virtual drive."
+msgstr "你可以在 Seafile 官方网站下载 SeaDrive 2.0。安装并登录到你的 Seafile 账户，SeaDrive 将会开始下载资料库和文件列表（与 SeaDrive 1.0.x 一样）。这将花费一些时间，时间长短取决于"
+"你 Seafile 账户中可访问的文件数量。文件下载是异步进行的，这意味着在下载的同时你已经可以开始访问部分虚拟磁盘中的文件。"
+
+msgid "To access the virtual drive, just open Windows file explorer. There is a \"seadrive\" node in the navigation pane of Windows file explorer."
+msgstr "要访问虚拟盘磁盘，只需打开 Windows 文件浏览器，你将可以看到导航窗格中有一个 \"seadrive\" 节点。"
+
+msgid "Accessing Files in the Virtual Drive"
+msgstr "通过虚拟磁盘访问文件"
+
+msgid "Libraries are grouped into 4 categories in the virtual drive: My Libraries, Shared with me, Shared with groups and Shared with all."
+msgstr "虚拟磁盘中的资料库被分为 4 组：我的资料库、共享资料库、群组资料库、公共资料库。"
+
+msgid "As you can see, the file status icons is more integrated into Windows file explorer. The icons are a bit different form version 1.0."
+msgstr "如你所见，文件状态的图标与 Windows 文件浏览器结合更自然了，与 1.0 时期的图标有些不同。"
+
+msgid "Files in the virtual are created as \"placeholders\" in the local file system. They may be in 3 states:"
+msgstr "虚拟磁盘中的文件在本地磁盘系统中被创建为\"占位符\"，共有 3 种状态："
+
+msgid "<b>Placeholder file</b>: An empty representation of the file and can only be opened when there is network connection."
+msgstr "<b>占位符文件</b>：一个空的占位文件，仅在有网络连接的时候才能打开。"
+
+msgid "<b>Full file</b>: The file has been downloaded and saved locally. Download is automatic when a placeholder file is opened for the first time. "
+"These files are available whenever you open SeaDrive regardless to network connections. The operating system may decide to clear a full file when more disk space is needed."
+msgstr "<b>完整文件</b>：文件被下载并保存在了本地。在占位符被第一次打开时，下载将会自动完成，无论你是否有网络连接，都可以正常使用。当计算机需要更多存储空间时，可能会选择清理完整文件。"
+
+msgid "<b>Pinned full file</b>: The file has been downloaded and saved locally. It is guaranteed to be available offline."
+msgstr "<b>固定完整文件</b>：文件被下载并保存在了本地，并且保证一直可以离线使用，不会被自动清理。"
+
+msgid "You can control which files or folder are cached locally. This can be changed from the context menu when you right click on a file or folder. "
+"Choose \"Always keep on this device\" when you want to pin a file or folder locally; choose \"Free up space\" when you want to clean the cache for a file or folder."
+msgstr "你可以在本地控制缓存文件，右键单击文件或目录，选择\"Always keep on this device\"，即可保证文件或目录一直离线可用；选择\"Free up space\"可以清理文件或目录的缓存内容。"
+
+msgid "In SeaDrive 1.0, cached files are not automatically updated when they're updated on the server. In SeaDrive 2.0, full and pinned files are automatically kept in sync with the server."
+msgstr "在 SeaDrive 1.0 中，缓存文件并不会在服务端上更新时自动更新。在 SeaDrive 2.0 中，完整文件和固定完整文件将会与服务端保持同步。"
+
+msgid "File Download and Control"
+msgstr "文件下载和控制"
+
+msgid "Whenever you open a placeholder file, the operating system will automatically start to download it. "
+"If the file may take some time to download, there will be a progress bar shown up in file explorer and you may cancel the download."
+msgstr "每当你打开占位符文件时，系统都会自动开始下载它们。如果文件需要一定时间才能完成下载，在文件浏览器上将会显示一个进度条，你可以取消下载。"
+
+msgid "Sometimes a background application may try to download a file in the virtual drive (such as an Anti-Virus software). "
+"You will be notified by the operating system about this and you may choose to cancel the download or disallow the application from automatically downloading files in the future."
+msgstr "有时候，后台应用可能会导致虚拟磁盘中文件的下载（例如杀毒软件）。这种情况出现时，你会被操作系统提示，你可以选择取消下载，或者禁止应用自动下载文件。"
+
+msgid "Frequently Asked Questions"
+msgstr "常见问题"
+
+msgid "Can I create, delete, rename libraries?"
+msgstr "我能创建、删除、重命名资料库吗？"
+
+msgid "Yes. When you create, delete or rename library folders in the virtual drive, the operation will be reflected on the server. "
+"You can only create, delete, rename libraries under the \"My Libraries\" category. Creating, deleting or renaming libraries in other categories will be ignored."
+msgstr "可以。当你创建、删除、重命名虚拟硬盘中的资料库文件夹时，操作会被传送到服务器上，你可以创建、删除、重命名\"我的资料库\"分类下的资料库，在其他分类下创建、删除、重命名资料库操作将会被忽略。"
+
+msgid "Can I create files or folders outside of a library folder?"
+msgstr "我能在资料库外面创建文件或文件夹吗？"
+
+msgid "Yes. But files created outside of a library folder will be ignored and NOT synced to the server. "
+"A new folder under the \"My Libraries\" folder will be handled as a new library."
+msgstr "可以，但是在资料库外创建的文件将会被忽略，它们<b>不会</b>被同步到服务器。在\"我的资料库\"分类下新建的文件夹将会被视为新创建的资料库。"
+
+msgid "Can I access encrypted libraries?"
+msgstr "我能访问被加密的资料库吗？"
+
+msgid "Yes. By default, encrypted libraries are not synced and shown in the virtual drive. "
+"You need to manually choose which encrypted libraries to sync and enter the password. "
+"Just right click on the SeaDrive icon in the system tray area and choose \"Show encrypted libraries\". "
+"A windows will show up and you can choose to sync or unsync an encrypted library."
+msgstr "可以，但是默认情况下，加密资料库不会被同步，也不会显示在虚拟磁盘中。你需要手动选择需要同步的加密资料库，并输入密码。"
+"右键单击任务栏中的 SeaDrive 图标，并选择\"显示加密资料库\"，你可以在弹出的窗口中选择同步或取消同步加密资料库。"
+
+msgid "Is it compatible to SeaDrive 1.0?"
+msgstr "SeaDrive 2.0 与 SeaDrive 1.0 兼容吗？"
+
+msgid "SeaDrive 2.0 will use any existing accounts and their metadata (stored under C:\\users\\username\\seadrive\\ folder). "
+"But it will not use the cached files from SeaDrive 1.0. So any locally cached files in 1.0 version will not be accessible in 2.0 version. "
+"You can start SeaDrive 1.0 again to upload the files to server or copy them out."
+msgstr "SeaDrive 2.0 将会使用 SeaDrive 1.0 的账号信息和元数据（它们被保存在 C:\\users\\username\\seadrive\\ 文件夹下），但是"
+"SeaDrive 2.0 不会使用 SeaDrive 1.0 中的缓存文件，所以 1.0 中本地缓存的文件不能被 2.0 版本客户端访问。"
+"你可以再次启动 SeaDrive 1.0 并将文件上传到服务器，或将他们拷贝出来。"
+
+msgid "How do I clean the cache?"
+msgstr "我如何清理缓存？"
+
+msgid "You can manually choose which folders or files to be cached locally. If you find a folder consumes too much space, "
+"just choose to \"Free up space\" on that folder and all cached files in that folder will be cleaned. "
+"There is no need to set cache cleaning time and cache size limit as in SeaDrive 1.0. Because placeholders are "
+"just normal files created on your local disk, your cache size is only limited by the available disk space on your computer."
+msgstr "你可以手动选择缓存哪些文件或目录。如果你感到某个目录占用了太多空间，只需右键单击它并选择 \"Free up space\" 即可将该目录下的所有文件缓存全部清除。"
+"不需要像 SeaDrive 1.0 那样设置缓存大小和缓存清理时间，因为占位符只是保存在本地磁盘上的普通文件，你的缓存大小只与你的可用磁盘空间有关。"
+
+#: seahub/help/templates/help/drive_client_for_linux.html
+
+msgid "Using Seafile Drive Client on Linux"
+msgstr "在 Linux 上使用同步盘客户端"
+
+msgid "Installing on Debian/Ubuntu"
+msgstr "在 Debian/Ubuntu 上安装"
+
+msgid "Debian/Ubuntu users can install SeaDrive from our Debian repository."
+msgstr "Debian/Ubuntu 用户可以从我们的 Debian 仓库安装 SeaDrive。"
+
+msgid "Then add the repo to your apt source list, here we use Debian 8 (jessie) as an example. Change it to \"stretch\" for Debian 9. Change it to \"xenial\" for Ubuntu 16.04."
+msgstr "然后将仓库添加到你的 apt 源，这里我们使用 Debian 8 (jessie) 举例。如果是 Debian 9，改成 \"stretch\"。如果是 Ubuntu 16.04，改成 \"xenial\"。"
+
+msgid "To install SeaDrive with GUI:"
+msgstr "安装包含 GUI 的 SeaDrive："
+
+msgid "To install SeaDrive without GUI:"
+msgstr "安装不包含 GUI 的 SeaDrive："
+
+msgid "Installing on CentOS 7"
+msgstr "在 CentOS 7 上安装"
+
+msgid "Add the repo"
+msgstr "添加仓库"
+
+msgid "Install SeaDrive Client"
+msgstr "安装 SeaDrive 客户端"
+
+msgid "Installing on Fedora"
+msgstr "在 Fedora 上安装"
+
+msgid "Running SeaDrive with GUI"
+msgstr "运行包含 GUI 的 SeaDrive："
+
+msgid "To use SeaDrive, just run \"SeaDrive\" from your desktop environment, or type \"seadirve-gui\" in command line. After logging into your server, the virtual drive will be mounted in <code>~/SeaDrive.</code>"
+msgstr "要使用 SeaDrive，只需在你的桌面环境上运行 \"SeaDrive\"，或者在命令行运行 \"seadirve-gui\" 即可。登录到服务器后，虚拟磁盘将会被挂载到 <code>~/SeaDrive.</code>。"
+
+msgid "Running SeaDrive without GUI"
+msgstr "运行不包含 GUI 的 SeaDrive："
+
+msgid "In some use cases, it is useful to run SeaDrive in a server environment. To use SeaDrive without GUI, you can directly run seadrive-daemon (the background daemon) from command line."
+msgstr "在某些情况下，服务端运行 SeaDrive 很有用。要使用不包含 GUI 的 SeaDrive，你可以直接从命令行运行 seadrive-daemon（后台守护进程）。"
+
+msgid "First, you have to obtain an access token from your server."
+msgstr "首先，你需要从服务器获得访问 token。"
+
+msgid "Then you have to prepare a config file for SeaDrive. Let's assume that you save the config file as <code>~/seadrive.conf.</code>"
+msgstr "然后，你需要为 SeaDrive 准备配置文件，假设你把配置文件放在了 <code>~/seadrive.conf.</code> 地址。"
+
+msgid "You can only specify one account in the config file. If you need to switch accounts, you'll have to stop SeaDrive, change config file and restart. Meaning of config options are as following:"
+msgstr "你只能在配置文件中指定一个用户。如果你需要在多个账户之间切换，你需要停止运行 SeaDrive，切换配置文件并重启 SeaDrive。配置文件的含义如下："
+
+msgid "token: The access token you obtained above."
+msgstr "token：在上方获取到的访问 token。"
+
+msgid "is_pro: Set to true if your server is Pro edition."
+msgstr "is_pro：如果你的服务器是 Pro 版，则设置为 true。"
+
+msgid "client_name: This name will be displayed in the device information on the server."
+msgstr "client_name：这个名字将会显示在服务器的设备信息上。"
+
+msgid "size_limit: Size limit of local cache space."
+msgstr "size_limit：缓存空间大小限制。"
+
+msgid "clean_cache_interval: Interval of cache cleaning. The unit is minute."
+msgstr "clean_cache_interval：缓存清理间隔时间，单位是分钟。"
+
+msgid "Then you can start SeaDrive:"
+msgstr "然后你就可以启动 SeaDrive 了："
+
+msgid "Note that you must give <code>-f</code> option in the command line, to make sure seadrive runs in foregound, instead of forking as a daemon. "
+"By default, the data directory used by the SeaDrive GUI client will be <code>~/.seadrive/data</code>. "
+"It's recommended to use this path for data directory to be consistent with the GUI client. The log file path is <code>~/.seadrive/logs/seadrive.log</code>."
+msgstr "注意，你必须给出 <code>-f</code> 选项，确保它运行在前台，而不是被 fork 成为一个守护进程。"
+"默认状态下，SeaDrive GUI 客户端的数据存储目录是 <code>~/.seadrive/data</code>，这里推荐与 GUI 客户端的存储目录保持一致。"
+"日志文件地址是 <code>~/.seadrive/logs/seadrive.log</code>。"
+
+msgid "Sometimes you'll see the following error:"
+msgstr "有时你会看到如下错误："
+
+msgid "You can run <code>fusermount -u /home/user/SeaDrive</code> to fix the problem."
+msgstr "你可以运行 <code>fusermount -u /home/user/SeaDrive</code> 来解决此问题。"
+
+#: seahub/help/templates/help/faq.html
+
+msgid "Preconfigure Seafile clients"
+msgstr "预配置 Seafile 客户端"
+
+msgid "Normally, when the user installs a fresh seafile client, a login dialog would prompt him/her to fill "
+"the server address and user credentials. These behavior can be preconfigured by IT admins so that the users don't need to do it themselves."
+msgstr "通常情况下，当用户安装新的 Seafile 客户端时，一个登录窗口将会出现，并要求填写服务器地址和用户凭证信息。这些行为可以被 IT 管理员预配置，这样用户就无需自己做这些事了。"
+
+msgid "There are two ways to preconfigure seafile client:"
+msgstr "有以下两种方式预配置 Seafile 客户端："
+
+msgid "On windows, the admin can store the details it in the windows registry."
+msgstr "在 Windows 上，管理员可以将信息存入 Windows 注册表中。"
+
+msgid "On all desktop platforms (win/linux/mac), the admin can also store the details in a file <code>seafile.ini</code> in the HOME folder of the user."
+msgstr "在所有桌面平台上，管理员还可以将信息存在用户 HOME 目录下的 <code>seafile.ini</code> 文件中。"
+
+msgid "Using Windows registry"
+msgstr "使用 Windows 注册表"
+
+msgid "The preconfigure information can be stored in one of the following two places:"
+msgstr "预配置信息可以存储在以下两个位置的任意一个："
+
+msgid "If the information is found in both places, the one under <code>HKEY_CURRENT_USER</code> would take precedence."
+msgstr "如果两个地方都找到了，那么优先读取 <code>HKEY_CURRENT_USER</code> 下的设置。"
+
+msgid "Special note for 64bit Windows deployment"
+msgstr "64 位 Windows 部署特别通知"
+
+msgid "If you are using 64-bit windows and using HKLM instead of HKCU to deploy your seafile program. "
+"please note you need to correct the PrimaryKey to <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Seafile</code> "
+"instead of <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Seafile</code>. This is because seafile client is compiled as a 32-bit application on windows."
+msgstr "如果你正在使用 64 位 Windows，并且在使用 HKLM 而不是 HKCU 来部署你的 Seafile 系统，请注意你需要将 PrimaryKey 改为 <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Seafile</code>，"
+"而不是 <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Seafile</code>。这是因为 Seafile 客户端是 32 位 Windows 程序。"
+
+msgid "List of available preconfigure options"
+msgstr "可用的预配置选项"
+
+msgid "To preset the default server address:"
+msgstr "要预配置服务器地址："
+
+msgid "To preset the default shibboleth login address:"
+msgstr "要预配置默认 shibboleth 登录地址："
+
+msgid "To preset the account and login token:"
+msgstr "要预配置账号和登录 token："
+
+msgid "To prevent the user from using any other Seafile server:"
+msgstr "要阻止用户使用其他 Seafile 服务器："
+
+msgid "To preset the location of Seafile folder:"
+msgstr "要预配置 Seafile 存储位置："
+
+msgid "To avoid the configuration wizard:"
+msgstr "要阻止配置向导："
+
+msgid "To disable the \"Do you want to remove the account information\" dialog when uninstalling seafile client on Windows:"
+msgstr "要在卸载 Windows Seafile 客户端时关闭 \"是否删除账号信息\" 通知："
+
+msgid "Since version 7.0.6, you may use the option below to control average block size for indexing files in Sync client. "
+"Please note that, after setting this option in registry, you have to restart the sync client twice to let the option take effect."
+msgstr "从 7.0.6 版本开始，你还可以使用如下键来控制同步客户端的索引文件平均大小。请注意，当你在注册表设置此项后，你必须重启同步客户端两次以让改动生效。"
+
+msgid "Using <code>~/seafile.ini</code>(windows) or <code>~/.seafilerc</code>(linux/mac)"
+msgstr "使用 <code>~/seafile.ini</code>（Windows）或 <code>~/.seafilerc</code>（linux/mac）"
+
+msgid "This feature is available in seafile client 4.3.0 and above."
+msgstr "这个特性在 Seafile 客户端 4.3.0 或更高版本可用。"
+
+msgid "Below is an example to preset server address, user, token and Seafile folder:"
+msgstr "下面的例子可以预配置服务器地址、用户、token 和 Seafile 文件夹："
+
+msgid "How to use run Seafile client as a service on Windows"
+msgstr "如何在 Windows 上以服务的形式 Seafile 客户端"
+
+msgid "Seafile client can be configured to run as a daemon using tools like Firedaemon. "
+"First configure Seafile as the user it should run - in this example \"Administator\"："
+msgstr "Seafile 客户端可以被配置成像 Firedaemon 一样的守护工具。首先将 Seafile 配置为它应该运行的用户 —— 在本例中是 \"Administator\"："
+
+msgid "Replace <code>S:</code> with the partition you actually use to store <code>seafile-data</code> and <code>Seafile</code> folder."
+msgstr "将 <code>S:</code> 替换为你需要存储 <code>seafile-data</code> 和 <code>Seafile</code> 文件夹的盘符。"
+
+msgid "You can also use tools like NSSM (the Non-Sucking Service Manager). For more information, "
+"please check <a href=\"https://valdasv.blogspot.jp/2016/06/seafile-client-service.html\" target=\"_blank\">https://valdasv.blogspot.jp/2016/06/seafile-client-service.html</a>."
+msgstr "你还可以使用 NSSM (the Non-Sucking Service Manager) 之类的工具。要了解更多信息，请前往 <a href=\"https://valdasv.blogspot.jp/2016/06/seafile-client-service.html\" target=\"_blank\">https://valdasv.blogspot.jp/2016/06/seafile-client-service.html</a>。"
+
+msgid "How to suppress the launch of Seafile client after install on Windows"
+msgstr "如何阻止 Seafile 客户端在 Windows 上安装完成后自动运行"
+
+msgid "When the user installs seafile client on windows, the seafile client program would be started immediately after the installation is finished."
+msgstr "当用户安装 Seafile 客户端后，Seafile 客户端程序将会立即在安装完成后运行。"
+
+msgid "While this is the expected action for most users, it may be necessary to disable it sometimes. "
+"For example, when the seafile client is installed with Windows Group Policy Object (GPO), "
+"the program would be launched with the ADMIN user (instead of the current login user), which would make the program work incorrectly. "
+"In such cases, it's desirable to disable the launch of seafile client after installtion."
+msgstr "虽然这是许多用户期望的行为，但是有时还是需要让它不这么做。例如，当使用 Windows Group Policy Object (GPO) 安装时，"
+"程序会以 ADMIN 用户运行（而不是当前登录用户），这会导致程序无法正常工作。"
+"在这种情况下，需要把安装后自动启动的特性关闭。"
+
+msgid "To disable this behavior:"
+msgstr "要关闭这个特性："
+
+msgid "How to solve the shell icon overlay not shown problem"
+msgstr "如何解决重叠图标（shell icon overlay）不显示问题的"
+
+msgid "Windows uses only the first 15 of the entries in the registry (HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellIconOverlayIdentifiers). "
+"If there are other programs, like Dropbox and OneDrive, use up the overlay icons, Seafile shell icon overlay will not shown. "
+"To solve the problem, just delete the registration entries of other programs."
+msgstr "Windows 只使用注册表项 <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellIconOverlayIdentifiers</code> 中前 15 个条目。如果有其他程序，"
+"例如 Dropbox 和 OneDrive 把重叠图标用完了，那么 Seafile 重叠图标就不会被显示了。要解决这个问题，只需删除其他程序的重叠图标注册条目。"
 
 #: seahub/institutions/templates/institutions/base.html:7
 msgid "Exit admin panel"
@@ -2864,6 +4129,12 @@ msgstr "感谢参与！"
 #: seahub/templates/registration/password_change_done.html:10
 msgid "Log in again"
 msgstr "重新登录"
+
+msgid "Log In With Single Sign On"
+msgstr "使用统一认证系统登录"
+
+msgid "Login With Username and Password"
+msgstr "用户名密码登录"
 
 #: seahub/templates/registration/password_change_done.html:4
 msgid "Password Change Successfully"

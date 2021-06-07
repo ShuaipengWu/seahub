@@ -3,16 +3,17 @@
 
 {% block help_con %}
 <h3 class="hd">{% trans "Full text file search" %}</h3>
-<p>{% trans "If you're using a Pro Edition Server, you can search file and folder names, as well as the content of certains files, in the Seafile web app. Currently Seafile can search the contents of the following file types:" %}</p>
+<p>{% trans "You can search file and folder names, as well as the content of certains files, in the Seafile web app. Currently Seafile can search the contents of the following file types:" %}</p>
 <ul>
-  <li>{% trans "Microsoft Office Doc: .doc, .docx (Pro Edition Server only)" %}</li>
-  <li>{% trans "Microsoft Office PowerPoint: .ppt, .pptx (Pro Edition Server only)" %}</li>
-  <li>{% trans "Microsoft Office Excel: .xls, .xlsx (Pro Edition Server only)" %}</li>
-  <li>{% trans "LibreOffice files" %}</li>
-  <li>{% trans "PDF files" %}</li>
-  <li>{% trans "Markdown files: .md" %}</li>
-  <li>{% trans "Various source code files" %}</li>
-  <li>{% trans "Text files: .txt, .log" %}</li>
+    <li>{% trans "Microsoft Office Doc: .doc, .docx" %}</li>
+    <li>{% trans "Microsoft Office PowerPoint: .ppt, .pptx" %}</li>
+    <li>{% trans "Microsoft Office Excel: .xls, .xlsx" %}</li>
+    <li>{% trans "LibreOffice files" %}</li>
+    <li>{% trans "PDF files" %}</li>
+    <li>{% trans "Markdown files: .md" %}</li>
+    <li>{% trans "Various source code files" %}</li>
+    <li>{% trans "Text files: .txt, .log" %}</li>
 </ul>
 <p>{% trans "Note that your Seafile system administrator may not have enabled the full-text search feature. In that case, you can only search file and folder names." %}</p>
+<p>{% trans "The full-text search index information updates every 10 minutes (by default, might be changed by your system administrator), you won't be able to see the recently added contents until it has been indexed." %}</p>
 {% endblock %}

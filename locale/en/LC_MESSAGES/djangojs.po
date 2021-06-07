@@ -197,6 +197,12 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
+msgid "Special thanks to: "
+msgstr ""
+
+msgid "for their open-source Seafile."
+msgstr ""
+
 #: frontend/src/components/dialog/add-abuse-report-dialog.js:31
 msgid "Contact information is required."
 msgstr ""

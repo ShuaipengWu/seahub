@@ -78,7 +78,7 @@ PreconfigureServerAddr = https://cloud.seafile.de
 Parameters for seaf-daemon: -c C:/Users/Administrator/ccnet -d S:/seafile-data -w S:/Seafile
 </code></pre>
 <p>{% trans "Replace <code>S:</code> with the partition you actually use to store <code>seafile-data</code> and <code>Seafile</code> folder." %}</p>
-<p>{% trans "You call also use tools like NSSM (the Non-Sucking Service Manager). For more information, please check <a href=\"https://valdasv.blogspot.jp/2016/06/seafile-client-service.html\" target=\"_blank\">https://valdasv.blogspot.jp/2016/06/seafile-client-service.html</a>." %}</p>
+<p>{% trans "You can also use tools like NSSM (the Non-Sucking Service Manager). For more information, please check <a href=\"https://valdasv.blogspot.jp/2016/06/seafile-client-service.html\" target=\"_blank\">https://valdasv.blogspot.jp/2016/06/seafile-client-service.html</a>." %}</p>
 <h5 id="how-to-suppress-the-launch-of-seafile-client-after-install-on-windows">{% trans "How to suppress the launch of Seafile client after install on Windows" %}</h5>
 <p>{% trans "When the user installs seafile client on windows, the seafile client program would be started immediately after the installation is finished." %}</p>
 <p>{% trans "While this is the expected action for most users, it may be necessary to disable it sometimes. For example, when the seafile client is installed with Windows Group Policy Object (GPO), the program would be launched with the ADMIN user (instead of the current login user), which would make the program work incorrectly. In such cases, it's desirable to disable the launch of seafile client after installtion." %}</p>
@@ -88,5 +88,5 @@ Parameters for seaf-daemon: -c C:/Users/Administrator/ccnet -d S:/seafile-data -
 - Value: 1
 </code></pre>
 <h5 id="how-to-solve-the-shell-icon-overlay-not-shown-problem">{% trans "How to solve the shell icon overlay not shown problem" %}</h5>
-<p>{% trans "Windows uses only the first 15 of the entries in the registry (HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers). If there are other programs, like Dropbox and OneDrive, use up the overlay icons, Seafile shell icon overlay will not shown. To solve the problem, just delete the registration entries of other programs." %}</p>
+<p>{% trans "Windows uses only the first 15 of the entries in the registry (HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShellIconOverlayIdentifiers). If there are other programs, like Dropbox and OneDrive, use up the overlay icons, Seafile shell icon overlay will not shown. To solve the problem, just delete the registration entries of other programs." %}</p>
 {% endblock %}

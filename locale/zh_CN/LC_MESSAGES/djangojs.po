@@ -211,6 +211,12 @@ msgstr "海文互知"
 msgid "About Us"
 msgstr "关于我们"
 
+msgid "Special thanks to: "
+msgstr "特别感谢："
+
+msgid "for their open-source Seafile."
+msgstr "提供开源版 Seafile"
+
 #: frontend/src/components/dialog/add-abuse-report-dialog.js:31
 msgid "Contact information is required."
 msgstr "联系人为必填项。"
@@ -2844,6 +2850,12 @@ msgstr "待处理"
 
 msgid "Ignored"
 msgstr "已忽略"
+
+msgid "Ignore"
+msgstr "忽略"
+
+msgid "Don't ignore"
+msgstr "取消忽略"
 
 #: frontend/src/components/paginator.js:47
 msgid "{number_placeholder} / Page"
