@@ -328,6 +328,7 @@ class MultipleDirOperationToolbar extends React.Component {
     let direntPath1 = Utils.joinPath(path, selectedDirentList[0].name);
     let direntPath2 = Utils.joinPath(path, selectedDirentList[1].name);
     //alert(direntPath1+':'+direntPath2);
+    toaster.success('Moss request sent, we will notify you when complete.');
 
     let url = seafileAPI.server + '/api2/repos/' + repoID + '/moss/'+'?repoID='+repoID+'&direntPath1='+direntPath1+'&direntPath2='+direntPath2;
     return seafileAPI.req.get(url);
@@ -370,7 +371,7 @@ class MultipleDirOperationToolbar extends React.Component {
 
               {this.props.selectedDirentList.length === 2 && dirent.type === 'file' &&
                  <Fragment>
-                  <Button  className="secondary group-op-item action-icon sf2-icon-more" title={gettext('StartMoss')} onClick={this.onMossToggle}></Button>
+                  <Button  className="secondary group-op-item action-icon sf2-icon-security" title={gettext('StartMoss')} onClick={this.onMossToggle}></Button>
                 </Fragment>
               }
 

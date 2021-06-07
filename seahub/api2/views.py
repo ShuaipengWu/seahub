@@ -1,5 +1,6 @@
 # Copyright (c) 2012-2016 Seafile Ltd.
 # encoding: utf-8
+import _thread
 import logging
 import os
 import stat
@@ -126,6 +127,12 @@ try:
     from seahub.settings import OFFICE_WEB_APP_FILE_EXTENSION
 except ImportError:
     OFFICE_WEB_APP_FILE_EXTENSION = ()
+
+try:
+    from seahub.settings import MOSS_SETTINGS
+except ImportError:
+    print('Moss settings not available...')
+    MOSS_SETTINGS = None
 
 from pysearpc import SearpcError, SearpcObjEncoder
 import seaserv
@@ -5406,41 +5413,58 @@ class MossForCode(APIView):
         urllib.request.urlretrieve(url, save_path)
         return save_path
 
-    def get(self, request, repo_id, format=None):
-        para1 = request.GET.get('repoID', None)
-        para2 = request.GET.get('direntPath1', None)
-        para3 = request.GET.get('direntPath2', None)
-        print("NEWBEE")
-        print(para1)
-        print(para2)
-        print(para3)
-        print("username:{}".format(request.user.username))
-        file_id1 = seafile_api.get_file_id_by_path(repo_id, para2)
-        file_id2 = seafile_api.get_file_id_by_path(repo_id, para3)
-        print(file_id1)
-        print(file_id2)
-        dl_token1 = seafile_api.get_fileserver_access_token(repo_id, file_id1, 'view', request.user.username, use_onetime=False)
-        dl_token2 = seafile_api.get_fileserver_access_token(repo_id, file_id2, 'view', request.user.username, use_onetime=False)
-        print(dl_token1)
-        print(dl_token2)
-        file_name1 = os.path.basename(para2.rstrip('/'))
-        file_name2 = os.path.basename(para3.rstrip('/'))
+    def threaded_mission(self, username, repo_id, path1, path2):
+        # print("NEWBEE")
+        # print(para1)
+        # print(para2)
+        # print(para3)
+        # print("username:{}".format(request.user.username))
+        file_id1 = seafile_api.get_file_id_by_path(repo_id, path1)
+        file_id2 = seafile_api.get_file_id_by_path(repo_id, path2)
+        # print(file_id1)
+        # print(file_id2)
+        dl_token1 = seafile_api.get_fileserver_access_token(repo_id, file_id1, 'view', username, use_onetime=False)
+        dl_token2 = seafile_api.get_fileserver_access_token(repo_id, file_id2, 'view', username, use_onetime=False)
+        # print(dl_token1)
+        # print(dl_token2)
+        file_name1 = os.path.basename(path1.rstrip('/'))
+        file_name2 = os.path.basename(path2.rstrip('/'))
         access_url1 = gen_file_get_url(dl_token1, file_name1)
         access_url2 = gen_file_get_url(dl_token2, file_name2)
 
-        save_dir = "/var/seafile/seafile-data/moss"
-        
+        if 'tmpPath' not in MOSS_SETTINGS:
+            save_dir = '/tmp/moss'
+        else:
+            save_dir = MOSS_SETTINGS['tmpPath']
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
         internal_url1 = self.download_and_extract(access_url1, save_dir)
         internal_url2 = self.download_and_extract(access_url2, save_dir)
 
-        userid = 227798293 
+        # userid = 227798293
+        userid = MOSS_SETTINGS['userId']
         m = Moss(userid, "python")
         m.addFile(internal_url1)
         m.addFile(internal_url2)
         url = m.send(lambda file_path, display_name: print('*', end='', flush=True))
         print ("Report URL in seahub/api2/views.py: " + url)
-        send_moss_result_to_user.send(sender = None, to_user = request.user.username, moss_url = url)
+        send_moss_result_to_user.send(sender = None, to_user = username, moss_url = url)
         #UserNotification.objects.add_moss_result_msg(request.user.username, url)
+
+
+    def get(self, request, repo_id, format=None):
+        if MOSS_SETTINGS is None or 'userId' not in MOSS_SETTINGS:
+            return api_error(status.HTTP_404_NOT_FOUND, "Moss settings not found.")
+        para1 = request.GET.get('repoID', None)
+        para2 = request.GET.get('direntPath1', None)
+        para3 = request.GET.get('direntPath2', None)
+        if para1 is None or para2 is None or para3 is None:
+            return api_error(status.HTTP_400_BAD_REQUEST, "Missing some arguments.")
+
+        _thread.start_new_thread(self.threaded_mission, (request.user.username, para1, para2, para3))
+
+        return Response()
 
 
 class RepoUserFolderPerm(APIView):
