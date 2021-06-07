@@ -268,6 +268,13 @@ class UserNotificationManager(models.Manager):
                                            MSG_TYPE_REPO_SHARE, detail)
 
     def add_moss_result_msg(self, to_user, detail):
+    	"""Notify ``to_user`` that the moss result.
+
+        Arguments:
+        - `self`:
+        - `to_user`:
+        - `detail`:
+        """
         return self._add_user_notification(to_user,
                                            MSG_TYPE_MOSS_RESULT, detail)
 
