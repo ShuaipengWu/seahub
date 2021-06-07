@@ -72,6 +72,7 @@ def get_upload_link_info(uls):
     data['username'] = uls.username
     data['expire_date'] = expire_date
     data['format'] = uls.format
+    data['comment'] = uls.comment
     data['is_expired'] = uls.is_expired()
 
     return data
@@ -168,6 +169,9 @@ class UploadLinks(APIView):
         format = request.data.get('format', '')
         # TODO: Add format check.
 
+        comment = request.data.get('comment', '')
+        # TODO: Add format check.
+
         expire_date = None
         if expire_days:
             try:
@@ -252,7 +256,7 @@ class UploadLinks(APIView):
         uls = UploadLinkShare.objects.get_upload_link_by_path(username, repo_id, path)
         if not uls:
             uls = UploadLinkShare.objects.create_upload_link_share(username,
-                repo_id, path, password, expire_date, format)
+                repo_id, path, password, expire_date, format, comment)
 
         link_info = get_upload_link_info(uls)
         return Response(link_info)

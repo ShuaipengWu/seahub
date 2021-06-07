@@ -59,13 +59,19 @@ export const Utils = {
           i++;
           break;
         case '{':
-          if (inQuote) return false;  // A left quote in a quote.
+          if (inQuote) {
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i);
+          }   // A left quote in a quote.
           inQuote = true;
           continue;
         case '}':
-          if (!inQuote) return false;  // A right quote without left quote.
+          if (!inQuote) {
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i);
+          }   // A right quote without left quote.
           inQuote = false;
-          if (paramList.includes(currentParam)) return false;   // Duplicated variable.
+          if (paramList.includes(currentParam)) {
+            return gettext('Duplicated parameter "{param}".').replace('{param}', currentParam);
+          }   // Duplicated variable.
           paramList.push(currentParam);
           currentParam = '';
           continue;
@@ -75,7 +81,8 @@ export const Utils = {
         currentParam += format[i];
       }
     }
-    return paramList.length > 0;  // Must contains more than 1 parameter.
+    if (paramList.length === 0) return gettext('No parameter found in the format string.');
+    return '';  // Must contains more than 1 parameter.
   },
 
   getFormatParamCount: function(format) {

@@ -20,7 +20,7 @@ const propTypes = {
 const inputWidth = Utils.isDesktop() ? 250 : 210;
 
 // This code is pulled out from SeafileAPI.
-function createUploadLinkModified(repoID, path, password, expirationTime, format) {
+function createUploadLinkModified(repoID, path, password, expirationTime, format, comment) {
   var url = seafileAPI.server + '/api/v2.1/upload-links/';
   var form = new FormData();
   form.append('path', path);
@@ -33,6 +33,9 @@ function createUploadLinkModified(repoID, path, password, expirationTime, format
   }
   if (format) {
     form.append('format', format);
+  }
+  if (comment) {
+    form.append('comment', comment);
   }
   return seafileAPI._sendPostRequest(url, form);
 }
@@ -61,10 +64,12 @@ class GenerateUploadLink extends React.Component {
     this.state = {
       showPasswordInput: false,
       showFormatInput: false,
+      showCommentInput: false,
       passwordVisible: false,
       password: '',
       passwdnew: '',
       format: '',
+      comment: '',
       sharedUploadInfo: null,
       isSendLinkShown: false,
       isExpireChecked: !this.isExpireDaysNoLimit,
@@ -111,9 +116,22 @@ class GenerateUploadLink extends React.Component {
     });
   }
 
+  addComment = () => {
+    this.setState({
+      showCommentInput: !this.state.showCommentInput,
+      errorInfo: ''
+    });
+  }
+
   inputFormat = (e) => {
     this.setState({
       format: e.target.value
+    });
+  }
+
+  inputComment = (e) => {
+    this.setState({
+      comment: e.target.value
     });
   }
 
@@ -149,7 +167,7 @@ class GenerateUploadLink extends React.Component {
       this.setState({errorInfo: ''});
 
       let { itemPath, repoID } = this.props;
-      let { password, isExpireChecked, setExp, expireDays, expDate, format } = this.state;
+      let { password, isExpireChecked, setExp, expireDays, expDate, format, comment } = this.state;
 
       let expirationTime = '';
       if (isExpireChecked) {
@@ -160,7 +178,7 @@ class GenerateUploadLink extends React.Component {
         }
       }
 
-      createUploadLinkModified(repoID, itemPath, password, expirationTime, format).then((res) => {
+      createUploadLinkModified(repoID, itemPath, password, expirationTime, format, comment).then((res) => {
         let sharedUploadInfo = new UploadLink(res.data);
         this.setState({sharedUploadInfo: sharedUploadInfo});
       }).catch(error => {
@@ -171,7 +189,7 @@ class GenerateUploadLink extends React.Component {
   }
 
   validateParamsInput = () => {
-    let { showPasswordInput, password, passwordnew, isExpireChecked, setExp, expireDays, expDate, format } = this.state;
+    let { showPasswordInput, password, passwordnew, isExpireChecked, setExp, expireDays, expDate, format, comment } = this.state;
 
     // check password params
     if (showPasswordInput) {
@@ -208,9 +226,15 @@ class GenerateUploadLink extends React.Component {
         return false;
       }
 
-      // TODO: Add checks for format.
+      let checkFormatRes = Utils.validateFormat(format);
+      if (checkFormatRes !== '') {
+        this.setState({errorInfo: checkFormatRes});
+        return false;
+      }
 
-      this.setState({expireDays: parseInt(expireDays), format: format});
+      // TODO: Add checks for upload comment.
+
+      this.setState({expireDays: parseInt(expireDays), format: format, comment: comment});
     }
     return true;
   }
@@ -269,6 +293,8 @@ class GenerateUploadLink extends React.Component {
     seafileAPI.deleteUploadLink(sharedUploadInfo.token).then(() => {
       this.setState({
         showPasswordInput: false,
+        showFormatInput: false,
+        showCommentInput: false,
         expireDays: this.defaultExpireDays,
         isExpireChecked: !this.isExpireDaysNoLimit,
         password: '',
@@ -312,10 +338,16 @@ class GenerateUploadLink extends React.Component {
               </FormGroup>
             )}
             {sharedUploadInfo.format && (
-                <FormGroup className="mb-0">
-                  <dt className="text-secondary font-weight-normal">{gettext('Format:')}</dt>
-                  <dd>{sharedUploadInfo.format}</dd>
-                </FormGroup>
+              <FormGroup className="mb-0">
+                <dt className="text-secondary font-weight-normal">{gettext('Format:')}</dt>
+                <dd>{sharedUploadInfo.format}</dd>
+              </FormGroup>
+            )}
+            {sharedUploadInfo.comment && (
+              <FormGroup className="mb-0">
+                <dt className="text-secondary font-weight-normal">{gettext('Comment:')}</dt>
+                <dd>{sharedUploadInfo.comment}</dd>
+              </FormGroup>
             )}
           </Form>
           {canSendShareLinkEmail && !isSendLinkShown && <Button onClick={this.toggleSendLink} className="mr-2">{gettext('Send')}</Button>}
@@ -417,6 +449,21 @@ class GenerateUploadLink extends React.Component {
               <Input id="filename-format" style={{width: inputWidth}} type='text' onChange={this.inputFormat} />
             </FormGroup>
             <p className="tip">{gettext('About formatting, you can refer to <a href="#">this manual</a> for more help.')}</p>
+          </div>
+          }
+        </FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input type="checkbox" onChange={this.addComment} />
+            <span>{gettext('Add upload page comment')}</span>
+          </Label>
+          {this.state.showCommentInput &&
+          <div className="ml-4">
+            <FormGroup>
+              <Label for="filename-comment">{gettext('Page comment')}</Label>
+              <Input id="filename-comment" style={{width: inputWidth}} type='text' onChange={this.inputComment} />
+            </FormGroup>
+            <p className="tip">{gettext('The comment information will be shown above the upload page.')}</p>
           </div>
           }
         </FormGroup>

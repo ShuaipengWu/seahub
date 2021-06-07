@@ -19,6 +19,7 @@ const {
   token,
   repoID,
   path,
+  comment,
   format
 } = window.uploadLink;
 
@@ -123,6 +124,7 @@ class SharedUploadLink extends React.Component {
             ) : (
               <Fragment>
                 <ol className="small text-gray">
+                  {comment && <li className="tip-list-item">{comment}</li>}
                   <li className="tip-list-item">{gettext('Folder upload is limited to Chrome, Firefox 50+, and Microsoft Edge.')}</li>
                   {maxUploadFileSize && <li className="tip-list-item">{gettext('File size should be smaller than {max_size_placeholder}').replace('{max_size_placeholder}', maxUploadFileSize)}</li>}
                   {format && <li className="tip-list-item">{gettext('Please input these information to form an upload filename.')}</li>}
