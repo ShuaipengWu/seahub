@@ -5530,3 +5530,19 @@ msgstr "移动 %(name)s 和其他 %(amount)s 项条目失败。"
 #: frontend/src/utils/utils.js:1222
 msgid "Failed to move %(name)s."
 msgstr "移动 %(name)s 项条目失败。"
+
+#: frontend/src/components/dialog/lib-old-files-auto-del-dialog.js
+msgid "Auto deletion"
+msgstr "自动删除"
+
+msgid "Do not automatically delete files"
+msgstr "不要自动删除文件"
+
+msgid "Automatically delete files that are not modified within certain days:"
+msgstr "自动删除以下天数内未修改的文件："
+
+msgid "Please enter a positive integer"
+msgstr "请输入一个正整数"
+
+msgid "Library old files auto delete days setted."
+msgstr "资料库旧文件自动删除时长已设置。"
