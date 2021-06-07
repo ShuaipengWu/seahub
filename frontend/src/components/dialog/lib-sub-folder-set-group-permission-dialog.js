@@ -58,12 +58,6 @@ class GroupItem extends React.Component {
           />
         </td>
         <td>
-          <span
-            className={`sf2-icon-x3 action-icon ${this.state.isOperationShow ? '' : 'hide'}`}
-            onClick={this.deleteGroupPermissionItem}
-            title={gettext('Delete')}
-          >
-          </span>
         </td>
       </tr>
     );
@@ -94,11 +88,9 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
       showFileChooser: false
     };
     this.options = [];
-    if (!isPro) {
-      this.permissions = ['r', 'rw'];
-    } else {
-      this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
-    }
+    
+    this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
+    
   }
 
   handleSelectChange = (option) => {
@@ -106,10 +98,13 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
   }
 
   componentDidMount() {
+   /* 
     this.loadOptions();
     this.listGroupPermissionItems();
+    */
   }
 
+  /*
   loadOptions = () => {
     seafileAPI.shareableGroups().then((res) => {
       this.options = res.data.map((item, index) => {
@@ -135,21 +130,24 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
       }
     });
   }
+  */
 
   setPermission = (permission) => {
     this.setState({permission: permission});
   }
 
   addGroupFolderPerm = () => {
-    const { selectedOption } = this.state;
+   // const { selectedOption } = this.state;
+
     const folderPath = this.props.folderPath || this.state.folderPath;
-    if (!selectedOption || !folderPath) {
+    if (!folderPath) {
       return false;
     }
 
     const request = this.props.isDepartmentRepo ?
-      seafileAPI.addDepartmentRepoGroupFolderPerm(this.props.repoID, this.state.permission, folderPath, selectedOption.id) :
-      seafileAPI.addGroupFolderPerm(this.props.repoID, this.state.permission, folderPath, selectedOption.id);
+      seafileAPI.addDepartmentRepoGroupFolderPerm(this.props.repoID, this.state.permission, folderPath) :
+      seafileAPI.addGroupFolderPerm(this.props.repoID, this.state.permission, folderPath);
+    
     request.then(res => {
       let errorMsg = [];
       if (res.data.failed.length > 0) {
@@ -160,7 +158,8 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
 
       this.setState({
         errorMsg: errorMsg,
-        groupPermissionItems: this.state.groupPermissionItems.concat(res.data.success),
+        //groupPermissionItems: this.state.groupPermissionItems.concat(res.data.success),
+        groupPermissionItems: res.data.success,
         selectedOption: null,
         permission: 'rw',
         folderPath: ''
@@ -197,9 +196,11 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
     const request = this.props.isDepartmentRepo ?
       seafileAPI.updateDepartmentRepoGroupFolderPerm(item.repo_id, permission, item.folder_path, item.group_id) :
       seafileAPI.updateGroupFolderPerm(item.repo_id, permission, item.folder_path, item.group_id);
+
     request.then(() => {
       this.updateGroupPermission(item, permission);
     });
+
   }
 
   updateGroupPermission = (item, permission) => {
@@ -267,6 +268,17 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
     const thead = (
       <thead>
         <tr>
+          {showPath &&
+          <th width="88%">{gettext('Folder')}</th>
+          }
+          <th width={showPath ? '12%' : '15%'}></th>
+        </tr>
+      </thead>
+    );
+
+    const thead2 = (
+      <thead>
+        <tr>
           <th width={showPath ? '32%' : '55%'}>{gettext('Group')}</th>
           {showPath &&
           <th width="32%">{gettext('Folder')}</th>
@@ -276,23 +288,15 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
         </tr>
       </thead>
     );
+
+
+
     return (
       <Fragment>
         <table className="w-xs-250">
           {thead}
           <tbody>
             <tr>
-              <td>
-                <Select
-                  onChange={this.handleSelectChange}
-                  options={this.options}
-                  placeholder={gettext('Select a group')}
-                  maxMenuHeight={200}
-                  inputId={'react-select-2-input'}
-                  value={this.state.selectedOption}
-                  components={{ NoOptionsMessage }}
-                />
-              </td>
               {showPath &&
                 <td>
                   <InputGroup>
@@ -301,15 +305,7 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
                   </InputGroup>
                 </td>
               }
-              <td>
-                <SharePermissionEditor
-                  isTextMode={false}
-                  isEditIconShow={false}
-                  currentPermission={this.state.permission}
-                  permissions={this.permissions}
-                  onPermissionChanged={this.setPermission}
-                />
-              </td>
+
               <td>
                 <Button onClick={this.addGroupFolderPerm}>{gettext('Submit')}</Button>
               </td>
@@ -328,7 +324,7 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
         </table>
         <div className="share-list-container">
           <table className="table-thead-hidden w-xs-250">
-            {thead}
+            {thead2}
             <tbody>
               {this.state.groupPermissionItems.map((item, index) => {
                 return (

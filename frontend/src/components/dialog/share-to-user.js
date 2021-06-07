@@ -147,7 +147,7 @@ class ShareToUser extends React.Component {
     } else if (this.props.itemType === 'dir') {
       this.permissions = ['rw', 'r', 'cloud-edit', 'preview'];
     }
-    if (this.props.isGroupOwnedRepo || !isPro) {
+    if (this.props.isGroupOwnedRepo) {
       this.permissions = ['rw', 'r'];
     }
   }

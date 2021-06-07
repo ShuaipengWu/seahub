@@ -480,7 +480,7 @@ export const Utils = {
   getFolderOperationList: function(isRepoOwner, currentRepoInfo, dirent, isContextmenu) {
 
     let list = [];
-    const { SHARE, DOWNLOAD, DELETE, RENAME, MOVE, COPY, PERMISSION, OPEN_VIA_CLIENT } = TextTranslation;
+    const { SHARE, DOWNLOAD, DELETE, RENAME, MOVE, COPY, OPEN_VIA_CLIENT } = TextTranslation;
     const permission = dirent.permission;
 
     if (isContextmenu) {
@@ -499,9 +499,7 @@ export const Utils = {
 
     if (permission == 'rw') {
       list.push(RENAME, MOVE, COPY);
-      if (folderPermEnabled  && ((isRepoOwner && currentRepoInfo.has_been_shared_out) || currentRepoInfo.is_admin)) {
-        list.push('Divider', PERMISSION);
-      }
+
       list.push('Divider', OPEN_VIA_CLIENT);
     }
 

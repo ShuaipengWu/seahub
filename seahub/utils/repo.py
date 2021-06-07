@@ -42,8 +42,7 @@ def normalize_repo_status_str(status):
 
 def get_available_repo_perms():
     perms = [PERMISSION_READ, PERMISSION_READ_WRITE, PERMISSION_ADMIN]
-    if is_pro_version():
-        perms += [PERMISSION_PREVIEW, PERMISSION_PREVIEW_EDIT]
+    perms += [PERMISSION_PREVIEW, PERMISSION_PREVIEW_EDIT]
 
     return perms
 

@@ -19,6 +19,7 @@ const MSG_TYPE_FILE_COMMENT = 'file_comment';
 const MSG_TYPE_DRAFT_COMMENT = 'draft_comment';
 const MSG_TYPE_DRAFT_REVIEWER = 'draft_reviewer';
 const MSG_TYPE_GUEST_INVITATION_ACCEPTED = 'guest_invitation_accepted';
+const MSG_TYPE_MOSS_RESULT = 'moss_result';
 
 class NoticeItem extends React.Component {
 
@@ -26,6 +27,17 @@ class NoticeItem extends React.Component {
     let noticeItem = this.props.noticeItem;
     let noticeType = noticeItem.type;
     let detail = noticeItem.detail;
+
+    if (noticeType === MSG_TYPE_MOSS_RESULT) {
+
+      let moss_url = detail.moss_url;
+      let notice = gettext('Moss result: {moss_link}');
+      let mossLink = '<a href=' + moss_url + '>' + 'click_here' + '</a>';
+      notice = notice.replace('{moss_link}', mossLink);
+      let url = ''
+
+      return {url, notice};
+    }
 
     if (noticeType === MSG_TYPE_ADD_USER_TO_GROUP) {
 

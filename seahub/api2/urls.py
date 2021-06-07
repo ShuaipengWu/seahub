@@ -39,7 +39,11 @@ urlpatterns = [
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/$', Repo.as_view(), name="api2-repo"),
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/history/$', RepoHistory.as_view()),
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/user-folder-perm/$', RepoUserFolderPerm.as_view(), name="api2-repo-user-folder-perm"),
+    
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/group-folder-perm/$', RepoGroupFolderPerm.as_view(), name="api2-repo-group-folder-perm"),
+    
+    url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/moss/$', MossForCode.as_view(), name="moss"),
+
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/history-limit/$', RepoHistoryLimit.as_view(), name="api2-repo-history-limit"),
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/download-info/$', DownloadRepo.as_view()),
     url(r'^repos/(?P<repo_id>[-0-9a-f]{36})/owner/$', RepoOwner.as_view(), name="api2-repo-owner"),

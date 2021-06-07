@@ -27,6 +27,8 @@ from seahub.constants import HASH_URLS
 from seahub.drafts.models import DraftReviewer
 from seahub.file_participants.utils import list_file_participants
 
+
+
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -77,6 +79,7 @@ MSG_TYPE_DRAFT_COMMENT = 'draft_comment'
 MSG_TYPE_DRAFT_REVIEWER = 'draft_reviewer'
 MSG_TYPE_GUEST_INVITATION_ACCEPTED = 'guest_invitation_accepted'
 MSG_TYPE_REPO_TRANSFER = 'repo_transfer'
+MSG_TYPE_MOSS_RESULT = 'moss_result'
 
 USER_NOTIFICATION_COUNT_CACHE_PREFIX = 'USER_NOTIFICATION_COUNT_'
 
@@ -89,6 +92,9 @@ def file_uploaded_msg_to_json(file_name, repo_id, uploaded_to):
 def repo_share_msg_to_json(share_from, repo_id, path, org_id):
     return json.dumps({'share_from': share_from, 'repo_id': repo_id,
                        'path': path, 'org_id': org_id})
+
+def moss_result_to_json(user, moss_url):
+    return json.dumps({'user': user, 'moss_url': moss_url})
 
 def repo_share_to_group_msg_to_json(share_from, repo_id, group_id, path, org_id):
     return json.dumps({'share_from': share_from, 'repo_id': repo_id,
@@ -261,6 +267,10 @@ class UserNotificationManager(models.Manager):
         return self._add_user_notification(to_user,
                                            MSG_TYPE_REPO_SHARE, detail)
 
+    def add_moss_result_msg(self, to_user, detail):
+        return self._add_user_notification(to_user,
+                                           MSG_TYPE_MOSS_RESULT, detail)
+
     def add_repo_share_to_group_msg(self, to_user, detail):
         """Notify ``to_user`` that others shared a repo to group.
 
@@ -342,6 +352,11 @@ class UserNotification(models.Model):
             self.seen = True
             self.save()
         return seen
+
+
+    def is_moss_result_msg(self):
+        return self.msg_type == MSG_TYPE_MOSS_RESULT
+
 
     def is_file_uploaded_msg(self):
         """
@@ -775,6 +790,8 @@ from seahub.share.signals import share_repo_to_user_successful, \
 from seahub.invitations.signals import accept_guest_invitation_successful
 from seahub.drafts.signals import comment_draft_successful, \
         request_reviewer_successful
+from seahub.signals import send_moss_result_to_user
+
 
 @receiver(upload_file_successful)
 def add_upload_file_msg_cb(sender, **kwargs):
@@ -806,6 +823,25 @@ def add_share_repo_msg_cb(sender, **kwargs):
 
     detail = repo_share_msg_to_json(from_user, repo.id, path, org_id)
     UserNotification.objects.add_repo_share_msg(to_user, detail)
+
+
+@receiver(send_moss_result_to_user)
+def add_moss_result_msg_cb(sender, **kwargs):
+    """Notify user when seahub get moss results.
+    """
+
+    print("In the signals!!!!!!!!!!!!!!")
+
+    to_user = kwargs.get('to_user', None)
+    moss_url = kwargs.get('moss_url', None)
+
+    assert to_user and moss_url is not None, 'Arguments error'
+
+    detail = moss_result_to_json(to_user, moss_url)
+    UserNotification.objects.add_moss_result_msg(to_user, detail)
+
+
+
 
 @receiver(share_repo_to_group_successful)
 def add_share_repo_to_group_msg_cb(sender, **kwargs):

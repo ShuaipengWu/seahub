@@ -133,6 +133,7 @@ class MultipleDirOperationToolbar extends React.Component {
     return opList;
   }
 
+
   onMenuItemClick = (operation) => {
     const dirents = this.props.selectedDirentList;
     const dirent = dirents[0];
@@ -321,6 +322,19 @@ class MultipleDirOperationToolbar extends React.Component {
     if (dirent) return Utils.joinPath(this.props.path, dirent.name);
   }
 
+
+  onMossToggle = () => {
+    let { path, repoID, selectedDirentList } = this.props;
+    let direntPath1 = Utils.joinPath(path, selectedDirentList[0].name);
+    let direntPath2 = Utils.joinPath(path, selectedDirentList[1].name);
+    //alert(direntPath1+':'+direntPath2);
+
+    let url = seafileAPI.server + '/api2/repos/' + repoID + '/moss/'+'?repoID='+repoID+'&direntPath1='+direntPath1+'&direntPath2='+direntPath2;
+    return seafileAPI.req.get(url);
+
+  }
+  
+
   render() {
 
     const { repoID, userPerm } = this.props;
@@ -343,6 +357,7 @@ class MultipleDirOperationToolbar extends React.Component {
               {(userPerm === 'rw' || userPerm === 'admin' || userPerm === 'r') && (
                 <Button className="secondary group-op-item action-icon sf2-icon-download" title={gettext('Download')} onClick={this.onItemsDownload}></Button>
               )}
+
               {this.props.selectedDirentList.length === 1 &&
                 <ItemDropdownMenu
                   tagName={'button'}
@@ -352,6 +367,13 @@ class MultipleDirOperationToolbar extends React.Component {
                   getMenuList={this.getDirentMenuList}
                 />
               }
+
+              {this.props.selectedDirentList.length === 2 && dirent.type === 'file' &&
+                 <Fragment>
+                  <Button  className="secondary group-op-item action-icon sf2-icon-more" title={gettext('StartMoss')} onClick={this.onMossToggle}></Button>
+                </Fragment>
+              }
+
             </ButtonGroup>
           </div>
         </div>

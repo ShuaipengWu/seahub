@@ -687,7 +687,7 @@ ENABLE_ADDRESSBOOK_OPT_IN = False
 #####################
 # Folder Permission #
 #####################
-ENABLE_FOLDER_PERM = False
+ENABLE_FOLDER_PERM = True
 
 ####################
 # Guest Invite     #
