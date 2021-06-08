@@ -5414,23 +5414,25 @@ class MossForCode(APIView):
         return save_path
 
     def threaded_mission(self, username, repo_id, path1, path2):
-        # print("NEWBEE")
-        # print(para1)
-        # print(para2)
-        # print(para3)
-        # print("username:{}".format(request.user.username))
+        #print("NEWBEE")
+        #print(repo_id)
+        #print(path1)
+        #print(path2)
+        #print("username:{}".format(username))
         file_id1 = seafile_api.get_file_id_by_path(repo_id, path1)
         file_id2 = seafile_api.get_file_id_by_path(repo_id, path2)
-        # print(file_id1)
-        # print(file_id2)
+        #print('fileID1=', file_id1)
+        #print('fileID2=', file_id2)
         dl_token1 = seafile_api.get_fileserver_access_token(repo_id, file_id1, 'view', username, use_onetime=False)
         dl_token2 = seafile_api.get_fileserver_access_token(repo_id, file_id2, 'view', username, use_onetime=False)
-        # print(dl_token1)
-        # print(dl_token2)
+        #print('dlToken1=', dl_token1)
+        #print('dlToken2=', dl_token2)
         file_name1 = os.path.basename(path1.rstrip('/'))
         file_name2 = os.path.basename(path2.rstrip('/'))
         access_url1 = gen_file_get_url(dl_token1, file_name1)
         access_url2 = gen_file_get_url(dl_token2, file_name2)
+        #print('access_url1=', access_url1)
+        #print('access_url2=', access_url2)
 
         if 'tmpPath' not in MOSS_SETTINGS:
             save_dir = '/tmp/moss'
@@ -5441,12 +5443,15 @@ class MossForCode(APIView):
 
         internal_url1 = self.download_and_extract(access_url1, save_dir)
         internal_url2 = self.download_and_extract(access_url2, save_dir)
-
+        #print('internal_url1=', internal_url1)
+        #print('internal_url2=', internal_url2)
         # userid = 227798293
         userid = MOSS_SETTINGS['userId']
         m = Moss(userid, "python")
+        #print('MOSS client has been created.')
         m.addFile(internal_url1)
         m.addFile(internal_url2)
+        print('Request for MOSS has been sent.')
         url = m.send(lambda file_path, display_name: print('*', end='', flush=True))
         print ("Report URL in seahub/api2/views.py: " + url)
         send_moss_result_to_user.send(sender = None, to_user = username, moss_url = url)
