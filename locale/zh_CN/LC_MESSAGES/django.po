@@ -1952,6 +1952,13 @@ msgid "Generate and copy the link and send it to others. When they open the link
 "they will see an interface like this, they cannot upload any file untill all the blanks have been filled in."
 msgstr "生成链接，并将链接发送给他人。当他们打开链接时，他们会看到一个如下图所示的界面，必须填写好相应内容后才能上传文件。"
 
+msgid "Once the users filled in the blanks and uploaded the files, you will be able to see formatted "
+"files in your target directory. For example, if a user pass in <code>1234</code> as \"ID\", "
+"and <code>Adem Jensen</code> for \"real name\", then the uploaded .zip filename will be like "
+"<code>collect_1234_Adem Jensen.zip</code>. As you can see, the file extensions will be preserved."
+msgstr "一旦用户填好相应信息并上传文件后，你就能在你指定的上传目录下看到已命名好的文件了。例如，如果用户传入的 \"ID\" 是"
+"<code>1234</code>，\"real name\" 是 <code>Adem Jensen</code>，那么上传 .zip 文件上传后的文件名就是 <code>collect_1234_Adem Jensen.zip</code>。如你所见，文件扩展名被保留了。"
+
 msgid "Here are some tips for filename auto formation:"
 msgstr "以下是关于文件名自动格式化的几条提示："
 
