@@ -397,10 +397,19 @@ def view_shared_upload_link(request, uploadlink):
 
     no_quota = True if seaserv.check_quota(repo_id) < 0 else False
 
+    # Because it is filled into 2 ", therefore all the '\' will be treated as escapes.
+    # We need to unescape it to make it work for frontend.
+    unescaped_filename_format = ''
+    for i in range(len(filename_format)):
+        if filename_format[i] == '\\':
+            unescaped_filename_format += '\\\\'
+        else:
+            unescaped_filename_format += filename_format[i]
+
     return render(request, 'view_shared_upload_link_react.html', {
     #return render(request, 'view_shared_upload_link.html', {
             'repo': repo,
-            'format': filename_format,
+            'format': unescaped_filename_format,
             'comment': comment,
             'path': path,
             'username': username,

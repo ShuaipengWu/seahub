@@ -215,6 +215,16 @@ class GenerateUploadLink extends React.Component {
       }
     }
 
+    let checkFormatRes = Utils.validateFormat(format);
+    if (checkFormatRes !== '') {
+      this.setState({errorInfo: checkFormatRes});
+      return false;
+    }
+    this.setState({format: format});
+
+    // TODO: Add checks for upload comment.
+    this.setState({comment: comment});
+
     if (isExpireChecked) {
       if (setExp == 'by-date') {
         if (!expDate) {
@@ -234,15 +244,7 @@ class GenerateUploadLink extends React.Component {
         return false;
       }
 
-      let checkFormatRes = Utils.validateFormat(format);
-      if (checkFormatRes !== '') {
-        this.setState({errorInfo: checkFormatRes});
-        return false;
-      }
-
-      // TODO: Add checks for upload comment.
-
-      this.setState({expireDays: parseInt(expireDays), format: format, comment: comment});
+      this.setState({expireDays: parseInt(expireDays)});
     }
     return true;
   }

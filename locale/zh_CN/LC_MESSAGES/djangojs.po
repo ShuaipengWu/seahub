@@ -5586,13 +5586,10 @@ msgid "The comment information will be shown above the upload page."
 msgstr "备注信息将会显示在上传页面的上方。"
 
 msgid "Format string brace mismatch on column {col}."
-msgstr "格式串：大括号不匹配，错误位置：第 {col} 列。"
-
-msgid "Duplicated parameter \"{param}\"."
-msgstr "格式串：重复的参数 \"{param}\"。"
+msgstr "文件名格式：大括号不匹配，错误位置：第 {col} 列。"
 
 msgid "No parameter found in the format string."
-msgstr "格式串：未找到有效参数。"
+msgstr "文件名格式：未找到有效参数。"
 
 msgid "The owner of this library has run out of space."
 msgstr "该资料库的拥有者已耗尽存储空间。"
@@ -5611,3 +5608,9 @@ msgstr "拖拽文件或目录到此处。"
 
 msgid "Fill in all the blanks above to enable file upload."
 msgstr "将上方信息填写完整后方可解锁文件上传。"
+
+msgid "Illegal character on column {col}."
+msgstr "文件名格式：非法字符，第 {col} 列。"
+
+msgid "Given parameters contain illegal characters."
+msgstr "给定的参数包含非法字符。"

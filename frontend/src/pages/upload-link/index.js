@@ -9,6 +9,7 @@ import FileUploader from './file-uploader';
 import '../../css/upload-link.css';
 import {Form, FormGroup, Input, Label} from 'reactstrap';
 import PropTypes from "prop-types";
+import toaster from "../../components/toast";
 
 const loggedUser = window.app.pageOptions.username;
 const {
@@ -70,7 +71,13 @@ class SharedUploadLink extends React.Component {
 
   onParamChange = (index, value) => {
     let paramArr = this.state.formatParameters;
-    paramArr[index] = value;
+    if (Utils.isOkForFilename(value)) {
+      paramArr[index] = value;
+    } else {
+      toaster.danger(gettext('Given parameters contain illegal characters.'));
+      paramArr[index] = '';
+    }
+
     let isParametersAllOk = true;
     for (let i = 0; i < this.state.requiredFormatItems; i++) {
       if (paramArr[i].length === 0) {

@@ -49,10 +49,19 @@ export const Utils = {
     return isEnterpriseWeChat || isWeChat;
   },
 
+  isOkForFilename: function(filename) {
+    let illegalChars = ['\\', '/', ':', '*', '?', '"', '<', '>', '|'];
+    for (let i = 0; i < filename.length; i++) {
+      if (illegalChars.includes(filename[i])) {
+        return false;
+      }
+    }
+    return true;
+  },
+
   validateFormat: function(format) {
     let inQuote = false;
-    let paramList = [];
-    let currentParam = '';
+    let cnt = 0;
     for (let i = 0; i < format.length; i++) {
       switch (format[i]) {
         case '\\':
@@ -60,28 +69,31 @@ export const Utils = {
           break;
         case '{':
           if (inQuote) {
-            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i);
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i + 1);
           }   // A left quote in a quote.
           inQuote = true;
           continue;
         case '}':
           if (!inQuote) {
-            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i);
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i + 1);
           }   // A right quote without left quote.
           inQuote = false;
-          if (paramList.includes(currentParam)) {
-            return gettext('Duplicated parameter "{param}".').replace('{param}', currentParam);
-          }   // Duplicated variable.
-          paramList.push(currentParam);
-          currentParam = '';
+          cnt++;
           continue;
       }
       // Now handle current char
-      if (inQuote) {
-        currentParam += format[i];
+      if (!inQuote) {
+        if (!Utils.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return gettext('Illegal character on column {col}.').replace('{col}', i + 1);
+        }
       }
     }
-    if (paramList.length === 0) return gettext('No parameter found in the format string.');
+    if (inQuote) {
+      return gettext('Format string brace mismatch on column {col}.').replace('{col}', format.length);
+      // The last quote was not closed.
+    }
+    if (cnt === 0) return gettext('No parameter found in the format string.');
     return '';  // Must contains more than 1 parameter.
   },
 
@@ -96,31 +108,38 @@ export const Utils = {
     // }
     // return cnt;
     let inQuote = false;
-    let paramList = [];
-    let currentParam = '';
+    let cnt = 0;
     for (let i = 0; i < format.length; i++) {
       switch (format[i]) {
         case '\\':
           i++;
           break;
         case '{':
-          if (inQuote) return -1;  // A left quote in a quote.
+          if (inQuote) {
+            return -1;
+          }   // A left quote in a quote.
           inQuote = true;
           continue;
         case '}':
-          if (!inQuote) return -1;  // A right quote without left quote.
+          if (!inQuote) {
+            return -2;
+          }   // A right quote without left quote.
           inQuote = false;
-          if (paramList.includes(currentParam)) return -1;   // Duplicated variable.
-          paramList.push(currentParam);
-          currentParam = '';
+          cnt++;
           continue;
       }
       // Now handle current char
-      if (inQuote) {
-        currentParam += format[i];
+      if (!inQuote) {
+        if (!Utils.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return -3;
+        }
       }
     }
-    return paramList.length;
+    if (inQuote) {
+      return -4;  // The last quote was not closed.
+    }
+    return cnt;  // Must contains more than 1 parameter.
   },
 
   getFormatParameters: function(format) {
@@ -148,7 +167,7 @@ export const Utils = {
         case '}':
           if (!inQuote) return null;  // A right quote without left quote.
           inQuote = false;
-          if (paramList.includes(currentParam)) return null;   // Duplicated variable.
+          if (currentParam === '') currentParam = 'Param ' + (paramList.length + 1);
           paramList.push(currentParam);
           currentParam = '';
           continue;
@@ -156,16 +175,22 @@ export const Utils = {
       // Now handle current char
       if (inQuote) {
         currentParam += format[i];
+      } else {
+        if (!this.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return null;
+        }
       }
+    }
+    if (inQuote) {
+      return null;  // The last quote was not closed.
     }
     return paramList;
   },
 
   applyFormatParameters: function(format, paramValueArray, strict = true, voidDisplay = '[VOID]') {
     let inQuote = false;
-    let paramList = [];
     let cnt = 0;
-    let currentParam = '';
     let currentResult = '';
     for (let i = 0; i < format.length; i++) {
       switch (format[i]) {
@@ -179,8 +204,6 @@ export const Utils = {
         case '}':
           if (!inQuote) return null;  // A right quote without left quote.
           inQuote = false;
-          if (paramList.includes(currentParam)) return null;   // Duplicated variable.
-          paramList.push(currentParam);
           if (paramValueArray.length <= cnt || !paramValueArray[cnt] || paramValueArray[cnt].length === 0) {
             if (strict) return null;
             currentResult += voidDisplay;
@@ -188,15 +211,19 @@ export const Utils = {
             currentResult += paramValueArray[cnt];
           }
           cnt++;
-          currentParam = '';
           continue;
       }
       // Now handle current char
-      if (inQuote) {
-        currentParam += format[i];
-      } else {
+      if (!inQuote) {
+        if (!this.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return null;
+        }
         currentResult += format[i];
       }
+    }
+    if (inQuote) {
+      return null;  // The last quote was not closed.
     }
     return currentResult;
   },

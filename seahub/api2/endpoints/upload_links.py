@@ -81,28 +81,29 @@ def get_upload_link_info(uls):
 
 def validate_format(filename_format):
     in_quote = False
-    param_list = []
-    current_param = ''
-    for i in range(0, len(filename_format)):
-        if filename_format[i] == '\\':
-            i = i + 1
-        elif filename_format[i] == '{':
-            if in_quote:
-                return 'Format string brace mismatch.'
-            in_quote = True
-            continue
-        elif filename_format[i] == '}':
-            if not in_quote:
-                return 'Format string brace mismatch.'
-            in_quote = False
-            if current_param in param_list:
-                return 'Duplicated parameter.'
-            param_list.append(current_param)
-            current_param = ''
-            continue
-        if in_quote:
-            current_param += filename_format[i]
-    if len(param_list) == 0:
+    escape_mode = False
+    cnt = 0
+    for i in range(len(filename_format)):
+        if not escape_mode:
+            if filename_format[i] == '\\':
+                escape_mode = True
+                continue
+            elif filename_format[i] == '{':
+                if in_quote:
+                    return 'Format string brace mismatch.'
+                in_quote = True
+                continue
+            elif filename_format[i] == '}':
+                if not in_quote:
+                    return 'Format string brace mismatch.'
+                in_quote = False
+                cnt += 1
+                continue
+        if not in_quote:
+            if filename_format[i] in ['\\', '/', ':', '*', '?', '"', '<', '>', '|']:
+                return 'Illegal character in the format string.'
+        escape_mode = False
+    if cnt == 0:
         return 'No parameter found in the format string.'
     return ''
 

@@ -5542,9 +5542,6 @@ msgstr ""
 msgid "Format string brace mismatch on column {col}."
 msgstr ""
 
-msgid "Duplicated parameter \"{param}\"."
-msgstr ""
-
 msgid "No parameter found in the format string."
 msgstr ""
 
@@ -5564,4 +5561,10 @@ msgid "Drag and drop files or folders here."
 msgstr ""
 
 msgid "Fill in all the blanks above to enable file upload."
+msgstr ""
+
+msgid "Illegal character on column {col}."
+msgstr ""
+
+msgid "Given parameters contain illegal characters."
 msgstr ""
