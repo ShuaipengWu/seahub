@@ -19,6 +19,8 @@
     maxUploadFileSize: "{{max_upload_file_size|filesizeformat}}",
     {% endif %}
     token: "{{uploadlink.token}}",
+    format: "{{format}}",
+    comment: "{{comment}}",
     repoID: "{{uploadlink.repo_id}}",
     path: "{{path|escapejs}}"
   };

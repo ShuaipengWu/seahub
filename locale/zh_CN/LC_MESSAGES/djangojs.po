@@ -1225,7 +1225,7 @@ msgstr "上传连接已复制到剪切板。"
 
 #: frontend/src/components/dialog/generate-upload-link.js:266
 msgid "Upload Link:"
-msgstr "上传连接："
+msgstr "上传链接："
 
 #: frontend/src/components/dialog/guide-for-new-dialog.js:23
 msgid "Welcome to {site_name_placeholder}"
@@ -5546,3 +5546,68 @@ msgstr "请输入一个正整数"
 
 msgid "Library old files auto delete days setted."
 msgstr "资料库旧文件自动删除时长已设置。"
+
+#: Filename auto formation
+
+msgid "Upload files to {folder_name_placeholder}"
+msgstr "上传文件到 {folder_name_placeholder}"
+
+msgid "shared by:"
+msgstr "共享来自："
+
+msgid "Filename Format:"
+msgstr "文件名格式："
+
+msgid "Comment:"
+msgstr "备注："
+
+msgid "Filename auto formation"
+msgstr "文件名自动格式化"
+
+msgid "Filename format"
+msgstr "文件名格式"
+
+msgid "Filename auto formation system can automatically rename uploaded files to given format."
+msgstr "文件名自动格式化系统能够按照给定格式，帮你将他人上传的文件自动命名。"
+
+msgid "To learn basic usages, please refer to "
+msgstr "要了解如何使用该功能，请查阅"
+
+msgid "this manual"
+msgstr "这份文档"
+
+msgid "Add upload page comment"
+msgstr "增加上传页面备注"
+
+msgid "Page comment"
+msgstr "页面备注"
+
+msgid "The comment information will be shown above the upload page."
+msgstr "备注信息将会显示在上传页面的上方。"
+
+msgid "Format string brace mismatch on column {col}."
+msgstr "格式串：大括号不匹配，错误位置：第 {col} 列。"
+
+msgid "Duplicated parameter \"{param}\"."
+msgstr "格式串：重复的参数 \"{param}\"。"
+
+msgid "No parameter found in the format string."
+msgstr "格式串：未找到有效参数。"
+
+msgid "The owner of this library has run out of space."
+msgstr "该资料库的拥有者已耗尽存储空间。"
+
+msgid "Folder upload is limited to Chrome, Firefox 50+, and Microsoft Edge."
+msgstr "目录上传只能在 Chrome、Firefox 50+ 和 Microsoft Edge 浏览器上才能使用"
+
+msgid "File size should be smaller than {max_size_placeholder}"
+msgstr "文件大小应该小于 {max_size_placeholder}"
+
+msgid "Please input these information to form an upload filename."
+msgstr "请填写这些信息，以便生成文件的上传名称。"
+
+msgid "Drag and drop files or folders here."
+msgstr "拖拽文件或目录到此处。"
+
+msgid "Fill in all the blanks above to enable file upload."
+msgstr "将上方信息填写完整后方可解锁文件上传。"

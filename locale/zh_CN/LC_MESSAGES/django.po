@@ -1913,6 +1913,57 @@ msgstr "一个包含所有共享方式的窗口将会弹出。在窗口中，单
 msgid "Sharing libraries or folders"
 msgstr "共享资料库或目录"
 
+msgid "Filename auto formation"
+msgstr "上传文件名自动格式化"
+
+msgid "And we are intruoducing you a very powerful tool: the filename auto formation system for filenames."
+msgstr "接下来，我们将介绍一项非常强大的功能：文件名自动格式化系统。"
+
+msgid "When you collect files from groups, you may want their files be named in a manner. "
+"Sometimes it can be difficult for all of them to name their files in the way you want. Renaming all the files can be boring."
+msgstr "当你向数量较多的人收取文件时，你可能需要他们按照格式命名。但是在某些情况下，你无法确保所有人都能按照你想要的方式来命名文件，而给一堆文件重命名，这项工作想想就无聊。"
+
+msgid "In Seafile upload-link settings, you can specify a unified filename format. "
+"By that way, when a user opens up the upload link, he/she will be required to fill in the blanks for filename fileds. "
+"And after the upload, it's name will be automatically changed to a unified presentation based on the "
+"rules you set and what the user has filled in on previous step."
+msgstr "在 Seafile 上传目录设置中，你可以设置一个统一的文件名格式。这样，当用户通过链接上传文件时，他将被要求填写文件名的部分字段。"
+"填写并上传文件后，文件名将被基于你给定的格式和用户填写的内容，自动修改为统一形式。"
+
+msgid "Here are the steps for configurating auto formatting:"
+msgstr "以下是配置自动格式化文件名的步骤："
+
+msgid "Open the share window, and click the \"Upload Link\" tab on the left panel."
+msgstr "打开共享窗口，并单击左侧\"上传链接\"选项卡。"
+
+msgid "You will see 'Filename auto formation' check box, check it, and open the format input field."
+msgstr "你可以看到\"文件名自动格式化\"选项，点选它，就能看到格式输入框。"
+
+msgid "Input your format, and surround the name parameters by <code>{</code> and <code>}</code>. "
+"For example, if you want your files named with ID and real name, and with a \"collect_\" prefix on it, "
+"you can use <code>collect_{ID}_{real name}</code> for your format. The parameter's name can be anything. "
+"If you want <code>{</code> or <code>}</code> in your filename, please use <code>\\{</code> and <code>\\}</code> instead."
+msgstr "在其中输入你的格式，在字符串左右两侧添加 <code>{</code> 和 <code>}</code> 来定义参数。例如，"
+"如果你想用 \"ID\" 和 \"real name\" 为文件命名，然后再加个前缀 \"collect_\"，那么你就可以输入 <code>collect_{ID}_{real name}</code> 作为格式串。"
+"参数可以是任何单行字符串，只要它们被大括号包围即可。如果你想在你的文件名中使用 <code>{</code> 或 <code>}</code>，可以通过反斜线转义的方式进行，即"
+"使用 <code>\\{</code> 和 <code>\\}</code>。"
+
+msgid "Generate and copy the link and send it to others. When they open the link, "
+"they will see an interface like this, they cannot upload any file untill all the blanks have been filled in."
+msgstr "生成链接，并将链接发送给他人。当他们打开链接时，他们会看到一个如下图所示的界面，必须填写好相应内容后才能上传文件。"
+
+msgid "Here are some tips for filename auto formation:"
+msgstr "以下是关于文件名自动格式化的几条提示："
+
+msgid "The name of parameter can be any inline string. you can insert spaces, or define very long parameters. The parameter you define will be shown on the upload page."
+msgstr "参数可以是任何单行字符串，你可以在参数中插入空格，也可以定义超长的参数，你所定义的参数将会在上传页面被列出。"
+
+msgid "If you want to further more explain your parameters, you can add \"comments\" for upload links, it will also be displayed on the upload page."
+msgstr "如果你想进一步解释你的变量含义，你可以为上传链接添加\"备注\"，它将显示在上传页面的上方。"
+
+msgid "When you enable the auto formation, users cannot upload folders from the upload link. This feature is mainly for security issues."
+msgstr "当你对上传链接启用自动格式化命名后，使用该链接的用户无法上传文件夹，只能上传单个文件，这一特性主要是为了安全。"
+
 msgid "You can share a library or folder to other registered Seafile users. The shared library or folder can be accessed by others with the web app and Seafile clients."
 msgstr "你可以向已注册的 Seafile 用户共享资料库或目录。被共享的资料库或目录可以被他人通过 Web 客户端和 Seafile 客户端访问到。"
 
