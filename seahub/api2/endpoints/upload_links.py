@@ -30,9 +30,10 @@ from seahub.views import check_folder_permission
 from seahub.utils.timeutils import datetime_to_isoformat_timestr
 
 from seahub.settings import UPLOAD_LINK_EXPIRE_DAYS_DEFAULT, \
-        UPLOAD_LINK_EXPIRE_DAYS_MIN, UPLOAD_LINK_EXPIRE_DAYS_MAX
+    UPLOAD_LINK_EXPIRE_DAYS_MIN, UPLOAD_LINK_EXPIRE_DAYS_MAX
 
 logger = logging.getLogger(__name__)
+
 
 def get_upload_link_info(uls):
     data = {}
@@ -71,16 +72,46 @@ def get_upload_link_info(uls):
     data['token'] = token
     data['username'] = uls.username
     data['expire_date'] = expire_date
+    data['format'] = uls.format
+    data['comment'] = uls.comment
     data['is_expired'] = uls.is_expired()
 
     return data
 
 
-class UploadLinks(APIView):
+def validate_format(filename_format):
+    in_quote = False
+    escape_mode = False
+    cnt = 0
+    for i in range(len(filename_format)):
+        if not escape_mode:
+            if filename_format[i] == '\\':
+                escape_mode = True
+                continue
+            elif filename_format[i] == '{':
+                if in_quote:
+                    return 'Format string brace mismatch.'
+                in_quote = True
+                continue
+            elif filename_format[i] == '}':
+                if not in_quote:
+                    return 'Format string brace mismatch.'
+                in_quote = False
+                cnt += 1
+                continue
+        if not in_quote:
+            if filename_format[i] in ['\\', '/', ':', '*', '?', '"', '<', '>', '|']:
+                return 'Illegal character in the format string.'
+        escape_mode = False
+    if cnt == 0:
+        return 'No parameter found in the format string.'
+    return ''
 
+
+class UploadLinks(APIView):
     authentication_classes = (TokenAuthentication, SessionAuthentication)
     permission_classes = (IsAuthenticated, CanGenerateUploadLink)
-    throttle_classes = (UserRateThrottle, )
+    throttle_classes = (UserRateThrottle,)
 
     def get(self, request):
         """ Get all upload links of a user.
@@ -101,7 +132,7 @@ class UploadLinks(APIView):
                 return api_error(status.HTTP_404_NOT_FOUND, error_msg)
 
             # filter share links by repo
-            upload_link_shares = [ufs for ufs in upload_link_shares if ufs.repo_id==repo_id]
+            upload_link_shares = [ufs for ufs in upload_link_shares if ufs.repo_id == repo_id]
 
             path = request.GET.get('path', None)
             if path:
@@ -120,7 +151,7 @@ class UploadLinks(APIView):
                     path = path + '/'
 
                 # filter share links by path
-                upload_link_shares = [ufs for ufs in upload_link_shares if ufs.path==path]
+                upload_link_shares = [ufs for ufs in upload_link_shares if ufs.path == path]
 
         result = []
         for uls in upload_link_shares:
@@ -164,6 +195,14 @@ class UploadLinks(APIView):
             error_msg = 'Can not pass expire_days and expiration_time at the same time.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
+        filename_format = request.data.get('format', '')
+        error_msg = validate_format(filename_format)
+        if error_msg is not '':
+            return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+
+        comment = request.data.get('comment', '')
+        # TODO: Add comment check.
+
         expire_date = None
         if expire_days:
             try:
@@ -179,13 +218,13 @@ class UploadLinks(APIView):
             if UPLOAD_LINK_EXPIRE_DAYS_MIN > 0:
                 if expire_days < UPLOAD_LINK_EXPIRE_DAYS_MIN:
                     error_msg = _('Expire days should be greater or equal to %s') % \
-                            UPLOAD_LINK_EXPIRE_DAYS_MIN
+                                UPLOAD_LINK_EXPIRE_DAYS_MIN
                     return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
             if UPLOAD_LINK_EXPIRE_DAYS_MAX > 0:
                 if expire_days > UPLOAD_LINK_EXPIRE_DAYS_MAX:
                     error_msg = _('Expire days should be less than or equal to %s') % \
-                            UPLOAD_LINK_EXPIRE_DAYS_MAX
+                                UPLOAD_LINK_EXPIRE_DAYS_MAX
                     return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
             expire_date = timezone.now() + relativedelta(days=expire_days)
@@ -207,7 +246,7 @@ class UploadLinks(APIView):
 
                 if expire_date < expire_date_min_limit:
                     error_msg = _('Expiration time should be later than %s.') % \
-                            expire_date_min_limit.strftime("%Y-%m-%d %H:%M:%S")
+                                expire_date_min_limit.strftime("%Y-%m-%d %H:%M:%S")
                     return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
             if UPLOAD_LINK_EXPIRE_DAYS_MAX > 0:
@@ -216,7 +255,7 @@ class UploadLinks(APIView):
 
                 if expire_date > expire_date_max_limit:
                     error_msg = _('Expiration time should be earlier than %s.') % \
-                            expire_date_max_limit.strftime("%Y-%m-%d %H:%M:%S")
+                                expire_date_max_limit.strftime("%Y-%m-%d %H:%M:%S")
                     return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         else:
@@ -248,16 +287,17 @@ class UploadLinks(APIView):
         uls = UploadLinkShare.objects.get_upload_link_by_path(username, repo_id, path)
         if not uls:
             uls = UploadLinkShare.objects.create_upload_link_share(username,
-                repo_id, path, password, expire_date)
+                                                                   repo_id, path, password, expire_date,
+                                                                   filename_format, comment)
 
         link_info = get_upload_link_info(uls)
         return Response(link_info)
 
-class UploadLink(APIView):
 
+class UploadLink(APIView):
     authentication_classes = (TokenAuthentication, SessionAuthentication)
     permission_classes = (IsAuthenticated, CanGenerateUploadLink)
-    throttle_classes = (UserRateThrottle, )
+    throttle_classes = (UserRateThrottle,)
 
     def get(self, request, token):
         """ Get upload link info.
@@ -304,8 +344,7 @@ class UploadLink(APIView):
 
 
 class UploadLinkUpload(APIView):
-
-    throttle_classes = (AnonRateThrottle, )
+    throttle_classes = (AnonRateThrottle,)
 
     def get(self, request, token):
         """ Get file upload url according to upload link token.
@@ -344,7 +383,7 @@ class UploadLinkUpload(APIView):
 
         obj_id = json.dumps({'parent_dir': path})
         token = seafile_api.get_fileserver_access_token(repo_id,
-                obj_id, 'upload-link', uls.username, use_onetime=False)
+                                                        obj_id, 'upload-link', uls.username, use_onetime=False)
 
         if not token:
             error_msg = 'Internal Server Error'

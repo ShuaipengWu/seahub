@@ -4,6 +4,7 @@ import TextTranslation from './text-translation';
 import React from 'react';
 import toaster from '../components/toast';
 import PermissionDeniedTip from '../components/permission-denied-tip';
+import {FormGroup, Input, Label} from "reactstrap";
 
 export const Utils = {
 
@@ -46,6 +47,195 @@ export const Utils = {
     let isWeChat = ua.match(/MicroMessenger/i) == 'micromessenger';
     let isEnterpriseWeChat = ua.match(/MicroMessenger/i) == 'micromessenger' && ua.match(/wxwork/i) == 'wxwork';
     return isEnterpriseWeChat || isWeChat;
+  },
+
+  isOkForFilename: function(filename) {
+    let illegalChars = ['\\', '/', ':', '*', '?', '"', '<', '>', '|'];
+    for (let i = 0; i < filename.length; i++) {
+      if (illegalChars.includes(filename[i])) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  validateFormat: function(format) {
+    let inQuote = false;
+    let cnt = 0;
+    for (let i = 0; i < format.length; i++) {
+      switch (format[i]) {
+        case '\\':
+          i++;
+          break;
+        case '{':
+          if (inQuote) {
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i + 1);
+          }   // A left quote in a quote.
+          inQuote = true;
+          continue;
+        case '}':
+          if (!inQuote) {
+            return gettext('Format string brace mismatch on column {col}.').replace('{col}', i + 1);
+          }   // A right quote without left quote.
+          inQuote = false;
+          cnt++;
+          continue;
+      }
+      // Now handle current char
+      if (!inQuote) {
+        if (!Utils.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return gettext('Illegal character on column {col}.').replace('{col}', i + 1);
+        }
+      }
+    }
+    if (inQuote) {
+      return gettext('Format string brace mismatch on column {col}.').replace('{col}', format.length);
+      // The last quote was not closed.
+    }
+    if (cnt === 0) return gettext('No parameter found in the format string.');
+    return '';  // Must contains more than 1 parameter.
+  },
+
+  getFormatParamCount: function(format) {
+    // const reg=/{(.*?)}/g;
+    // let res = reg.exec(format);
+    // let cnt = 0;
+    // while(res)
+    // {
+    //   cnt++;
+    //   res = reg.exec(format);
+    // }
+    // return cnt;
+    let inQuote = false;
+    let cnt = 0;
+    for (let i = 0; i < format.length; i++) {
+      switch (format[i]) {
+        case '\\':
+          i++;
+          break;
+        case '{':
+          if (inQuote) {
+            return -1;
+          }   // A left quote in a quote.
+          inQuote = true;
+          continue;
+        case '}':
+          if (!inQuote) {
+            return -2;
+          }   // A right quote without left quote.
+          inQuote = false;
+          cnt++;
+          continue;
+      }
+      // Now handle current char
+      if (!inQuote) {
+        if (!Utils.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return -3;
+        }
+      }
+    }
+    if (inQuote) {
+      return -4;  // The last quote was not closed.
+    }
+    return cnt;  // Must contains more than 1 parameter.
+  },
+
+  getFormatParameters: function(format) {
+    // const reg=/{(.*?)}/g;
+    // let res = reg.exec(format);
+    // let params = [];
+    // while(res)
+    // {
+    //   params.push(res[1]);
+    //   res = reg.exec(format);
+    // }
+    // return params;
+    let inQuote = false;
+    let paramList = [];
+    let currentParam = '';
+    for (let i = 0; i < format.length; i++) {
+      switch (format[i]) {
+        case '\\':
+          i++;
+          break;
+        case '{':
+          if (inQuote) return null;  // A left quote in a quote.
+          inQuote = true;
+          continue;
+        case '}':
+          if (!inQuote) return null;  // A right quote without left quote.
+          inQuote = false;
+          if (currentParam === '') currentParam = 'Param ' + (paramList.length + 1);
+          paramList.push(currentParam);
+          currentParam = '';
+          continue;
+      }
+      // Now handle current char
+      if (inQuote) {
+        currentParam += format[i];
+      } else {
+        if (!this.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return null;
+        }
+      }
+    }
+    if (inQuote) {
+      return null;  // The last quote was not closed.
+    }
+    return paramList;
+  },
+
+  applyFormatParameters: function(format, paramValueArray, strict = true, voidDisplay = '[VOID]') {
+    let inQuote = false;
+    let cnt = 0;
+    let currentResult = '';
+    for (let i = 0; i < format.length; i++) {
+      switch (format[i]) {
+        case '\\':
+          i++;
+          break;
+        case '{':
+          if (inQuote) return null;  // A left quote in a quote.
+          inQuote = true;
+          continue;
+        case '}':
+          if (!inQuote) return null;  // A right quote without left quote.
+          inQuote = false;
+          if (paramValueArray.length <= cnt || !paramValueArray[cnt] || paramValueArray[cnt].length === 0) {
+            if (strict) return null;
+            currentResult += voidDisplay;
+          } else {
+            currentResult += paramValueArray[cnt];
+          }
+          cnt++;
+          continue;
+      }
+      // Now handle current char
+      if (!inQuote) {
+        if (!this.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return null;
+        }
+        currentResult += format[i];
+      }
+    }
+    if (inQuote) {
+      return null;  // The last quote was not closed.
+    }
+    return currentResult;
+  },
+
+  replaceMainFileName: function(newMainName, oldFullName) {
+    // TODO: Cannot handle .tar.gz or other formats with 2 or more sections.
+    let extName = '';
+    for (let i = oldFullName.length - 1; i >= 0; i--) {
+      if (oldFullName[i] === '.') return newMainName + '.' + extName;
+      extName = oldFullName[i] + extName;
+    }
+    return newMainName;   // No point found, means no ext name.
   },
 
   offlineDownloadStatus: {

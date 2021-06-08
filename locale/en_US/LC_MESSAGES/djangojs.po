@@ -864,3 +864,19 @@ msgstr ""
 #: static/scripts/sysadmin-app/views/trash-repos.js:50
 msgid "Are you sure you want to clear trash?"
 msgstr ""
+
+#: frontend/src/components/dialog/lib-old-files-auto-del-dialog.js
+msgid "Auto deletion"
+msgstr ""
+
+msgid "Do not automatically delete files"
+msgstr ""
+
+msgid "Automatically delete files that are not modified within certain days:"
+msgstr ""
+
+msgid "Please enter a positive integer"
+msgstr ""
+
+msgid "Library old files auto delete days setted."
+msgstr ""

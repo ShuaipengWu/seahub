@@ -41,7 +41,27 @@
   <li>{% trans "A pop-up window will appear with all the share options. Click the \"Upload Link\" tab on the left panel. Then click \"Generate\" button to create a link. You can use password to protect your link." %}</li>
   <li>{% trans "Copy the link to email, instant messaging client or any other tool to send it to others." %}</li>
 </ol>
-<h4>{% trans "Sharing libraries or folders" %}</h4>
+    <h5>{% trans "Filename auto formation" %}</h5>
+    <p>{% trans "And we are intruoducing you a very powerful tool: the filename auto formation system for filenames." %}</p>
+    <p>{% trans "When you collect files from groups, you may want their files be named in a manner. Sometimes it can be difficult for all of them to name their files in the way you want. Renaming all the files can be boring." %}</p>
+    <p>{% trans "In Seafile upload-link settings, you can specify a unified filename format. By that way, when a user opens up the upload link, he/she will be required to fill in the blanks for filename fileds. And after the upload, it's name will be automatically changed to a unified presentation based on the rules you set and what the user has filled in on previous step." %}</p>
+    <p>{% trans "Here are the steps for configurating auto formatting:" %}</p>
+    <ol>
+    <li>{% trans "Open the share window, and click the \"Upload Link\" tab on the left panel." %}</li>
+    <li>{% trans "You will see 'Filename auto formation' check box, check it, and open the format input field." %}</li>
+    <li>{% trans "Input your format, and surround the name parameters by <code>{</code> and <code>}</code>. For example, if you want your files named with ID and real name, and with a \"collect_\" prefix on it, you can use <code>collect_{ID}_{real name}</code> for your format. The parameter's name can be anything. If you want <code>{</code> or <code>}</code> in your filename, please use <code>\\{</code> and <code>\\}</code> instead." %}</li>
+    <img src="{{ MEDIA_URL }}img/help/auto-format-settings.png" alt="Format settings" />
+    <li>{% trans "Generate and copy the link and send it to others. When they open the link, they will see an interface like this, they cannot upload any file untill all the blanks have been filled in." %}</li>
+    <img src="{{ MEDIA_URL }}img/help/auto-format-upload-interface-unlock.png" alt="Format interface" />
+    <li>{% trans "Once the users filled in the blanks and uoloaded the files, you will be able to see formatted files in your target directory. For example, if you pass in <code>1234</code> as \"ID\", and <code>Adem Jensen</code> for \"real name\", then the uploaded .zip filename will be like <code>collect_1234_Adem Jensen.zip</code>. As you can see, the file extensions will be preserved." %}</li>
+    </ol>
+    <p>{% trans "Here are some tips for filename auto formation:" %}</p>
+    <ol>
+    <li>{% trans "The name of parameter can be any inline string. you can insert spaces, or define very long parameters. The parameter you define will be shown on the upload page." %}</li>
+    <li>{% trans "If you want to further more explain your parameters, you can add \"comments\" for upload links, it will also be displayed on the upload page." %}</li>
+    <li>{% trans "When you enable the auto formation, users cannot upload folders from the upload link. This feature is mainly for security issues." %}</li>
+    </ol>
+    <h4>{% trans "Sharing libraries or folders" %}</h4>
 <p>{% trans "You can share a library or folder to other registered Seafile users. The shared library or folder can be accessed by others with the web app and Seafile clients." %}</p>
 <p>{% trans "You can choose the member range of the share:" %}</p>
 <ul>
