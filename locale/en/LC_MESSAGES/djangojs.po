@@ -5500,3 +5500,68 @@ msgstr ""
 #: frontend/src/utils/utils.js:1222
 msgid "Failed to move %(name)s."
 msgstr ""
+
+#: Filename auto formation
+
+msgid "Upload files to {folder_name_placeholder}"
+msgstr ""
+
+msgid "shared by:"
+msgstr ""
+
+msgid "Filename Format:"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Filename auto formation"
+msgstr ""
+
+msgid "Filename format"
+msgstr ""
+
+msgid "Filename auto formation system can automatically rename uploaded files to given format."
+msgstr ""
+
+msgid "To learn basic usages, please refer to "
+msgstr ""
+
+msgid "this manual"
+msgstr ""
+
+msgid "Add upload page comment"
+msgstr ""
+
+msgid "Page comment"
+msgstr ""
+
+msgid "The comment information will be shown above the upload page."
+msgstr ""
+
+msgid "Format string brace mismatch on column {col}."
+msgstr ""
+
+msgid "Duplicated parameter \"{param}\"."
+msgstr ""
+
+msgid "No parameter found in the format string."
+msgstr ""
+
+msgid "The owner of this library has run out of space."
+msgstr ""
+
+msgid "Folder upload is limited to Chrome, Firefox 50+, and Microsoft Edge."
+msgstr ""
+
+msgid "File size should be smaller than {max_size_placeholder}"
+msgstr ""
+
+msgid "Please input these information to form an upload filename."
+msgstr ""
+
+msgid "Drag and drop files or folders here."
+msgstr ""
+
+msgid "Fill in all the blanks above to enable file upload."
+msgstr ""

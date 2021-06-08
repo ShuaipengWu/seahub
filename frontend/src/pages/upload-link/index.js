@@ -149,7 +149,7 @@ class SharedUploadLink extends React.Component {
                   </Fragment>
                 ) : (
                   <div className="py-6 text-center">
-                    <span className="sf3-font sf3-font-tips warning-icon"></span>
+                    <span className="sf3-font sf3-font-tips notice-icon"></span>
                     <p>{gettext('Fill in all the blanks above to enable file upload.')}</p>
                   </div>
                 )}
