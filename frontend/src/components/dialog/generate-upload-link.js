@@ -77,6 +77,7 @@ class GenerateUploadLink extends React.Component {
       password: '',
       passwdnew: '',
       format: '',
+      prettyPrintedFormat: '',
       comment: '',
       sharedUploadInfo: null,
       isSendLinkShown: false,
@@ -133,7 +134,16 @@ class GenerateUploadLink extends React.Component {
 
   inputFormat = (e) => {
     this.setState({
-      format: e.target.value
+      format: e.target.value,
+      prettyPrintedFormat: e.target.value.length > 0 ? Utils.prettyPrintFormatString(e.target.value) : ''
+    });
+  }
+
+  addParameter = () => {
+    let newFormat = this.state.format + '{}';
+    this.setState({
+      format: newFormat,
+      prettyPrintedFormat: Utils.prettyPrintFormatString(newFormat)
     });
   }
 
@@ -309,6 +319,8 @@ class GenerateUploadLink extends React.Component {
         isExpireChecked: !this.isExpireDaysNoLimit,
         password: '',
         passwordnew: '',
+        format: '',
+        prettyPrintedFormat: '',
         sharedUploadInfo: null,
       });
     }).catch(error => {
@@ -350,7 +362,7 @@ class GenerateUploadLink extends React.Component {
             {sharedUploadInfo.format && (
               <FormGroup className="mb-0">
                 <dt className="text-secondary font-weight-normal">{gettext('Filename Format:')}</dt>
-                <dd>{sharedUploadInfo.format}</dd>
+                <dd>{Utils.prettyPrintFormatString(sharedUploadInfo.format)}</dd>
               </FormGroup>
             )}
             {sharedUploadInfo.comment && (
@@ -456,7 +468,13 @@ class GenerateUploadLink extends React.Component {
           <div className="ml-4">
             <FormGroup>
               <Label for="filename-format">{gettext('Filename format')}</Label>
-              <Input id="filename-format" style={{width: inputWidth}} type='text' onChange={this.inputFormat} />
+              <InputGroup style={{width: inputWidth}}>
+                <Input id="filename-format" type='text' value={this.state.format || ''} onChange={this.inputFormat} />
+                <InputGroupAddon addonType="append">
+                  <Button onClick={this.addParameter}><i className="link-operation-icon fas fa-plus"></i></Button>
+                </InputGroupAddon>
+              </InputGroup>
+              <p style={{marginTop:'5px'}}>{this.state.prettyPrintedFormat}</p>
             </FormGroup>
             <p className="tip">{gettext('Filename auto formation system can automatically rename uploaded files to given format.')}<br/>{gettext('To learn basic usages, please refer to ')}<a target={'_blank'} href={`${siteRoot}help/sharing_files_and_folders/`}>{gettext('this manual')}</a></p>
           </div>

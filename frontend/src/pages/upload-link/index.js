@@ -132,7 +132,7 @@ class SharedUploadLink extends React.Component {
               <Fragment>
                 <ol className="small text-gray">
                   {comment && <li className="tip-list-item">{comment}</li>}
-                  <li className="tip-list-item">{gettext('Folder upload is limited to Chrome, Firefox 50+, and Microsoft Edge.')}</li>
+                  {this.state.requiredFormatItems === 0 && <li className="tip-list-item">{gettext('Folder upload is limited to Chrome, Firefox 50+, and Microsoft Edge.')}</li>}
                   {maxUploadFileSize && <li className="tip-list-item">{gettext('File size should be smaller than {max_size_placeholder}').replace('{max_size_placeholder}', maxUploadFileSize)}</li>}
                   {format && <li className="tip-list-item">{gettext('Please input these information to form an upload filename.')}</li>}
                 </ol>
@@ -141,7 +141,7 @@ class SharedUploadLink extends React.Component {
                   <Fragment>
                     <div id="upload-link-drop-zone" className="text-center mt-2 mb-4">
                       <span className="sf3-font sf3-font-upload upload-icon"></span>
-                      <p className="small text-gray mb-0">{gettext('Drag and drop files or folders here.')}</p>
+                      <p className="small text-gray mb-0">{this.state.requiredFormatItems > 0 ? gettext('Drag and drop files here.') : gettext('Drag and drop files or folders here.')}</p>
                     </div>
                     <FileUploader
                       ref={uploader => this.uploader = uploader}

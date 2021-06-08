@@ -202,6 +202,7 @@ class FileUploader extends React.Component {
         });
       } else {
         // [SDU-NDT] Add for Filename override
+        // Single file upload.
         if (this.props.filenameOverride && this.props.filenameOverride.length > 0) {
           for (let i = 0; i < this.resumable.files.length; i++) {
             this.resumable.files[i].fileName =
@@ -221,6 +222,11 @@ class FileUploader extends React.Component {
     } else {
       this.setUploadFileList(this.resumable.files);
       // [SDU-NDT] Add for Filename override
+      // Folder upload.
+      if (this.props.disableFolderUpload && !isFile) {
+        this.resumable.files = [];
+        return;
+      }
       if (this.props.filenameOverride && this.props.filenameOverride.length > 0) {
         for (let i = 0; i < this.resumable.files.length; i++) {
           this.resumable.files[i].fileName =

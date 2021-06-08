@@ -5582,6 +5582,9 @@ msgstr "增加上传页面备注"
 msgid "Page comment"
 msgstr "页面备注"
 
+msgid "extension"
+msgstr "扩展名"
+
 msgid "The comment information will be shown above the upload page."
 msgstr "备注信息将会显示在上传页面的上方。"
 
@@ -5604,13 +5607,26 @@ msgid "Please input these information to form an upload filename."
 msgstr "请填写这些信息，以便生成文件的上传名称。"
 
 msgid "Drag and drop files or folders here."
-msgstr "拖拽文件或目录到此处。"
+msgstr "拖动文件或目录到此处。"
+
+
+msgid "Drag and drop files here."
+msgstr "拖动文件到此处。"
 
 msgid "Fill in all the blanks above to enable file upload."
-msgstr "将上方信息填写完整后方可解锁文件上传。"
+msgstr "将上方信息填写完整以解锁文件上传。"
 
 msgid "Illegal character on column {col}."
 msgstr "文件名格式：非法字符，第 {col} 列。"
 
 msgid "Given parameters contain illegal characters."
 msgstr "给定的参数包含非法字符。"
+
+msgid "Brace mismatch"
+msgstr "大括号不匹配"
+
+msgid "Illegal character included"
+msgstr "包含非法字符"
+
+msgid "At least 1 parameter required"
+msgstr "请至少定义 1 个参数"
