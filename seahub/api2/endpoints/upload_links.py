@@ -195,7 +195,7 @@ class UploadLinks(APIView):
             error_msg = 'Can not pass expire_days and expiration_time at the same time.'
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
-        filename_format = request.data.get('format', '')
+        filename_format = request.data.get('format', '').strip()
         error_msg = validate_format(filename_format)
         if error_msg is not '':
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)

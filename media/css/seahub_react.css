@@ -1148,6 +1148,31 @@ a.table-sort-op:focus {
     max-height: 24px;
 }
 
+.format-instant-error {
+    color: black;
+    background: lightpink;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+.format-param-normal {
+    color: black;
+    background: lightsalmon;
+    padding: 2px 6px;
+    border-radius: 11px;
+    font-size: 12px;
+    margin: 2px;
+}
+
+.format-param-special {
+    color: black;
+    background: yellowgreen;
+    padding: 2px 6px;
+    border-radius: 11px;
+    font-size: 12px;
+    margin: 2px;
+}
+
 @media (max-width: 767px) {
     /* mobile menu */
     .item-meta-info {

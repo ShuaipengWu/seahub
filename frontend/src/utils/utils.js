@@ -60,6 +60,7 @@ export const Utils = {
   },
 
   validateFormat: function(format) {
+    format = format.trim();
     let inQuote = false;
     let cnt = 0;
     for (let i = 0; i < format.length; i++) {
@@ -98,6 +99,7 @@ export const Utils = {
   },
 
   getFormatParamCount: function(format) {
+    format = format.trim();
     // const reg=/{(.*?)}/g;
     // let res = reg.exec(format);
     // let cnt = 0;
@@ -143,6 +145,7 @@ export const Utils = {
   },
 
   getFormatParameters: function(format) {
+    format = format.trim();
     // const reg=/{(.*?)}/g;
     // let res = reg.exec(format);
     // let params = [];
@@ -189,6 +192,7 @@ export const Utils = {
   },
 
   applyFormatParameters: function(format, paramValueArray, strict = true, voidDisplay = '[VOID]') {
+    format = format.trim();
     let inQuote = false;
     let cnt = 0;
     let currentResult = '';
@@ -228,8 +232,60 @@ export const Utils = {
     return currentResult;
   },
 
+  prettyPrintFormatString: function prettyPrintFormatString(format) {
+    format = format.trim();
+    let inQuote = false;
+    let cnt = 0;
+    let currentResult = [];
+    let resultBuffer = '';
+    let currentParam = '';
+    for (let i = 0; i < format.length; i++) {
+      switch (format[i]) {
+        case '\\':
+          i++;
+          break;
+        case '{':
+          if (inQuote) return <span className={'format-instant-error'}>{gettext('Brace mismatch')}</span>;  // A left quote in a quote.
+          inQuote = true;
+          currentResult.push(resultBuffer);
+          resultBuffer = '';
+          continue;
+        case '}':
+          if (!inQuote) return <span className={'format-instant-error'}>{gettext('Brace mismatch')}</span>;  // A right quote without left quote.
+          inQuote = false;
+          if (currentParam === '') currentParam = 'Param ' + (cnt + 1);
+          currentResult.push(<span className={'format-param-normal'}>{currentParam}</span>);
+          currentParam = '';
+          cnt++;
+          continue;
+      }
+      // Now handle current char
+      if (inQuote) {
+        currentParam += format[i];
+      } else {
+        if (!this.isOkForFilename(format[i])) {
+          // Contains illegal char
+          return <span className={'format-instant-error'}>{gettext('Illegal character included')}</span>;
+        }
+        resultBuffer += format[i];
+      }
+    }
+    if (inQuote) {
+      return <span className={'format-instant-error'}>{gettext('Brace mismatch').replace('{col}', format.length)}</span>;  // The last quote was not closed.
+    }
+    if (resultBuffer.length > 0) {
+      currentResult.push(resultBuffer);
+      resultBuffer = '';
+    }
+    if (cnt === 0) return <span className={'format-instant-error'}>{gettext('At least 1 parameter required')}</span>; // No parameter
+    currentResult.push('.');
+    currentResult.push(<span className={'format-param-special'}>{gettext('extension')}</span>);
+    return currentResult;
+  },
+
   replaceMainFileName: function(newMainName, oldFullName) {
     // TODO: Cannot handle .tar.gz or other formats with 2 or more sections.
+    newMainName = newMainName.trim();
     let extName = '';
     for (let i = oldFullName.length - 1; i >= 0; i--) {
       if (oldFullName[i] === '.') return newMainName + '.' + extName;

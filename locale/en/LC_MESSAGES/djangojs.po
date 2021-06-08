@@ -5536,6 +5536,9 @@ msgstr ""
 msgid "Page comment"
 msgstr ""
 
+msgid "extension"
+msgstr ""
+
 msgid "The comment information will be shown above the upload page."
 msgstr ""
 
@@ -5560,6 +5563,9 @@ msgstr ""
 msgid "Drag and drop files or folders here."
 msgstr ""
 
+msgid "Drag and drop files here."
+msgstr ""
+
 msgid "Fill in all the blanks above to enable file upload."
 msgstr ""
 
@@ -5567,4 +5573,13 @@ msgid "Illegal character on column {col}."
 msgstr ""
 
 msgid "Given parameters contain illegal characters."
+msgstr ""
+
+msgid "Brace mismatch"
+msgstr ""
+
+msgid "Illegal character included"
+msgstr ""
+
+msgid "At least 1 parameter required"
 msgstr ""
