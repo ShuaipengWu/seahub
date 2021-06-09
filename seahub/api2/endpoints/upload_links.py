@@ -196,9 +196,10 @@ class UploadLinks(APIView):
             return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         filename_format = request.data.get('format', '').strip()
-        error_msg = validate_format(filename_format)
-        if error_msg is not '':
-            return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
+        if filename_format is not '':
+            error_msg = validate_format(filename_format)
+            if error_msg is not '':
+                return api_error(status.HTTP_400_BAD_REQUEST, error_msg)
 
         comment = request.data.get('comment', '')
         # TODO: Add comment check.

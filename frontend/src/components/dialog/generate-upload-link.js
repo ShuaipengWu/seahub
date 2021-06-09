@@ -225,15 +225,15 @@ class GenerateUploadLink extends React.Component {
       }
     }
 
-    let checkFormatRes = Utils.validateFormat(format);
-    if (checkFormatRes !== '') {
-      this.setState({errorInfo: checkFormatRes});
-      return false;
+    if (format !== '') {
+      let checkFormatRes = Utils.validateFormat(format);
+      if (checkFormatRes !== '') {
+        this.setState({errorInfo: checkFormatRes});
+        return false;
+      }
     }
-    this.setState({format: format});
 
     // TODO: Add checks for upload comment.
-    this.setState({comment: comment});
 
     if (isExpireChecked) {
       if (setExp == 'by-date') {
