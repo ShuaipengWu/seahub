@@ -192,7 +192,7 @@ def login(request, template_name='registration/login.html',
                  getattr(settings, 'ENABLE_REMOTE_USER_AUTHENTICATION', False) or \
                  getattr(settings, 'ENABLE_WORK_WEIXIN', False)
 
-    enlarge_sso = enable_sso and getattr(settings, 'ENLARGE_SSO_BUTTON', False)
+    enlarge_sso = enable_sso and getattr(settings, 'ENLARGE_SSO_BUTTON', False) and not form.errors
 
     login_bg_image_path = get_login_bg_image_path()
 
