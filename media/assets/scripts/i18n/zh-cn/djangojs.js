@@ -257,6 +257,7 @@
     "Don't send emails": "\u4e0d\u53d1\u9001\u90ae\u4ef6",
     "Download": "\u4e0b\u8f7d",
     "Download an example file": "\u4e0b\u8f7d\u793a\u4f8b\u6587\u4ef6",
+    "Download and upload": "\u4e0b\u8f7d\u548c\u4e0a\u4f20",
     "Downloading": "\u6b63\u5728\u4e0b\u8f7d",
     "Draft": "\u8349\u7a3f",
     "Draft has been deleted.": "\u8349\u7a3f\u6587\u4ef6\u5df2\u88ab\u5220\u9664\u3002",
