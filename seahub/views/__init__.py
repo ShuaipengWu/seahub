@@ -616,7 +616,9 @@ def fpath_to_link(repo_id, path, is_dir=False):
     else:
         if not path.startswith('/'):
             p = '/' + path
-        href = reverse("view_lib_file", args=[repo_id, p.encode('utf-8')])
+        else:
+            p = path
+        href = reverse("view_lib_file", args=[repo_id, p])
 
     return '<a href="%s">%s</a>' % (href, escape(path))
 
