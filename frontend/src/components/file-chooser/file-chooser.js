@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api';
-import { gettext, isPro } from '../../utils/constants';
+import { gettext } from '../../utils/constants';
 import { Utils } from '../../utils/utils';
 import toaster from '../toast';
 import RepoInfo from '../../models/repo-info';
@@ -472,14 +472,12 @@ class FileChooser extends React.Component {
 
     return (
       <Fragment>
-        {isPro && (
-          <div className="file-chooser-search-input">
-            <Input className="search-input mb-2" placeholder={gettext('Search...')} type='text' value={this.state.searchInfo} onChange={this.onSearchInfoChanged}></Input>
-            {this.state.searchInfo.length !== 0 && (
-              <span className="search-control attr-action-icon fas fa-times" onClick={this.onCloseSearching}></span>
-            )}
-          </div>
-        )}
+        <div className="file-chooser-search-input">
+          <Input className="search-input mb-2" placeholder={gettext('Search...')} type='text' value={this.state.searchInfo} onChange={this.onSearchInfoChanged}></Input>
+          {this.state.searchInfo.length !== 0 && (
+            <span className="search-control attr-action-icon fas fa-times" onClick={this.onCloseSearching}></span>
+          )}
+        </div>
         {this.state.isSearching && (
           <div className="file-chooser-search-container">
             {this.renderSearchedView()}

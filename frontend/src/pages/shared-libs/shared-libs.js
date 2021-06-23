@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import cookie from 'react-cookies';
 import { Link } from '@reach/router';
-import { gettext, siteRoot, isPro } from '../../utils/constants';
+import { gettext, siteRoot } from '../../utils/constants';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
 import toaster from '../../components/toast';
@@ -219,7 +219,7 @@ class Item extends Component {
           <td><img src={data.icon_url} title={data.icon_title} alt={data.icon_title} width="24" /></td>
           <td><Link to={shareRepoUrl}>{data.repo_name}</Link></td>
           <td>
-            {(isPro && data.is_admin) &&
+            {(data.is_admin) &&
               <a href="#" className={shareIconClassName} title={gettext('Share')} onClick={this.share}></a>
             }
             <a href="#" className={leaveShareIconClassName} title={gettext('Leave Share')} onClick={this.leaveShare}></a>
@@ -269,7 +269,7 @@ class Item extends Component {
                 <div className="mobile-operation-menu-bg-layer"></div>
                 <div className="mobile-operation-menu">
                   <DropdownItem className="mobile-menu-item" onClick={this.onStarRepo}>{this.state.isStarred ? gettext('Unstar') : gettext('Star')}</DropdownItem>
-                  {(isPro && data.is_admin) &&
+                  {(data.is_admin) &&
                   <DropdownItem className="mobile-menu-item" onClick={this.share}>{gettext('Share')}</DropdownItem>
                   }
                   <DropdownItem className="mobile-menu-item" onClick={this.leaveShare}>{gettext('Leave Share')}</DropdownItem>

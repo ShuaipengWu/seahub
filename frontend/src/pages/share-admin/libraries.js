@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Link } from '@reach/router';
 import { Dropdown, DropdownToggle, DropdownItem } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api';
-import { gettext, siteRoot, isPro } from '../../utils/constants';
+import { gettext, siteRoot } from '../../utils/constants';
 import { Utils } from '../../utils/utils';
 import toaster from '../../components/toast';
 import EmptyTip from '../../components/empty-tip';
@@ -91,13 +91,11 @@ class Item extends Component {
     };
     let permissions = ['rw', 'r'];
     this.permissions = permissions;
-    this.showAdmin = isPro && (item.share_type !== 'public');
+    this.showAdmin = item.share_type !== 'public';
     if (this.showAdmin) {
       permissions.push('admin');
     }
-    if (isPro) {
-      permissions.push('cloud-edit', 'preview');
-    }
+    permissions.push('cloud-edit', 'preview');
   }
 
   toggleOpMenu = () => {

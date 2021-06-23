@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Dropdown, DropdownToggle, DropdownItem } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
-import { isPro, gettext, siteRoot, canGenerateUploadLink } from '../../utils/constants';
+import { gettext, siteRoot, canGenerateUploadLink } from '../../utils/constants';
 import ShareLink from '../../models/share-link';
 import ShareLinkPermissionEditor from '../../components/select-editor/share-link-permission-editor';
 import Loading from '../../components/loading';
@@ -51,7 +51,7 @@ class Content extends Component {
 
       const isDesktop = Utils.isDesktop();
       // only for some columns
-      const columnWidths = isPro ? ['14%', '7%', '14%'] : ['21%', '14%', '20%'];
+      const columnWidths = ['14%', '7%', '14%'];
       const table = (
         <table className={`table-hover ${isDesktop ? '': 'table-thead-hidden'}`}>
           <thead>
@@ -60,7 +60,7 @@ class Content extends Component {
                 <th width="4%">{/*icon*/}</th>
                 <th width="31%"><a className="d-block table-sort-op" href="#" onClick={this.sortByName}>{gettext('Name')} {sortByName && sortIcon}</a></th>
                 <th width={columnWidths[0]}>{gettext('Library')}</th>
-                {isPro && <th width="20%">{gettext('Permission')}</th>}
+                <th width="20%">{gettext('Permission')}</th>
                 <th width={columnWidths[1]}>{gettext('Visits')}</th>
                 <th width={columnWidths[2]}><a className="d-block table-sort-op" href="#" onClick={this.sortByTime}>{gettext('Expiration')} {sortByTime && sortIcon}</a></th>
                 <th width="10%">{/*Operations*/}</th>
@@ -102,9 +102,7 @@ class Item extends Component {
   }
 
   componentDidMount() {
-    if (isPro) {
-      this.updatePermissionOptions();
-    }
+    this.updatePermissionOptions();
   }
 
   updatePermissionOptions = () => {
@@ -204,7 +202,6 @@ class Item extends Component {
           }
         </td>
         <td><Link to={`${siteRoot}library/${item.repo_id}/${encodeURIComponent(item.repo_name)}/`}>{item.repo_name}</Link></td>
-        {isPro &&
         <td>
           <ShareLinkPermissionEditor
             isTextMode={true}
@@ -214,7 +211,6 @@ class Item extends Component {
             onPermissionChanged={this.changePerm}
           />
         </td>
-        }
         <td>{item.view_cnt}</td>
         <td>{this.renderExpiration()}</td>
         <td>
@@ -233,7 +229,7 @@ class Item extends Component {
               <Link to={objUrl}>{item.obj_name}</Link> :
               <a href={objUrl} target="_blank">{item.obj_name}</a>
             }
-            {isPro && <span className="item-meta-info-highlighted">{Utils.getShareLinkPermissionObject(currentPermission).text}</span>}
+            <span className="item-meta-info-highlighted">{Utils.getShareLinkPermissionObject(currentPermission).text}</span>
             <br />
             <span>{item.repo_name}</span><br />
             <span className="item-meta-info">{item.view_cnt}<span className="small text-secondary">({gettext('Visits')})</span></span>
@@ -251,7 +247,7 @@ class Item extends Component {
               <div className={this.state.isOpMenuOpen ? '' : 'd-none'} onClick={this.toggleOpMenu}>
                 <div className="mobile-operation-menu-bg-layer"></div>
                 <div className="mobile-operation-menu">
-                  {(isPro && !item.is_expired) && <DropdownItem className="mobile-menu-item" onClick={this.togglePermSelectDialog}>{gettext('Permission')}</DropdownItem>}
+                  {!item.is_expired && <DropdownItem className="mobile-menu-item" onClick={this.togglePermSelectDialog}>{gettext('Permission')}</DropdownItem>}
                   {!item.is_expired && <DropdownItem className="mobile-menu-item" onClick={this.viewLink}>{gettext('View')}</DropdownItem>}
                   <DropdownItem className="mobile-menu-item" onClick={this.removeLink}>{gettext('Remove')}</DropdownItem>
                 </div>

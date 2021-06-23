@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { seafileAPI } from '../../../utils/seafile-api';
-import { gettext, siteRoot, enableSysAdminViewRepo, isPro } from '../../../utils/constants';
+import { gettext, siteRoot, enableSysAdminViewRepo } from '../../../utils/constants';
 import { Utils } from '../../../utils/utils';
 import EmptyTip from '../../../components/empty-tip';
 import moment from 'moment';
@@ -121,7 +121,7 @@ class Item extends Component {
       case 'repo_create':
         detailText = gettext('Created library {library_name} with {owner} as its owner')
           .replace('{owner}', '<a href="' + ownerPageUrl + '">' + detail.owner + '</a>');
-        if (isPro && enableSysAdminViewRepo) {
+        if (enableSysAdminViewRepo) {
           detailText = detailText.replace('{library_name}', '<a href="' + repoPageUrl + '">' + detail.name + '</a>');
         } else {
           detailText = detailText.replace('{library_name}', '<span class="font-weight-bold">' + detail.name + '</span>');
@@ -137,7 +137,7 @@ class Item extends Component {
         detailText = gettext('Transferred library {library_name} from {user_from} to {user_to}')
           .replace('{user_from}', '<span class="font-weight-bold">' + detail.from + '</span>')
           .replace('{user_to}', '<span class="font-weight-bold">' + detail.to+ '</span>');
-        if (isPro && enableSysAdminViewRepo) {
+        if (enableSysAdminViewRepo) {
           detailText = detailText.replace('{library_name}', '<a href="' + repoPageUrl + '">' + detail.name + '</a>');
         } else {
           detailText = detailText.replace('{library_name}', '<span class="font-weight-bold">' + detail.name + '</span>');

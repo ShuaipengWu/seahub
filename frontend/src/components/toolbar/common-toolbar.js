@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isPro, gettext, showLogoutIcon } from '../../utils/constants';
+import { gettext, showLogoutIcon } from '../../utils/constants';
 import Search from '../search/search';
 import Notification from '../common/notification';
 import Account from '../common/account';

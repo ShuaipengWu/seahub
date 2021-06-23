@@ -217,6 +217,9 @@ msgstr "特别感谢："
 msgid "for their open-source Seafile."
 msgstr "提供开源版 Seafile"
 
+msgid "Download and upload"
+msgstr "下载和上传"
+
 #: frontend/src/components/dialog/add-abuse-report-dialog.js:31
 msgid "Contact information is required."
 msgstr "联系人为必填项。"

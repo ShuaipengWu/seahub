@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from '@reach/router';
 import { Utils } from '../../../utils/utils';
 import { seafileAPI } from '../../../utils/seafile-api';
-import { gettext, siteRoot, isPro } from '../../../utils/constants';
+import { gettext, siteRoot } from '../../../utils/constants';
 import toaster from '../../../components/toast';
 import EmptyTip from '../../../components/empty-tip';
 import Loading from '../../../components/loading';
@@ -228,7 +228,7 @@ class Item extends Component {
   renderRepoName = () => {
     const { repo } = this.props;
     if (repo.name) {
-      if (isPro && enableSysAdminViewRepo && !repo.encrypted) {
+      if (enableSysAdminViewRepo && !repo.encrypted) {
         return <Link to={`${siteRoot}sys/libraries/${repo.id}/`}>{repo.name}</Link>;
       } else {
         return repo.name;

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Button, Dropdown, DropdownToggle, DropdownItem } from 'reactstrap';
 import moment from 'moment';
 import Account from './components/common/account';
-import { isPro, gettext, siteRoot, mediaUrl, logoPath, logoWidth, logoHeight, siteTitle, thumbnailSizeForOriginal } from './utils/constants';
+import { gettext, siteRoot, mediaUrl, logoPath, logoWidth, logoHeight, siteTitle, thumbnailSizeForOriginal } from './utils/constants';
 import { Utils } from './utils/utils';
 import { seafileAPI } from './utils/seafile-api';
 import Loading from './components/loading';

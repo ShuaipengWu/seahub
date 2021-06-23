@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import copy from 'copy-to-clipboard';
 import { Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText, Alert, FormText } from 'reactstrap';
-import { isPro, gettext, shareLinkExpireDaysMin, shareLinkExpireDaysMax, shareLinkExpireDaysDefault, shareLinkPasswordMinLength, canSendShareLinkEmail } from '../../utils/constants';
+import { gettext, shareLinkExpireDaysMin, shareLinkExpireDaysMax, shareLinkExpireDaysDefault, shareLinkPasswordMinLength, canSendShareLinkEmail } from '../../utils/constants';
 import ShareLinkPermissionEditor from '../../components/select-editor/share-link-permission-editor';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
@@ -82,34 +82,32 @@ class GenerateShareLink extends React.Component {
       toaster.danger(errMessage);
     });
 
-    if (isPro) {
-      const { itemType, userPerm } = this.props;
-      if (itemType == 'library') {
-        let permissionOptions = Utils.getShareLinkPermissionList(itemType, userPerm, path);
+    const { itemType, userPerm } = this.props;
+    if (itemType == 'library') {
+      let permissionOptions = Utils.getShareLinkPermissionList(itemType, userPerm, path);
+      this.setState({
+        permissionOptions: permissionOptions,
+        currentPermission: permissionOptions[0],
+      });
+    } else {
+      let getDirentInfoAPI;
+      if (this.props.itemType === 'file') {
+        getDirentInfoAPI = seafileAPI.getFileInfo(repoID, path);
+      } else if (this.props.itemType === 'dir') {
+        getDirentInfoAPI = seafileAPI.getDirInfo(repoID, path);
+      }
+      getDirentInfoAPI.then((res) => {
+        let canEdit = res.data.can_edit;
+        let permission = res.data.permission;
+        let permissionOptions = Utils.getShareLinkPermissionList(this.props.itemType, permission, path, canEdit);
         this.setState({
           permissionOptions: permissionOptions,
           currentPermission: permissionOptions[0],
         });
-      } else {
-        let getDirentInfoAPI;
-        if (this.props.itemType === 'file') {
-          getDirentInfoAPI = seafileAPI.getFileInfo(repoID, path);
-        } else if (this.props.itemType === 'dir') {
-          getDirentInfoAPI = seafileAPI.getDirInfo(repoID, path);
-        }
-        getDirentInfoAPI.then((res) => {
-          let canEdit = res.data.can_edit;
-          let permission = res.data.permission;
-          let permissionOptions = Utils.getShareLinkPermissionList(this.props.itemType, permission, path, canEdit);
-          this.setState({
-            permissionOptions: permissionOptions,
-            currentPermission: permissionOptions[0],
-          });
-        }).catch(error => {
-          let errMessage = Utils.getErrorMsg(error);
-          toaster.danger(errMessage);
-        });
-      }
+      }).catch(error => {
+        let errMessage = Utils.getErrorMsg(error);
+        toaster.danger(errMessage);
+      });
     }
   }
 
@@ -190,10 +188,8 @@ class GenerateShareLink extends React.Component {
       let { itemPath, repoID } = this.props;
       let { password, isExpireChecked, setExp, expireDays, expDate } = this.state;
       let permissions;
-      if (isPro) {
-        const permissionDetails = Utils.getShareLinkPermissionObject(this.state.currentPermission).permissionDetails;
-        permissions = JSON.stringify(permissionDetails);
-      }
+      const permissionDetails = Utils.getShareLinkPermissionObject(this.state.currentPermission).permissionDetails;
+      permissions = JSON.stringify(permissionDetails);
       let expirationTime = '';
       if (isExpireChecked) {
         if (setExp == 'by-days') {
@@ -397,7 +393,7 @@ class GenerateShareLink extends React.Component {
               </FormGroup>
             )}
 
-            {(isPro && sharedLinkInfo.permissions) && (
+            {(sharedLinkInfo.permissions) && (
               <FormGroup className="mb-0">
                 <dt className="text-secondary font-weight-normal">{gettext('Permission:')}</dt>
                 <dd style={{width:'250px'}} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseOut}>
@@ -512,23 +508,21 @@ class GenerateShareLink extends React.Component {
               </div>
             }
           </FormGroup>
-          {isPro && (
-            <FormGroup check>
-              <Label check>
-                <span>{gettext('Set permission')}</span>
-              </Label>
-              {this.state.permissionOptions.map((item, index) => {
-                return (
-                  <FormGroup check className="ml-4" key={index}>
-                    <Label check>
-                      <Input type="radio" name="permission" value={item} checked={this.state.currentPermission == item} onChange={this.setPermission} className="mr-1" />
-                      {Utils.getShareLinkPermissionObject(item).text}
-                    </Label>
-                  </FormGroup>
-                );
-              })}
-            </FormGroup>
-          )}
+          <FormGroup check>
+            <Label check>
+              <span>{gettext('Set permission')}</span>
+            </Label>
+            {this.state.permissionOptions.map((item, index) => {
+              return (
+                <FormGroup check className="ml-4" key={index}>
+                  <Label check>
+                    <Input type="radio" name="permission" value={item} checked={this.state.currentPermission == item} onChange={this.setPermission} className="mr-1" />
+                    {Utils.getShareLinkPermissionObject(item).text}
+                  </Label>
+                </FormGroup>
+              );
+            })}
+          </FormGroup>
           {this.state.errorInfo && <Alert color="danger" className="mt-2">{gettext(this.state.errorInfo)}</Alert>}
           <Button onClick={this.generateShareLink} className="mt-2">{gettext('Generate')}</Button>
         </Form>

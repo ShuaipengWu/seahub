@@ -12,6 +12,14 @@ import UploadProgressDialog from './upload-progress-dialog';
 import toaster from '../toast';
 import '../../css/file-uploader.css';
 
+// replaced function was: seafileAPI.sharedLinkGetFileUploadUrl(token)
+// Because the old function cannot pass in 'path' as parameter
+// But after a while of checks, it is required for sure.
+function sharedLinkGetFileUploadUrl(token, relativePath) {
+  var url = seafileAPI.server + '/api/v2.1/share-links/' + token + '/upload/?path=' + encodeURIComponent(relativePath);
+  return seafileAPI.req.get(url);
+}
+
 const propTypes = {
   token: PropTypes.string.isRequired,
   repoID: PropTypes.string.isRequired,
@@ -155,31 +163,31 @@ class FileUploader extends React.Component {
   }
 
   onChunkingComplete = (resumableFile) => {
-
     let allFilesUploaded = this.state.allFilesUploaded;
     if (allFilesUploaded === true) {
       this.setState({allFilesUploaded: false});
     }
 
     //get parent_dir relative_path
-    let path = this.props.path === '/' ? '/' : this.props.path + '/';
+    // let path = this.props.path === '/' ? '/' : this.props.path + (this.props.path[this.props.path.length - 1] === '/' ? '' : '/');
     let fileName = resumableFile.fileName;
     let relativePath = resumableFile.relativePath;
     let isFile = fileName === relativePath;
 
     //update formdata
-    resumableFile.formData = {};
-    if (isFile) { // upload file
-      resumableFile.formData  = {
-        parent_dir: path,
-      };
-    } else { // upload folder
+    resumableFile.formData = { parent_dir: '' };
+    if (!isFile) { // upload folder
       let relative_path = relativePath.slice(0, relativePath.lastIndexOf('/') + 1);
-      resumableFile.formData  = {
-        parent_dir: path,
+      resumableFile.formData = {
+        parent_dir: '',
         relative_path: relative_path
       };
     }
+    // Why: The Seafile share link uses share-tokens to get upload root path.
+    // The old implementation takes input prop 'path' as the absolute path to target file,
+    // which is incorrect since the upload path should be relative path of share path.
+    // So we changed the meaning of that 'path' in props to 'relative path'.
+    // We will get the realPath by newly modified SeafileAPI actions. So we won't set it here.
   }
 
   onFileAdded = (resumableFile, files) => {
@@ -203,9 +211,10 @@ class FileUploader extends React.Component {
         });
       } else {
         this.setUploadFileList(this.resumable.files);
-        let { token } = this.props;
-        seafileAPI.sharedLinkGetFileUploadUrl(token).then(res => {
+        let { token, path } = this.props;
+        sharedLinkGetFileUploadUrl(token, path).then(res => {
           this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
+          resumableFile.formData.parent_dir = res.data.real_path;    // The modified section.
           this.resumableUpload(resumableFile);
         }).catch(error => {
           let errMessage = Utils.getErrorMsg(error);
@@ -216,9 +225,10 @@ class FileUploader extends React.Component {
       this.setUploadFileList(this.resumable.files);
       if (!this.isUploadLinkLoaded) {
         this.isUploadLinkLoaded = true;
-        let { token } = this.props;
-        seafileAPI.sharedLinkGetFileUploadUrl(token).then(res => {
+        let { token, path } = this.props;
+        sharedLinkGetFileUploadUrl(token, path).then(res => {
           this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
+          resumableFile.formData.parent_dir = res.data.real_path;
           this.resumable.upload();
         }).catch(error => {
           let errMessage = Utils.getErrorMsg(error);
@@ -229,8 +239,9 @@ class FileUploader extends React.Component {
   }
 
   resumableUpload = (resumableFile) => {
-    let { repoID, path } = this.props;
-    seafileAPI.getFileUploadedBytes(repoID, path, resumableFile.fileName).then(res => {
+    let { repoID } = this.props;
+    let realPath = resumableFile.formData.parent_dir;
+    seafileAPI.getFileUploadedBytes(repoID, realPath, resumableFile.fileName).then(res => {
       let uploadedBytes = res.data.uploadedBytes;
       let blockSize = parseInt(resumableUploadFileBlockSize) * 1024 * 1024 || 1024 * 1024;
       let offset = Math.floor(uploadedBytes / blockSize);
@@ -563,9 +574,10 @@ class FileUploader extends React.Component {
 
   onUploadRetry = (resumableFile) => {
 
-    let { token } = this.props;
-    seafileAPI.sharedLinkGetFileUploadUrl(token).then(res => {
+    let { token, path } = this.props;
+    sharedLinkGetFileUploadUrl(token, path).then(res => {
       this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
+      resumableFile.formData.parent_dir = res.data.real_path;    // The modified section.
 
       let retryFileList = this.state.retryFileList.filter(item => {
         return item.uniqueIdentifier !== resumableFile.uniqueIdentifier;
@@ -590,11 +602,12 @@ class FileUploader extends React.Component {
 
   onUploadRetryAll = () => {
 
-    let { token } = this.props;
-    seafileAPI.sharedLinkGetFileUploadUrl(token).then(res => {
+    let { token, path } = this.props;
+    sharedLinkGetFileUploadUrl(token, path).then(res => {
       this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
       this.state.retryFileList.forEach(item => {
         item.error = false;
+        item.formData.parent_dir = res.data.real_path;    // The modified section.
         this.retryUploadFile(item);
       });
 
@@ -619,12 +632,13 @@ class FileUploader extends React.Component {
       let prefix = path === '/' ? (path + relative_path) : (path + '/' + relative_path);
       fileName = prefix + fileName;
     }
+    let realPath = resumableFile.formData.parent_dir;    // The modified section.
 
     resumableFile.bootstrap();
     var firedRetry = false;
     resumableFile.resumableObj.on('chunkingComplete', () => {
       if(!firedRetry) {
-        seafileAPI.getFileUploadedBytes(repoID, path, fileName).then(res => {
+        seafileAPI.getFileUploadedBytes(repoID, realPath, fileName).then(res => {
           let uploadedBytes = res.data.uploadedBytes;
           let blockSize = parseInt(resumableUploadFileBlockSize) * 1024 * 1024 || 1024 * 1024;
           let offset = Math.floor(uploadedBytes / blockSize);
@@ -644,9 +658,10 @@ class FileUploader extends React.Component {
   uploadFile = () => {
     let resumableFile = this.resumable.files[this.resumable.files.length - 1];
 
-    let { token } = this.props;
-    seafileAPI.sharedLinkGetFileUploadUrl(token).then(res => {
+    let { token, path } = this.props;
+    sharedLinkGetFileUploadUrl(token, path).then(res => {
       this.resumable.opts.target = res.data.upload_link + '?ret-json=1';
+      resumableFile.formData.parent_dir = res.data.real_path;    // The modified section.
       this.setState({
         isUploadRemindDialogShow: false,
         isUploadProgressDialogShow: true,

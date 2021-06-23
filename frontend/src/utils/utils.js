@@ -1,4 +1,4 @@
-import { mediaUrl, gettext, serviceURL, siteRoot, isPro, enableFileComment, fileAuditEnabled, canGenerateShareLink, canGenerateUploadLink, username, folderPermEnabled } from './constants';
+import { mediaUrl, gettext, serviceURL, siteRoot, enableFileComment, fileAuditEnabled, canGenerateShareLink, canGenerateUploadLink, username, folderPermEnabled } from './constants';
 import { strChineseFirstPY } from './pinyin-by-unicode';
 import TextTranslation from './text-translation';
 import React from 'react';

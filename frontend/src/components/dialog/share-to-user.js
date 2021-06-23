@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {gettext, isPro, siteRoot} from '../../utils/constants';
+import {gettext, siteRoot} from '../../utils/constants';
 import { Button } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api.js';
 import { Utils } from '../../utils/utils';
@@ -147,7 +147,7 @@ class ShareToUser extends React.Component {
     } else if (this.props.itemType === 'dir') {
       this.permissions = ['rw', 'r', 'cloud-edit', 'preview'];
     }
-    if (this.props.isGroupOwnedRepo || !isPro) {
+    if (this.props.isGroupOwnedRepo) {
       this.permissions = ['rw', 'r'];
     }
   }

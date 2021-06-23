@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import Select from 'react-select';
-import { gettext, isPro } from '../../utils/constants';
+import { gettext } from '../../utils/constants';
 import { seafileAPI } from '../../utils/seafile-api.js';
 import { Utils } from '../../utils/utils';
 import toaster from '../toast';
@@ -117,7 +117,7 @@ class ShareToGroup extends React.Component {
     } else if (itemType === 'dir') {
       this.permissions = ['rw', 'r', 'cloud-edit', 'preview'];
     }
-    if (this.props.isGroupOwnedRepo || !isPro) {
+    if (this.props.isGroupOwnedRepo) {
       this.permissions = ['rw', 'r'];
     }
   }

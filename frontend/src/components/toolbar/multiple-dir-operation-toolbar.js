@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup } from 'reactstrap';
-import { gettext, siteRoot, canGenerateShareLink, isPro, fileAuditEnabled, name } from '../../utils/constants';
+import { gettext, siteRoot, canGenerateShareLink, fileAuditEnabled, name } from '../../utils/constants';
 import { Utils } from '../../utils/utils';
 import { seafileAPI } from '../../utils/seafile-api';
 import URLDecorator from '../../utils/url-decorator';

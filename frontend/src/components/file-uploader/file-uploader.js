@@ -160,7 +160,7 @@ class FileUploader extends React.Component {
     }
 
     //get parent_dir relative_path
-    let path = this.props.path === '/' ? '/' : this.props.path + '/';
+    let path = this.props.path === '/' ? '/' : this.props.path + (this.props.path[this.props.path.length - 1] === '/' ? '' : '/');
     let fileName = resumableFile.fileName;
     let relativePath = resumableFile.relativePath;
     let isFile = fileName === relativePath;

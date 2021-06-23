@@ -19,7 +19,7 @@ class Repo {
     this.starred = object.starred;
     this.status = object.status;
     this.storage_name = object.storage_name;
-    if (object.is_admin != undefined) {
+    if (object.is_admin !== undefined) {
       this.is_admin = object.is_admin;
     }
   }

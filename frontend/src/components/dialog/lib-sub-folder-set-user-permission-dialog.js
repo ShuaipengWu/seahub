@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { gettext, isPro, siteRoot } from '../../utils/constants';
+import { gettext, siteRoot } from '../../utils/constants';
 import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api.js';
 import { Utils } from '../../utils/utils.js';
@@ -89,11 +89,7 @@ class LibSubFolderSetUserPermissionDialog extends React.Component {
       folderPath: '',
       showFileChooser: false
     };
-    if (!isPro) {
-      this.permissions = ['r', 'rw'];
-    } else {
-      this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
-    }
+    this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
   }
 
   handleUserSelectChange = (option) => {

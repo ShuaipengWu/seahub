@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import { Dropdown, DropdownToggle, DropdownItem } from 'reactstrap';
 import { seafileAPI } from '../../utils/seafile-api';
 import { Utils } from '../../utils/utils';
-import { gettext, siteRoot, isPro } from '../../utils/constants';
+import { gettext, siteRoot } from '../../utils/constants';
 import Loading from '../../components/loading';
 import EmptyTip from '../../components/empty-tip';
 import toaster from '../../components/toast';
@@ -84,10 +84,7 @@ class Item extends Component {
       unshared: false
     };
 
-    this.permissions = ['rw', 'r'];
-    if (isPro) {
-      this.permissions.push('cloud-edit', 'preview');
-    }
+    this.permissions = ['rw', 'r', 'cloud-edit', 'preview'];
   }
 
   toggleOpMenu = () => {

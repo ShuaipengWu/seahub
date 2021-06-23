@@ -793,8 +793,10 @@ class ShareLinkUpload(APIView):
             error_msg = 'Internal Server Error'
             return api_error(status.HTTP_500_INTERNAL_SERVER_ERROR, error_msg)
 
-        result = {}
-        result['upload_link'] = gen_file_upload_url(token, 'upload-api')
+        result = {
+            'upload_link': gen_file_upload_url(token, 'upload-api'),
+            'real_path': path
+        }
         return Response(result)
 
 

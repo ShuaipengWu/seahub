@@ -341,7 +341,7 @@ def view_shared_dir(request, fileshare):
     return render(request, template, {
             'repo': repo,
             'token': token,
-            'path': req_path,
+            'path': req_path,       # The path used for nav bar display, this is a relative path
             'username': username,
             'dir_name': dir_name,
             'file_list': file_list,

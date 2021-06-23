@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { isPro, gettext, siteRoot } from '../../../utils/constants';
+import { gettext, siteRoot } from '../../../utils/constants';
 import { Button } from 'reactstrap';
 import { seafileAPI } from '../../../utils/seafile-api.js';
 import { Utils } from '../../../utils/utils';
@@ -103,10 +103,7 @@ class SysAdminShareToUser extends React.Component {
       sharedItems: []
     };
     this.options = [];
-    this.permissions = ['rw', 'r'];
-    if (isPro) {
-      this.permissions.push('admin', 'cloud-edit', 'preview');
-    }
+    this.permissions = ['rw', 'r', 'admin', 'cloud-edit', 'preview'];
   }
 
   handleSelectChange = (option) => {

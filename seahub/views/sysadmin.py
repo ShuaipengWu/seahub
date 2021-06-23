@@ -149,7 +149,7 @@ def can_view_sys_admin_repo(repo):
         return True
     elif repo.encrypted:
         return False
-    elif is_pro_version() and ENABLE_SYS_ADMIN_VIEW_REPO:
+    elif ENABLE_SYS_ADMIN_VIEW_REPO:
         return True
     else:
         return False

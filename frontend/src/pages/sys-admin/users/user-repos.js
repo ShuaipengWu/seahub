@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import moment from 'moment';
 import { Utils } from '../../../utils/utils';
 import { seafileAPI } from '../../../utils/seafile-api';
-import { isPro, siteRoot, gettext } from '../../../utils/constants';
+import { siteRoot, gettext } from '../../../utils/constants';
 import toaster from '../../../components/toast';
 import EmptyTip from '../../../components/empty-tip';
 import Loading from '../../../components/loading';

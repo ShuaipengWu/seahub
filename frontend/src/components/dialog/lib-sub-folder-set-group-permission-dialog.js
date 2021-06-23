@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
-import { gettext, isPro, siteRoot } from '../../utils/constants';
+import { gettext, siteRoot } from '../../utils/constants';
 import { seafileAPI } from '../../utils/seafile-api.js';
 import { Utils } from '../../utils/utils.js';
 import SharePermissionEditor from '../select-editor/share-permission-editor';
@@ -94,11 +94,7 @@ class LibSubFolderSerGroupPermissionDialog extends React.Component {
       showFileChooser: false
     };
     this.options = [];
-    if (!isPro) {
-      this.permissions = ['r', 'rw'];
-    } else {
-      this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
-    }
+    this.permissions = ['r', 'rw', 'cloud-edit', 'preview'];
   }
 
   handleSelectChange = (option) => {

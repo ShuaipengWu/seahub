@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { isPro, gettext, mediaUrl, siteRoot } from '../../utils/constants';
+import { gettext, mediaUrl, siteRoot } from '../../utils/constants';
 import InternalLinkDialog from '../dialog/internal-link-dialog';
 
 const propTypes = {
@@ -40,7 +40,7 @@ class FileInfo extends React.PureComponent {
             onClick={this.toggleStar}>
           </a>
           <InternalLinkDialog repoID={repoID} path={filePath} />
-          {(isPro && isLocked) &&
+          {(isLocked) &&
             <img className="file-locked-icon" width="16"
               src={`${mediaUrl}img/file-locked-32.png`}
               alt={lockedText}
