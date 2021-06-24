@@ -1781,8 +1781,20 @@ msgstr "在弹出的对话框中，你可以设置历史保留时长。"
 
 #: seahub/help/templates/help/deleting_a_library.html
 
-msgid "You can delete a library owned by you. Unlike the files and folders in the library, a deleted library currently cannot be restored by the user. But the Seafile server's administrator can restore a deleted library for users. In the future, we may allow the end users to restore a deleted library."
-msgstr "你可以删除一个你拥有的资料库。与资料库中的文件和目录不同，你无法恢复被删除的资料库。不过，系统管理员能够恢复你在 30 天内删除的资料库，未来我们有可能将恢复资料库的功能开放给用户。"
+msgid "You can delete a library owned by you. If you want to restore a deleted library, follow the steps:"
+msgstr "你可以删除一个你拥有的资料库。如果你想恢复一个被删除的资料库，请遵循以下步骤："
+
+msgid "Go to \"My Library\"."
+msgstr "前往\"我的资料库\"界面。"
+
+msgid "Click the \"More\" button, and select \"Deleted libraries\"."
+msgstr "单击\"更多\"按钮，并选择\"已删除的资料库\"。"
+
+msgid "You will see a list, find the library you want to restore."
+msgstr "你将看到一个列表，找到你想恢复的资料库。"
+
+msgid "Navigate your cursor on the library, and hit the restore button appeared on the right. The library will be restored once you hit the button."
+msgstr "将光标移动到要恢复的资料库上，并单击右侧出现的恢复按钮。按钮单击后，你的资料库就会被恢复了。"
 
 msgid "After a library is deleted, it has following effects:"
 msgstr "当一个资料库被删除后，将会产生如下效果："
