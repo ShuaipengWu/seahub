@@ -12,7 +12,7 @@
     <img src="{{ MEDIA_URL }}img/help/webdav_client.png" alt="" />
 <p>{% trans "Add a new WebDAV connection." %}</p>
     <img src="{{ MEDIA_URL }}img/help/add_webdav_con.png" alt="" />
-<p>{% blocktrans %}Input your authentication information. Use <code>{{ SITE_ROOT }}/seafdav</code> for the HostURL. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password.{% endblocktrans %}</p>
+<p>{% blocktrans %}Input your authentication information. Use <code>/seafdav</code> for the path, and your site domain for host. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password.{% endblocktrans %}</p>
     <img src="{{ MEDIA_URL }}img/help/webdav_config.png" alt="" />
 <p>{% trans "Hit the \"Save and connect\" button, the connection will be established, and you can enjoy the WebDAV features." %}</p>
 {% endblock %}

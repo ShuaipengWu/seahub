@@ -5085,6 +5085,9 @@ msgstr "功能未启用。"
 
 #: eahub/help/templates/help/offline_upload.html
 
+msgid "Offline upload"
+msgstr "离线上传"
+
 msgid "Sometimes you may have some file links, and you want to store the file behind that link. Normally, you need to download it to your computer first, and then upload it to the netdisk again."
 msgstr "有时候，你会有一些文件链接，你想把链接指向的文件存储到网盘中。一般情况下，你需要先把文件下载到你的电脑上，然后再上传到网盘上。"
 
@@ -5138,8 +5141,8 @@ msgstr "现在，打开你的 WebDAV 客户端程序。这是我的界面："
 msgid "Add a new WebDAV connection."
 msgstr "添加一个新的 WebDAV 连接："
 
-msgid "Input your authentication information. Use <code>%(SITE_ROOT)s/seafdav</code> for the HostURL. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password."
-msgstr "填写好你的认证信息。将 <code>%(SITE_ROOT)s/seafdav</code> 填写在主机URL的位置。如果你的管理员开启了安全通信模式，则选择启用 HTTPS（如果你的主机地址是 'https://' 开头的，那么它肯定是安全通信模式，选择启用 HTTPS 就好），然后输入你的用户名和密码。"
+msgid "Input your authentication information. Use <code>/seafdav</code> for the path, and your site domain for host. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password."
+msgstr "填写好你的认证信息。将 <code>/seafdav</code> 填写在路径的位置，然后将网站域名填写在主机位置。如果你的管理员开启了安全通信模式，则选择启用 HTTPS（如果你的主机地址是 'https://' 开头的，那么它肯定是安全通信模式，选择启用 HTTPS 就好），然后输入你的用户名和密码。"
 
 msgid "Hit the \"Save and connect\" button, the connection will be established, and you can enjoy the WebDAV features."
 msgstr "单击\"保存并连接\"按钮，连接将会被建立，享受 WebDAV 带来的便捷吧。"
@@ -5149,5 +5152,5 @@ msgstr "单击\"保存并连接\"按钮，连接将会被建立，享受 WebDAV 
 msgid "Seafile offers a series of Web API interface."
 msgstr "Seafile 提供了一系列 Web API 接口。"
 
-msgid "Refer to <a href=\"%(SITE_ROOT)s/published/web-api/home.md\">this manual</a> for detailed documentations."
-msgstr "要获得更详细的信息，请查看<a href=\"%(SITE_ROOT)s/published/web-api/home.md\">这份文档</a>。"
+msgid "Refer to <a href=\"%(SITE_ROOT)spublished/web-api/home.md\">this manual</a> for detailed documentations."
+msgstr "要获得更详细的信息，请查看<a href=\"%(SITE_ROOT)spublished/web-api/home.md\">这份文档</a>。"
