@@ -1,0 +1,16 @@
+{% extends "help/base.html" %}
+{% load i18n %}
+
+{% block help_con %}
+<h3 class="hd">{% trans "Offline upload" %}</h3>
+<p>{% trans "Sometimes you may have some file links, and you want to store the file behind that link. Normally, you need to download it to your computer first, and then upload it to the netdisk again." %}</p>
+<p>{% trans "With Offline upload feature, you can skip those unnecessary steps. Just give the link to us, and we will download it for you. Once the download procedure completes, the fill will be automatically stored to your library." %}</p>
+<p>{% trans "Here are the manuals for using offline upload feature:" %}</p>
+<p>{% trans "Navigate to a folder or library, where you want to store the file." %}</p>
+<p>{% trans "Click the \"Upload\" button on the top, and select \"Offline upload\"." %}</p>
+    <img src="{{ MEDIA_URL }}img/help/offline_upload_button.png" alt="" />
+<p>{% trans "In the pop-up window, you can see all your offline upload requests and their status." %}</p>
+    <img src="{{ MEDIA_URL }}img/help/offline_upload_window.png" alt="" />
+<p>{% trans "To create a new offline upload request, just put your file link into that input field and hit the \"Add\" button. The request will be created and you are able to monitor its status." %}</p>
+<p>{% trans "Once upload is complete, the file will appear at the folder where you hit the \"Add\" button." %}</p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "help/base.html" %}
+{% load i18n %}
+
+{% block help_con %}
+<h3 class="hd">{% trans "Using WebDAV" %}</h3>
+<p>{% trans "WebDAV is the abbreviate for \"Web-based Distributed Authoring and Versioning\", which is a unified file-server communication protocol." %}</p>
+<p>{% trans "With WebDAV, you can use some Third-party client programs, or command-line tools that support WebDAV protocol to use Seafile." %}</p>
+<p>{% trans "Here, we will take \"FE File Explorer\" for example, which is a free WebDAV tool on MacOS:" %}</p>
+<p>{% trans "Before using WebDAV, you need to have username and password. Your username is your email address, but be aware that a CAS, OAuth or any other Single-Sign-On user doesn't have a password initially, you need to set a password before using WebDAV." %}</p>
+<p>{% trans "To set a password, just go to your personal settings page by clicking your avatar on the top-right corner, and select \"Settings\". Click the \"Set password\" button on you personal page, and set your password." %}</p>
+<p>{% trans "Now, open your WebDAV client program. Here is mine:" %}</p>
+    <img src="{{ MEDIA_URL }}img/help/webdav_client.png" alt="" />
+<p>{% trans "Add a new WebDAV connection." %}</p>
+    <img src="{{ MEDIA_URL }}img/help/add_webdav_con.png" alt="" />
+<p>{% blocktrans %}Input your authentication information. Use <code>{{ SITE_ROOT }}/seafdav</code> for the HostURL. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password.{% endblocktrans %}</p>
+    <img src="{{ MEDIA_URL }}img/help/webdav_config.png" alt="" />
+<p>{% trans "Hit the \"Save and connect\" button, the connection will be established, and you can enjoy the WebDAV features." %}</p>
+{% endblock %}

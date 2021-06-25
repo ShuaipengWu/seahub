@@ -2286,10 +2286,10 @@ msgstr "下载超时"
 msgid "Provide a file url or torrent"
 msgstr "提供文件链接或Torrent"
 
-msgid "Task Owner"
+msgid "Task owner"
 msgstr "任务创建者"
 
-msgid "Repo Owner"
+msgid "Repo owner"
 msgstr "仓库拥有者"
 
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58

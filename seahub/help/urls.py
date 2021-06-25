@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^deleting_a_library/$', TemplateView.as_view(template_name="help/deleting_a_library.html")),
     url(r'^viewing_files_within_web_app/$', TemplateView.as_view(template_name="help/viewing_files_within_web_app.html")),
     url(r'^full_text_file_search/$', TemplateView.as_view(template_name="help/full_text_file_search.html")),
+    url(r'^offline_upload/$', TemplateView.as_view(template_name="help/offline_upload.html")),
 
     url(r'^sharing_files_and_folders/$', TemplateView.as_view(template_name="help/sharing_files_and_folders.html")),
     url(r'^groups_managing/$', TemplateView.as_view(template_name="help/groups_managing.html")),
@@ -38,6 +39,9 @@ urlpatterns = [
     url(r'^using_drive_client/$', TemplateView.as_view(template_name="help/using_drive_client.html") ),
     url(r'^drive_client_2.0_for_windows_10/$', TemplateView.as_view(template_name="help/drive_client_2.0_for_windows_10.html") ),
     url(r'^drive_client_for_linux/$', TemplateView.as_view(template_name="help/drive_client_for_linux.html") ),
+
+    url(r'^using_webdav/$', TemplateView.as_view(template_name="help/using_webdav.html") ),
+    url(r'^web_api/$', TemplateView.as_view(template_name="help/web_api.html") ),
 
     url(r'^encrypted_libraries/$', TemplateView.as_view(template_name="help/encrypted_libraries.html") ),
 

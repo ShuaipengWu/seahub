@@ -2270,10 +2270,10 @@ msgstr ""
 msgid "Provide a file url or torrent"
 msgstr ""
 
-msgid "Task Owner"
+msgid "Task owner"
 msgstr ""
 
-msgid "Repo Owner"
+msgid "Repo owner"
 msgstr ""
 
 #: frontend/src/components/dialog/sysadmin-dialog/sysadmin-logs-export-excel-dialog.js:58

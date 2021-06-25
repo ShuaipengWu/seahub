@@ -5082,3 +5082,72 @@ msgstr "无法查看维基"
 #: seahub/work_weixin/views.py:220
 msgid "Feature is not enabled."
 msgstr "功能未启用。"
+
+#: eahub/help/templates/help/offline_upload.html
+
+msgid "Sometimes you may have some file links, and you want to store the file behind that link. Normally, you need to download it to your computer first, and then upload it to the netdisk again."
+msgstr "有时候，你会有一些文件链接，你想把链接指向的文件存储到网盘中。一般情况下，你需要先把文件下载到你的电脑上，然后再上传到网盘上。"
+
+msgid "With Offline upload feature, you can skip those unnecessary steps. Just give the link to us, and we will download it for you. Once the download procedure completes, the fill will be automatically stored to your library."
+msgstr "有了离线上传功能，你就不用这么麻烦了。只要把链接交给我们，我们来帮你下载。下载完成后，它就自动存储到你的资料库里啦。"
+
+msgid "Here are the manuals for using offline upload feature:"
+msgstr "以下是离线上传功能的使用方法："
+
+msgid "Navigate to a folder or library, where you want to store the file."
+msgstr "前往你想保存文件的文件夹或资料库。"
+
+msgid "Click the \"Upload\" button on the top, and select \"Offline upload\"."
+msgstr "单击顶部\"上传\"按钮，然后选择\"离线上传\"。"
+
+msgid "In the pop-up window, you can see all your offline upload requests and their status."
+msgstr "在弹出窗口中，你可以看到你先前创建的全部离线上传请求，以及它们的状态。"
+
+msgid "To create a new offline upload request, just put your file link into that input field and hit the \"Add\" button. The request will be created and you are able to monitor its status."
+msgstr "要创建一个新的离线上传请求，只需要将文件链接放到输入框中，然后单击\"添加\"按钮，请求将会被创建，你可以在界面上看到它的状态。"
+
+msgid "Once upload is complete, the file will appear at the folder where you hit the \"Add\" button."
+msgstr "上传完成后，文件将会出现在你单击\"添加\"按钮时所在的目录下。"
+
+#: eahub/help/templates/help/using_webdav.html
+
+msgid "Thrid-party client"
+msgstr "第三方客户端"
+
+msgid "Using WebDAV"
+msgstr "使用 WebDAV"
+
+msgid "WebDAV is the abbreviate for \"Web-based Distributed Authoring and Versioning\", which is a unified file-server communication protocol."
+msgstr "WebDAV 是 \"Web-based Distributed Authoring and Versioning\" 的简写，它是一种通用的文件通信协议。"
+
+msgid "With WebDAV, you can use some Third-party client programs, or command-line tools that support WebDAV protocol to use Seafile."
+msgstr "通过 WebDAV 协议，你可以使用支持 WebDAV 的第三方客户端和命令行工具来访问 Seafile。"
+
+msgid "Here, we will take \"FE File Explorer\" for example, which is a free WebDAV tool on MacOS:"
+msgstr "在这里，我将使用 \"FE File Explorer\" 作为演示例子，它是 MacOS 上的一款免费的文件客户端，支持 WebDAV 协议。"
+
+msgid "Before using WebDAV, you need to have username and password. Your username is your email address, but be aware that a CAS, OAuth or any other Single-Sign-On user doesn't have a password initially, you need to set a password before using WebDAV."
+msgstr "使用 WebDAV 之前，你需要准备好你的用户名和密码。你的用户名是你的邮箱地址，但是注意，CAS 用户、OAuth 用户，以及任何单点登录的用户，默认情况下是没有密码的。你必须为自己设置一个密码，才能使用 WebDAV。"
+
+msgid "To set a password, just go to your personal settings page by clicking your avatar on the top-right corner, and select \"Settings\". Click the \"Set password\" button on you personal page, and set your password."
+msgstr "要设置密码，只需单击右上角的头像，选择\"设置\"，并在个人信息页面中单击\"设置密码\"，跟随向导完成密码设置即可。"
+
+msgid "Now, open your WebDAV client program. Here is mine:"
+msgstr "现在，打开你的 WebDAV 客户端程序。这是我的界面："
+
+msgid "Add a new WebDAV connection."
+msgstr "添加一个新的 WebDAV 连接："
+
+msgid "Input your authentication information. Use <code>%(SITE_ROOT)s/seafdav</code> for the HostURL. Use HTTPS if your manager opens up secure channel (An URL starts with 'https://' is a secured channel), and input your username and password."
+msgstr "填写好你的认证信息。将 <code>%(SITE_ROOT)s/seafdav</code> 填写在主机URL的位置。如果你的管理员开启了安全通信模式，则选择启用 HTTPS（如果你的主机地址是 'https://' 开头的，那么它肯定是安全通信模式，选择启用 HTTPS 就好），然后输入你的用户名和密码。"
+
+msgid "Hit the \"Save and connect\" button, the connection will be established, and you can enjoy the WebDAV features."
+msgstr "单击\"保存并连接\"按钮，连接将会被建立，享受 WebDAV 带来的便捷吧。"
+
+#: eahub/help/templates/help/web_api.html
+
+msgid "Seafile offers a series of Web API interface."
+msgstr "Seafile 提供了一系列 Web API 接口。"
+
+msgid "Refer to <a href=\"%(SITE_ROOT)s/published/web-api/home.md\">this manual</a> for detailed documentations."
+msgstr "要获得更详细的信息，请查看<a href=\"%(SITE_ROOT)s/published/web-api/home.md\">这份文档</a>。"
