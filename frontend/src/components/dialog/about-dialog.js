@@ -42,10 +42,10 @@ class AboutDialog extends React.Component {
           <ModalBody>
             <button type="button" className="close" onClick={this.toggle}><span aria-hidden="true">×</span></button>
             <div className="about-content">
-              <p><img src={mediaUrl + logoPath} height={logoHeight} width={logoWidth} title={siteTitle} alt="logo" /></p>
-              <p>{gettext('Server Version: ')}{seafileVersion}<br />© {(new Date()).getFullYear()} {gettext('Seafile')}</p>
-              <p>{this.renderExternalAboutLinks()}</p>
-              <p><a href={href} target="_blank">{gettext('About Us')}</a></p>
+               <p><img src={mediaUrl + logoPath} height={logoHeight} width={logoWidth} title={siteTitle} alt="logo" /></p>
+            <p>{gettext('Server Version: ')}{seafileVersion}<br />© 2022 SDU Netdisk Engineering Team</p>
+            <p>{this.renderExternalAboutLinks()}</p>
+            <p>{gettext('Special thanks to: ')}<a href={href} target="_blank">{gettext('Seafile')}</a> {gettext('for their open-source Seafile.')}</p>
             </div>
           </ModalBody>
         </Modal>
