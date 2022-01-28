@@ -118,9 +118,9 @@
   flex-direction: column;
 }
 
-.table-container {
+.table-container { /*bug is here change it to 17 rem,the former value was ten,but it was too small.*/
   flex: 1;
-  padding: 0 1rem 10rem;
+  padding: 0 1rem 17rem;
   position: relative;
 }
 
